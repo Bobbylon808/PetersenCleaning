@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Petersen Cleaning &amp; Junk Removal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
+      color: #1a1a1a;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #007bff 0%, #0056b3 100%);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/bubbles.png');
+      opacity: 0.2;
+      z-index: 1;
+    }
+    header h1 {
+      font-size: 3rem;
+      z-index: 2;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      z-index: 2;
+    }
+    .cta-button {
+      background-color: white;
+      color: #007bff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 2rem;
+      z-index: 2;
+      transition: background 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #f0f8ff;
+    }
+    nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav a {
+      text-decoration: none;
+      color: #0056b3;
+      font-weight: bold;
+    }
+    section {
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    footer {
+      background-color: #0056b3;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+<style>
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.show {
+    opacity: 1;
+    transform: none;
+  }
+  .ai-avatar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    background: url('https://cdn-icons-png.flaticon.com/512/4712/4712027.png') no-repeat center center / contain;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const faders = document.querySelectorAll('.fade-in');
+    const options = {
+      threshold: 0.1
+    };
+    const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('show');
+        appearOnScroll.unobserve(entry.target);
+      });
+    }, options);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  });
+</script>
+</head>
+<body>
+<header>
+<h1>Petersen Cleaning &amp; Junk Removal</h1>
+<p>Clean never looked this cool. See why people are obsessed with our shine.</p>
+<button class="cta-button" onclick="window.location.href='contact.html'">Get a Quote</button>
+</header>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="gallery.html">Gallery</a>
+<a href="tips.html">Cleaning Tips</a>
+<a href="contact.html">Contact</a>
+</nav>
+<section>
+<div class="card fade-in">
+<h2>Why We're Not Just Another Cleaning Company</h2>
+<p>From AI-driven tips to a team that shows up like pros, we’re changing the game — one cleaned-up mess at a time. Navigate our site like a game and learn something new while you're at it.</p>
+</div>
+<div class="card fade-in">
+<h2>Scroll Down for Magic</h2>
+<p>Tips. Tricks. Hacks. Tools. And the most addictive before-and-after junk removal gallery you’ve ever seen.</p>
+</div>
+</section>
+<footer>
+<p>© 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.</p>
+</footer>
+<div class="ai-avatar" title="Ask Neo a tip!"></div>
+<script>
+  const tips = [
+    "Use vinegar and baking soda to unclog drains naturally.",
+    "Lemons can remove rust stains on sinks.",
+    "Use a lint roller on lampshades to clean dust.",
+    "Dryer sheets can polish chrome and repel dust.",
+    "Clean baseboards with a dryer sheet to prevent static dust cling."
+  ];
+  function showRandomTip() {
+    const tip = tips[Math.floor(Math.random() * tips.length)];
+    alert("🧼 Tip: " + tip);
+  }
+</script>
+<div style="position: fixed; bottom: 120px; right: 20px; z-index: 999;">
+<button onclick="showRandomTip()" style="background: #00c3ff; color: white; padding: 1rem 1.5rem; border: none; border-radius: 50px; font-weight: bold;">✨ Random Tip</button>
+</div>
+
+<div style="position: fixed; bottom: 20px; left: 20px; z-index: 999;">
+<a href="contact.html" style="background: #007bff; color: white; padding: 1rem 1.25rem; border-radius: 50px; font-weight: bold; text-decoration: none;">📋 Get a Free Estimate</a>
+</div>
+
+<script>
+  document.addEventListener("mousemove", function(e) {
+    const bubble = document.createElement("div");
+    bubble.style.position = "absolute";
+    bubble.style.width = "10px";
+    bubble.style.height = "10px";
+    bubble.style.borderRadius = "50%";
+    bubble.style.background = "rgba(0, 123, 255, 0.5)";
+    bubble.style.left = e.pageX + "px";
+    bubble.style.top = e.pageY + "px";
+    bubble.style.pointerEvents = "none";
+    bubble.style.zIndex = 999;
+    document.body.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 500);
+  });
+</script>
+
+<script>
+  let exitPopupShown = false;
+  document.addEventListener("mouseout", function(e) {
+    if (e.clientY < 50 && !exitPopupShown) {
+      alert("💥 Wait! Get 10% off your first clean — just mention this popup when you contact us!");
+      exitPopupShown = true;
+    }
+  });
+</script>
+</body>
+</html>
+
+
+<!-- ===== END OF INDEX.HTML ===== -->
+
+
+<!-- ===== START OF ABOUT.HTML ===== -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Petersen Cleaning</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4faff; margin: 0; padding: 2rem; }
+    h1 { text-align: center; color: #0056b3; }
+    .content { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <h1>👋 About Petersen Cleaning</h1>
+  <div class="content">
+    <p>We’re not just a cleaning company. We’re a movement against mess. Founded with the mission of raising the bar in both cleaning quality and client experience, our team delivers unmatched results through cutting-edge tools, green products, and total dedication.</p>
+    <p>Whether it's a one-time deep clean or recurring commercial service, we handle it with care, professionalism, and pride.</p>
+  </div>
+</body>
+</html>
+
+
+<!-- ===== END OF ABOUT.HTML ===== -->
+
+
+<!-- ===== START OF SERVICES.HTML ===== -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services - Petersen Cleaning</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4faff; margin: 0; padding: 2rem; }
+    h1 { text-align: center; color: #0056b3; }
+    .services { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 2rem; }
+    .card {
+      background: white;
+      border-radius: 10px;
+      width: 280px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <h1>🧹 Our Services</h1>
+  <div class="services">
+    <div class="card">
+      <h3>Residential Cleaning</h3>
+      <p>From bedrooms to bathrooms, we deep clean and sanitize every inch.</p>
+    </div>
+    <div class="card">
+      <h3>Commercial Janitorial</h3>
+      <p>Professional nightly or weekly service for your office or retail space.</p>
+    </div>
+    <div class="card">
+      <h3>Junk Removal</h3>
+      <p>We haul off unwanted items fast — from furniture to appliances and more.</p>
+    </div>
+  </div>
+</body>
+</html>
+
+
+<!-- ===== END OF SERVICES.HTML ===== -->
+
+
+<!-- ===== START OF GALLERY.HTML ===== -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - Petersen Cleaning</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4faff; margin: 0; padding: 2rem; }
+    h1 { text-align: center; color: #0056b3; }
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .gallery-placeholder {
+      background: #dbefff;
+      border: 2px dashed #007bff;
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
+      color: #007bff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🖼️ Our Work in Action</h1>
+  <div class="gallery-container">
+    <div class="gallery-placeholder">Upload Your Photo Here</div>
+    <div class="gallery-placeholder">Upload Your Photo Here</div>
+    <div class="gallery-placeholder">Upload Your Photo Here</div>
+    <div class="gallery-placeholder">Upload Your Photo Here</div>
+  </div>
+</body>
+</html>
+
+
+<!-- ===== END OF GALLERY.HTML ===== -->
+
+
+<!-- ===== START OF TIPS.HTML ===== -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cleaning Tips - Petersen Cleaning</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4faff; margin: 0; padding: 2rem; }
+    h1 { text-align: center; color: #0056b3; }
+    .tips { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
+    .tip-card {
+      width: 200px;
+      height: 150px;
+      perspective: 1000px;
+    }
+    .tip-inner {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .tip-card:hover .tip-inner {
+      transform: rotateY(180deg);
+    }
+    .tip-front, .tip-back {
+      padding: 1rem;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .tip-back {
+      transform: rotateY(180deg);
+      background: #e0f7fa;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Cleaning Tips</h1>
+  <div class="tips">
+    <div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #1: Use method 1 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #2: Use method 2 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #3: Use method 3 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #4: Use method 4 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #5: Use method 5 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #6: Use method 6 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #7: Use method 7 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #8: Use method 8 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #9: Use method 9 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #10: Use method 10 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #11: Use method 11 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #12: Use method 12 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #13: Use method 13 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #14: Use method 14 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #15: Use method 15 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #16: Use method 16 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #17: Use method 17 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #18: Use method 18 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #19: Use method 19 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #20: Use method 20 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #21: Use method 21 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #22: Use method 22 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #23: Use method 23 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #24: Use method 24 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #25: Use method 25 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #26: Use method 26 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #27: Use method 27 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #28: Use method 28 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #29: Use method 29 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #30: Use method 30 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #31: Use method 31 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #32: Use method 32 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #33: Use method 33 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #34: Use method 34 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #35: Use method 35 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #36: Use method 36 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #37: Use method 37 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #38: Use method 38 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #39: Use method 39 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #40: Use method 40 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #41: Use method 41 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #42: Use method 42 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #43: Use method 43 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #44: Use method 44 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #45: Use method 45 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #46: Use method 46 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #47: Use method 47 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #48: Use method 48 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #49: Use method 49 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #50: Use method 50 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #51: Use method 51 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #52: Use method 52 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #53: Use method 53 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #54: Use method 54 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #55: Use method 55 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #56: Use method 56 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #57: Use method 57 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #58: Use method 58 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #59: Use method 59 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #60: Use method 60 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #61: Use method 61 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #62: Use method 62 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #63: Use method 63 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #64: Use method 64 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #65: Use method 65 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #66: Use method 66 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #67: Use method 67 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #68: Use method 68 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #69: Use method 69 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #70: Use method 70 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #71: Use method 71 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #72: Use method 72 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #73: Use method 73 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #74: Use method 74 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #75: Use method 75 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #76: Use method 76 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #77: Use method 77 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #78: Use method 78 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #79: Use method 79 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #80: Use method 80 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #81: Use method 81 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #82: Use method 82 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #83: Use method 83 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #84: Use method 84 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #85: Use method 85 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #86: Use method 86 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #87: Use method 87 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #88: Use method 88 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #89: Use method 89 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #90: Use method 90 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #91: Use method 91 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #92: Use method 92 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #93: Use method 93 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #94: Use method 94 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #95: Use method 95 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #96: Use method 96 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #97: Use method 97 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #98: Use method 98 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #99: Use method 99 to keep your home spotless.</div></div></div>
+<div class="tip-card"><div class="tip-inner"><div class="tip-front">🧼 Click Me!</div><div class="tip-back">Tip #100: Use method 100 to keep your home spotless.</div></div></div>
+  </div>
+</body>
+</html>
+
+
+<!-- ===== END OF TIPS.HTML ===== -->
+
+
+<!-- ===== START OF CONTACT.HTML ===== -->
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us - Petersen Cleaning</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f4faff; margin: 0; padding: 2rem; }
+    h1 { text-align: center; color: #0056b3; }
+    .contact-box { max-width: 600px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .section { margin-bottom: 2rem; }
+    .section h2 { color: #007bff; }
+    .section p { margin: 0.5rem 0; font-size: 1rem; }
+  </style>
+<style>
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.show {
+    opacity: 1;
+    transform: none;
+  }
+  .ai-avatar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    background: url('https://cdn-icons-png.flaticon.com/512/4712/4712027.png') no-repeat center center / contain;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const faders = document.querySelectorAll('.fade-in');
+    const options = {
+      threshold: 0.1
+    };
+    const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('show');
+        appearOnScroll.unobserve(entry.target);
+      });
+    }, options);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  });
+</script>
+</head>
+<body>
+<h1>📞 Contact Petersen Cleaning</h1>
+<div class="contact-box">
+<div class="section">
+<h2>English - Bobby Petersen</h2>
+<p>📞 808-319-5819</p>
+<p>📧 bobby@petersencleaning.com</p>
+</div>
+<div class="section">
+<h2>Español - Allison Petersen</h2>
+<p>📞 702-409-3296</p>
+<p>📧 allison@petersencleaning.com</p>
+</div>
+<section style="margin-top: 3rem;">
+<h2 style="color:#0056b3;">📝 Book a Cleaning or Ask a Question</h2>
+<form action="https://docs.google.com/forms/d/e/1FAIpQLScwII5ahmDjvaeGovEIy7nVnPTo7K2nq0xyx1NJgFRh5ycKhQ/formResponse" method="POST" style="margin-top: 1rem;" target="_blank">
+<label>Name:<br/><input name="entry.1965243937" required="" style="width:100%;padding:0.5rem;margin-top:0.5rem;margin-bottom:1rem;" type="text"/></label><br/>
+<label>Email:<br/><input name="entry.774825672" required="" style="width:100%;padding:0.5rem;margin-top:0.5rem;margin-bottom:1rem;" type="email"/></label><br/>
+<label>Phone:<br/><input name="entry.802543098" style="width:100%;padding:0.5rem;margin-top:0.5rem;margin-bottom:1rem;" type="tel"/></label><br/>
+<label>Message:<br/><textarea name="entry.380445711" rows="4" style="width:100%;padding:0.5rem;"></textarea></label><br/>
+<button style="margin-top:1rem;padding:0.75rem 1.5rem;background:#007bff;color:white;border:none;border-radius:8px;" type="submit">Send</button>
+</form>
+</section>
+</div>
+<div class="ai-avatar" title="Ask Neo a tip!"></div>
+<!-- Simple Chatbot Widget -->
+<div style="position:fixed;bottom:90px;right:20px;z-index:999;">
+<button onclick="alert('Hi! I'm Neo 🤖 — I can help you book or clean! (Real AI chat not connected yet)');" style="background:#007bff;color:white;border:none;border-radius:30px;padding:0.75rem 1.5rem;font-size:1rem;cursor:pointer;">
+    💬 Chat with Neo
+  </button>
+</div>
+</body>
+</html>
