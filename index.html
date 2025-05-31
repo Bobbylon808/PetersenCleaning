@@ -1,12 +1,65 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Petersen Cleaning &amp; Junk Removal</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       1. SEO: Title & Meta Description
+       ────────────────────────────────────────────────────────────────────────── -->
+  <title>Commercial & Residential Cleaning in Las Vegas | Petersen Cleaning &amp; Junk Removal</title>
+  <meta
+    name="description"
+    content="Petersen Cleaning &amp; Junk Removal offers top-rated commercial and residential cleaning services in Las Vegas, NV. Call (702) 123-4567 for a free quote!"
+  />
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       2. LocalBusiness Schema (Structured Data)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Petersen Cleaning & Junk Removal",
+    "image": "https://www.petersencleaning.com/assets/images/logo.png",
+    "@id": "https://www.petersencleaning.com",
+    "url": "https://www.petersencleaning.com",
+    "telephone": "(702) 123-4567",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "5940 S Rainbow Blvd",
+      "addressLocality": "Las Vegas",
+      "addressRegion": "NV",
+      "postalCode": "89118",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 36.095,
+      "longitude": -115.181
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ],
+    "priceRange": "$$",
+    "sameAs": [
+      "https://www.facebook.com/petersencleaning",
+      "https://www.yelp.com/biz/petersen-cleaning-las-vegas",
+      "https://www.thumbtack.com/nv/las-vegas/petersen-cleaning"
+    ]
+  }
+  </script>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       3. Inline CSS (Unchanged from Your Original)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
     * {
       margin: 0;
       padding: 0;
@@ -103,124 +156,178 @@
       padding: 1.5rem 1rem;
       margin-top: 2rem;
     }
-  </style>
-<style>
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-  .fade-in.show {
-    opacity: 1;
-    transform: none;
-  }
-  .ai-avatar {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
-    background: url('https://cdn-icons-png.flaticon.com/512/4712/4712027.png') no-repeat center center / contain;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 1000;
-  }
-</style>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const faders = document.querySelectorAll('.fade-in');
-    const options = {
-      threshold: 0.1
-    };
-    const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('show');
-        appearOnScroll.unobserve(entry.target);
-      });
-    }, options);
-
-    faders.forEach(fader => {
-      appearOnScroll.observe(fader);
-    });
-  });
-</script>
-</head>
-<body>
-<header>
-<h1>Petersen Cleaning &amp; Junk Removal</h1>
-<p>Clean never looked this cool. See why people are obsessed with our shine.</p>
-<button class="cta-button" onclick="window.location.href='contact.html'">Get a Quote</button>
-</header>
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="services.html">Services</a>
-<a href="gallery.html">Gallery</a>
-<a href="cleaning-tips.html">Cleaning Tips</a>
-<a href="contact.html">Contact</a>
-</nav>
-<section>
-<div class="card fade-in">
-<h2>Why We're Not Just Another Cleaning Company</h2>
-<p>From AI-driven tips to a team that shows up like pros, we’re changing the game — one cleaned-up mess at a time. Navigate our site like a game and learn something new while you're at it.</p>
-</div>
-<div class="card fade-in">
-<h2>Scroll Down for Magic</h2>
-<p>Tips. Tricks. Hacks. Tools. And the most addictive before-and-after junk removal gallery you’ve ever seen.</p>
-</div>
-</section>
-<footer>
-<p>© 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.</p>
-</footer>
-<div class="ai-avatar" title="Ask Neo a tip!"></div>
-<script>
-  const tips = [
-    "Use vinegar and baking soda to unclog drains naturally.",
-    "Lemons can remove rust stains on sinks.",
-    "Use a lint roller on lampshades to clean dust.",
-    "Dryer sheets can polish chrome and repel dust.",
-    "Clean baseboards with a dryer sheet to prevent static dust cling."
-  ];
-  function showRandomTip() {
-    const tip = tips[Math.floor(Math.random() * tips.length)];
-    alert("🧼 Tip: " + tip);
-  }
-</script>
-<div style="position: fixed; bottom: 120px; right: 20px; z-index: 999;">
-<button onclick="showRandomTip()" style="background: #00c3ff; color: white; padding: 1rem 1.5rem; border: none; border-radius: 50px; font-weight: bold;">✨ Random Tip</button>
-</div>
-
-<div style="position: fixed; bottom: 20px; left: 20px; z-index: 999;">
-<a href="contact.html" style="background: #007bff; color: white; padding: 1rem 1.25rem; border-radius: 50px; font-weight: bold; text-decoration: none;">📋 Get a Free Estimate</a>
-</div>
-
-<script>
-  document.addEventListener("mousemove", function(e) {
-    const bubble = document.createElement("div");
-    bubble.style.position = "absolute";
-    bubble.style.width = "10px";
-    bubble.style.height = "10px";
-    bubble.style.borderRadius = "50%";
-    bubble.style.background = "rgba(0, 123, 255, 0.5)";
-    bubble.style.left = e.pageX + "px";
-    bubble.style.top = e.pageY + "px";
-    bubble.style.pointerEvents = "none";
-    bubble.style.zIndex = 999;
-    document.body.appendChild(bubble);
-    setTimeout(() => bubble.remove(), 500);
-  });
-</script>
-
-<script>
-  let exitPopupShown = false;
-  document.addEventListener("mouseout", function(e) {
-    if (e.clientY < 50 && !exitPopupShown) {
-      alert("💥 Wait! Get 10% off your first clean — just mention this popup when you contact us!");
-      exitPopupShown = true;
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-  });
-</script>
+    .fade-in.show {
+      opacity: 1;
+      transform: none;
+    }
+    .ai-avatar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      background: url('https://cdn-icons-png.flaticon.com/512/4712/4712027.png') no-repeat center center / contain;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+  </style>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       4. Fade-in & Intersection Observer Script (Unchanged)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const faders = document.querySelectorAll('.fade-in');
+      const options = { threshold: 0.1 };
+      const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('show');
+          appearOnScroll.unobserve(entry.target);
+        });
+      }, options);
+
+      faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       5. Header Section
+       ────────────────────────────────────────────────────────────────────────── -->
+  <header>
+    <h1>Petersen Cleaning &amp; Junk Removal</h1>
+    <p>Clean never looked this cool. See why people are obsessed with our shine.</p>
+    <button class="cta-button" onclick="window.location.href='contact.html'">Get a Quote</button>
+  </header>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       6. Navigation
+       ────────────────────────────────────────────────────────────────────────── -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="cleaning-tips.html">Cleaning Tips</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       7. Main Content
+       ────────────────────────────────────────────────────────────────────────── -->
+  <section>
+    <div class="card fade-in">
+      <h2>Why We're Not Just Another Cleaning Company</h2>
+      <p>From AI-driven tips to a team that shows up like pros, we’re changing the game — one cleaned-up mess at a time. Navigate our site like a game and learn something new while you're at it.</p>
+    </div>
+    <div class="card fade-in">
+      <h2>Scroll Down for Magic</h2>
+      <p>Tips. Tricks. Hacks. Tools. And the most addictive before-and-after junk removal gallery you’ve ever seen.</p>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       8. Footer with Consistent NAP & Internal Links
+       ────────────────────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-content">
+      <p>
+        <strong>Petersen Cleaning &amp; Junk Removal</strong><br />
+        5940 S Rainbow Blvd<br />
+        Las Vegas, NV 89118<br />
+        <a href="tel:7021234567" style="color: white; text-decoration: none;">(702) 123-4567</a>
+      </p>
+      <nav class="footer-nav" style="margin: 1rem 0;">
+        <a href="index.html" style="color: white; text-decoration: none; margin: 0 0.5rem;">Home</a> |
+        <a href="about.html" style="color: white; text-decoration: none; margin: 0 0.5rem;">About</a> |
+        <a href="services.html" style="color: white; text-decoration: none; margin: 0 0.5rem;">Services</a> |
+        <a href="gallery.html" style="color: white; text-decoration: none; margin: 0 0.5rem;">Gallery</a> |
+        <a href="cleaning-tips.html" style="color: white; text-decoration: none; margin: 0 0.5rem;">Cleaning Tips</a> |
+        <a href="contact.html" style="color: white; text-decoration: none; margin: 0 0.5rem;">Contact</a>
+      </nav>
+      <p style="font-size: 0.9rem; margin-top: 0.5rem;">&copy; 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.</p>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       9. AI Avatar Icon
+       ────────────────────────────────────────────────────────────────────────── -->
+  <div class="ai-avatar" title="Ask Neo a tip!"></div>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       10. Random Tip Button (Unchanged)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    const tips = [
+      "Use vinegar and baking soda to unclog drains naturally.",
+      "Lemons can remove rust stains on sinks.",
+      "Use a lint roller on lampshades to clean dust.",
+      "Dryer sheets can polish chrome and repel dust.",
+      "Clean baseboards with a dryer sheet to prevent static dust cling."
+    ];
+    function showRandomTip() {
+      const tip = tips[Math.floor(Math.random() * tips.length)];
+      alert("🧼 Tip: " + tip);
+    }
+  </script>
+  <div style="position: fixed; bottom: 120px; right: 20px; z-index: 999;">
+    <button onclick="showRandomTip()" style="background: #00c3ff; color: white; padding: 1rem 1.5rem; border: none; border-radius: 50px; font-weight: bold;">
+      ✨ Random Tip
+    </button>
+  </div>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       11. “Get a Free Estimate” Button (Unchanged)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <div style="position: fixed; bottom: 20px; left: 20px; z-index: 999;">
+    <a href="contact.html"
+       style="background: #007bff; color: white; padding: 1rem 1.25rem; border-radius: 50px; font-weight: bold; text-decoration: none;">
+      📋 Get a Free Estimate
+    </a>
+  </div>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       12. Bubble-Trail Cursor Script (Unchanged)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    document.addEventListener("mousemove", function(e) {
+      const bubble = document.createElement("div");
+      bubble.style.position = "absolute";
+      bubble.style.width = "10px";
+      bubble.style.height = "10px";
+      bubble.style.borderRadius = "50%";
+      bubble.style.background = "rgba(0, 123, 255, 0.5)";
+      bubble.style.left = e.pageX + "px";
+      bubble.style.top = e.pageY + "px";
+      bubble.style.pointerEvents = "none";
+      bubble.style.zIndex = 999;
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 500);
+    });
+  </script>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       13. Exit-Intent Popup Script (Unchanged)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    let exitPopupShown = false;
+    document.addEventListener("mouseout", function(e) {
+      if (e.clientY < 50 && !exitPopupShown) {
+        alert("💥 Wait! Get 10% off your first clean — just mention this popup when you contact us!");
+        exitPopupShown = true;
+      }
+    });
+  </script>
 </body>
 </html>
