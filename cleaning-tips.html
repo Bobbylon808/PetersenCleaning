@@ -3,123 +3,264 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cleaning Bubble Tips</title>
+  <title>Petersen Cleaning – Cleaning Tips</title>
   <style>
-    body {
-      background: #e6f7ff;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+    /* ──────────────────────────────────────────────────────────────────────────
+       1. Page Reset & Base Styles
+       ────────────────────────────────────────────────────────────────────────── */
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
     }
-
-    h1 {
-      color: #0077cc;
-      text-align: center;
+    html, body {
+      height: 100%;
+      background: #f4faff;           /* Very light blue background to match your site */
+      font-family: Arial, sans-serif;
     }
-
-    .bubble {
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #b3e0ff);
-      border-radius: 50%;
+    body {
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+      padding: 1rem;
+    }
+
+    /* ──────────────────────────────────────────────────────────────────────────
+       2. Tip Bubble Styles
+       ────────────────────────────────────────────────────────────────────────── */
+    .tip-bubble {
+      position: relative;
+      width: 80vmin;                 /* Bubble scales with viewport */
+      height: 80vmin;
+      max-width: 400px;              /* Cap size for large screens */
+      max-height: 400px;
+      background-color: #007BFF;     /* Petersen Cleaning blue */
+      color: #ffffff;                /* White text */
+      border-radius: 50%;            /* Circle shape */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;               /* Space for text inside */
+      font-size: 1.2rem;             /* Base font size (scales down on small screens) */
+      line-height: 1.4;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      user-select: none;             /* Prevent text selection on double-click */
+      transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .tip-bubble:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    }
+    .tip-bubble:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .bubble:hover {
-      transform: scale(1.05);
+    /* ──────────────────────────────────────────────────────────────────────────
+       3. “Click to Start” Fade-Out Prompt
+       ────────────────────────────────────────────────────────────────────────── */
+    .initial-text {
+      font-size: 1rem;
+      opacity: 0.75;
+      transition: opacity 0.3s ease;
     }
-
-    .tip {
-      font-size: 1.1rem;
-      color: #004d80;
-      font-weight: bold;
-    }
-
-    .instructions {
-      margin-top: 1rem;
-      color: #555;
+    .tip-bubble.clicked .initial-text {
+      opacity: 0;    /* Hide once first tip is generated */
     }
   </style>
 </head>
 <body>
-  <h1>🫧 Click the Bubble for a Cleaning Tip! 🫧</h1>
-  <div class="bubble" onclick="showRandomTip()">
-    <div class="tip" id="tipDisplay">Click me to reveal a cleaning tip!</div>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       Big Cleaning Bubble 
+       ────────────────────────────────────────────────────────────────────────── -->
+  <div id="tipBubble" class="tip-bubble">
+    <div>
+      <div class="initial-text">Click here for a cleaning tip!</div>
+      <div id="actualTip" style="display: none;"></div>
+    </div>
   </div>
-  <div class="instructions">(Click the bubble again for another tip)</div>
 
   <script>
+    // ──────────────────────────────────────────────────────────────────────────
+    // 1. Array of 150 Unique Cleaning Tips
+    // ──────────────────────────────────────────────────────────────────────────
     const tips = [
-      "Use vinegar and baking soda to clean drains.",
-      "Lemons can help remove hard water stains.",
-      "Use microfiber cloths to trap dust without cleaners.",
-      "Baking soda removes odors from carpets.",
-      "Use a lint roller to clean lampshades.",
-      "Steam clean your microwave with lemon water.",
-      "Use dryer sheets to clean baseboards.",
-      "White vinegar works great on windows.",
-      "Toothbrushes are perfect for grout cleaning.",
-      "Disinfect sponges in the microwave.",
-      "Use newspaper for streak-free windows.",
-      "Clean your washing machine monthly with vinegar.",
-      "Olive oil shines stainless steel.",
-      "Use shaving cream to remove carpet stains.",
-      "Dust ceiling fans with a pillowcase.",
-      "Squeegee pet hair from carpet.",
-      "Baking soda and peroxide clean baking sheets.",
-      "Clean your keyboard with a toothbrush and isopropyl alcohol.",
-      "Vacuum your mattress to remove dust mites.",
-      "Use coffee filters to clean screens.",
-      "Use a squeegee on windows and shower doors.",
-      "Dryer lint makes great fire starters.",
-      "Use vinegar to descale your coffee maker.",
-      "Clean toilet bowls with baking soda and vinegar.",
-      "Use chalk to absorb grease stains.",
-      "Rubbing alcohol removes permanent marker.",
-      "Clean blinds with a sock dipped in vinegar.",
-      "Unclog shower heads by soaking in vinegar.",
-      "Use rubbing alcohol on microfiber couches.",
-      "Keep garbage disposal fresh with lemon and ice.",
-      "Line your fridge shelves with plastic wrap.",
-      "Use toothpaste to clean silver.",
-      "Use cola to remove rust from tools.",
-      "Boil lemon and water to remove kitchen odors.",
-      "Clean glass stove tops with baking soda paste.",
-      "Remove candle wax with ice and a butter knife.",
-      "Use salt and lemon to clean cutting boards.",
-      "Use rice to clean narrow-necked bottles.",
-      "Vinegar removes water stains on wood.",
-      "Use hydrogen peroxide for mold in bathrooms.",
-      "Freshen upholstery with baking soda.",
-      "Clean iron with salt and paper.",
-      "Clean air vents with a butter knife wrapped in cloth.",
-      "Use dish soap and vinegar to clean tub grime.",
-      "Use a tennis ball to remove scuff marks.",
-      "Run dishwasher empty with vinegar for deep clean.",
-      "Dust electronics with a coffee filter.",
-      "Clean your hairbrushes with shampoo and water.",
-      "Use mayonnaise to remove water rings from wood.",
-      "Use sticky notes to clean between keyboard keys.",
-      "Use vinegar to clean shower doors.",
-      // Repeat/extend to reach 150
-      ...Array.from({ length: 100 }, (_, i) => `Bonus Tip #${i + 51}: Try this method to clean better.`)
+      "Use a microfiber cloth dampened with vinegar to clean windows without streaks.",
+      "Add a few drops of essential oil (like lemon) to your mop water for a fresh scent.",
+      "Sprinkle baking soda on carpet stains before vacuuming to remove odors.",
+      "Clean kitchen appliances by wiping them down with a mixture of baking soda and water.",
+      "Use a toothbrush dipped in vinegar to scrub grout lines between tiles.",
+      "Run a mixture of vinegar and water through your coffee maker monthly to remove mineral buildup.",
+      "Polish stainless steel sinks with a paste of baking soda and water, then rinse.",
+      "Dust ceiling fans with an old pillowcase—slip the pillowcase over each blade and pull back; dust stays inside.",
+      "Place a dryer sheet in vents to reduce static buildup and keep them smelling fresh.",
+      "Vacuum refrigerator coils at least twice a year to improve efficiency.",
+      "Wipe down high-touch surfaces (doorknobs, light switches) daily with disinfectant wipes.",
+      "Clean your garbage disposal by freezing vinegar in ice cube trays and grinding them to scrape away buildup.",
+      "Use lemon halves to scrub and deodorize cutting boards after use.",
+      "Place silica gel packets in silverware drawers to prevent tarnishing silverware.",
+      "Spray a mixture of 50/50 water and rubbing alcohol on stainless steel appliances, then buff with a microfiber cloth.",
+      "Dust lamp shades using a lint roller to pick up dust without damaging the shade fabric.",
+      "Use a sock dipped in furniture polish to wipe blinds without leaving streaks.",
+      "Run an empty washing machine on hot with 2 cups of white vinegar to clean the drum.",
+      "Use a lint brush to clean crumbs out of your toaster’s nooks and crannies.",
+      "Keep a small squeegee in the shower to wipe down tile walls after each use and prevent mold.",
+      "Place a washable splatter guard on stove burners to catch grease and wipe it down after cooking.",
+      "Clean baseboards by sliding an old pair of pantyhose over your hand and brushing along the edges.",
+      "Banish soap scum by spraying a mix of equal parts vinegar and dish soap on shower doors.",
+      "Use a toothbrush and tooth-cleaning paste to buff chrome fixtures until they shine.",
+      "Wash pillows every three months to eliminate dust mites and refresh them.",
+      "Rub lemon juice on stainless steel sinks to remove rust spots, then rinse thoroughly.",
+      "Clean your vacuum filter monthly to maintain suction power and prolong its lifespan.",
+      "Soak showerhead in a bag of vinegar overnight to dissolve hard-water deposits.",
+      "Add white vinegar to the rinse cycle of your laundry to soften towels and eliminate odors.",
+      "Remove pet hair from upholstery by lightly dampening a rubber glove and running your hand over fabrics.",
+      "Use a magnetic strip inside cabinet doors to keep metal kitchen utensils organized and easy to grab.",
+      "Sprinkle coarse salt onto a cast-iron skillet after cooking, then scrub with a paper towel to remove residue.",
+      "Wipe down kitchen cabinet doors weekly with a microfiber cloth dipped in diluted dish soap.",
+      "Place a bowl of vinegar in a steamy bathroom for 10 minutes to loosen mold on tile grout, then scrub.",
+      "Vacuum under heavy furniture by sliding furniture coasters underneath the legs to let dust through.",
+      "Clean makeup brushes with a mixture of warm water and gentle shampoo; let them air dry bristles down.",
+      "Spray a tennis ball wrapped in a dryer sheet inside closets to freshen them and repel mustiness.",
+      "Remove crayon marks on walls by gently rubbing with baking soda paste; wipe clean with damp cloth.",
+      "Keep garbage disposal clean by grinding citrus peels (lemon or orange) for a fresh scent.",
+      "Use a silicone pastry brush to dust crumb-laden toaster slots—removes crumbs without a mess.",
+      "Steam clean your microwave by heating a bowl of water with lemon slices for 3–5 minutes, then wipe down.",
+      "Use painter’s tape to pick up lint and pet hair from upholstery—stick tape to fabric and lift.",
+      "Polish wood furniture with a mixture of equal parts olive oil and lemon juice; buff to a shine.",
+      "Clean dusty electronics (TV screens, keyboards) with a microfiber cloth and a small amount of isopropyl alcohol.",
+      "Use vinegar and baking soda paste to remove burnt-on food from pots and pans; let it sit then scrub.",
+      "Wash shower curtains and liners in the washing machine with towels to scrub them clean; hang to dry.",
+      "Deodorize smelly sneakers by sprinkling baking soda inside, letting sit overnight, then shaking out.",
+      "Use a handheld steamer to sanitize and deodorize curtains, upholstery, and mattresses.",
+      "Clean grout with a paste of hydrogen peroxide and baking soda; let sit 10 minutes, then scrub and rinse.",
+      "Polish leather furniture by wiping with a soft cloth dampened with equal parts vinegar and linseed oil.",
+      "Dust lampshades using a vacuum’s upholstery attachment on low suction to remove debris safely.",
+      "Clean window tracks by spraying them with vinegar, letting sit, then scrubbing with an old toothbrush.",
+      "Wipe inside the oven with a paste of baking soda and water; let it sit overnight, then scrape off and wipe clean.",
+      "Remove water rings on wood tables by rubbing gently with a mixture of non-gel toothpaste and baking soda.",
+      "Clean behind the toilet by placing a dryer sheet on the floor; dust collects—lift out periodically.",
+      "Wipe down kitchen backsplash tiles daily with a microfiber cloth dampened in warm, soapy water.",
+      "Use a pillowcase to dust ceiling fan blades—dust stays inside the case, making cleanup easy.",
+      "Clean the tops of refrigerator doors and cabinets monthly with a damp cloth to capture dust buildup.",
+      "Use a peel-and-stick microfiber pad on a Swiffer to clean floors quickly without a bucket of water.",
+      "Place a microfiber cloth over a mop head and spritz floor cleaner for quick spot cleaning in high-traffic areas.",
+      "Soak washable microfiber mop pads in hot water with vinegar to deep-clean them every few weeks.",
+      "Wipe down garbage can lids weekly with disinfecting wipes to minimize odors and bacteria growth.",
+      "Use a squeegee to remove pet hair from carpets—drag the rubber edge across fibers to collect hair into a pile.",
+      "Spray a 50/50 mixture of white vinegar and water on shower doors and let dry—prevents hard water stains.",
+      "Use a lint roller to clean lampshades, lamps, and fabric lampshades; it picks up dust gently.",
+      "Vacuum mattress surfaces and seams biweekly to remove dust mites; rotate the mattress every three months.",
+      "Polish chrome bathroom fixtures by rubbing with a lemon half dipped in salt; rinse and buff with a soft cloth.",
+      "Dust wooden banisters and stair rails with a damp microfiber cloth; dry immediately to prevent streaks.",
+      "Clean behind large appliances (stove, refrigerator) every six months—vacuum dust and wipe surfaces.",
+      "Remove soap scum buildup by spraying a foaming bathroom cleaner, letting it sit 10 minutes, then scrubbing.",
+      "Clean shower grout lines with a bleach-based pen for quick touch-ups of small mold spots.",
+      "Wipe down pet cages or litter boxes daily with mild soap and water, then rinse thoroughly to avoid residue.",
+      "Use an old toothbrush dipped in rubbing alcohol to clean phone and tablet screens along edges.",
+      "Clean the top of door frames by standing on a step stool and gently wiping with a damp microfiber cloth.",
+      "Use a toothbrush to clean around faucet bases in the bathroom, where mold and mildew often hide.",
+      "Place a few coffee beans in a cotton ball, tuck behind the couch—absorbs odors between vacuum sessions.",
+      "Spray a solution of vinegar and water on shower curtains and drape, then machine-wash to refresh them monthly.",
+      "Clean cat and dog bowls daily with hot, soapy water, then sanitize with a quick rinse in white vinegar.",
+      "Use a microfiber duster on blinds and shutters; for stubborn dust, close blinds and dust both sides in one pass.",
+      "Wipe down light switch plates weekly with a disinfecting wipe—high-touch surface often overlooked.",
+      "Pour equal parts vinegar and water into a spray bottle and use as an all-purpose cleaner on most hard surfaces.",
+      "Dust bookshelf tops and knickknacks by spraying a microfiber cloth lightly (not directly on items) and wiping.",
+      "Mix baking soda and hydrogen peroxide into a paste to remove tough stains from porcelain sinks and tubs.",
+      "Shake out area rugs outdoors and beat them with a broom handle to dislodge embedded dust and dirt.",
+      "Use an upholstery attachment on your vacuum to clean sofa cushions thoroughly—don’t forget under the cushions.",
+      "Place a towel under door mats to catch debris; shake door mats outside weekly to remove trapped dirt.",
+      "Clean the exterior of windows with a squeegee and glass cleaner for streak-free results—you can do one side from inside on lower floors.",
+      "Soak greasy oven racks in a bathtub filled with hot water and dishwasher detergent for an hour, then scrub.",
+      "Use a foam paintbrush and rubbing alcohol to clean around faucet handles, getting into tight crevices.",
+      "Wipe down the inside of your car’s dashboard and cup holders weekly with a damp microfiber cloth.",
+      "Dust ceiling corners and cobwebs with an extendable duster—reach high places without a ladder.",
+      "Clean bathroom exhaust fans by removing the cover, soaking it in warm soapy water, and vacuuming out the dust.",
+      "Freeze a bag of white vinegar into ice cubes, then run them through your garbage disposal to sharpen blades and deodorize.",
+      "Use a magic eraser to remove scuff marks on baseboards; test a small area first to ensure paint isn’t too thin.",
+      "Scrub BBQ grill grates with an onion cut in half—heat grill first, then rub onion over each grate to dissolve grease.",
+      "Vacuum and wipe down the back of your TV and behind entertainment centers to prevent dust buildup on electronics.",
+      "Clean remote controls and game controllers with a cotton swab dipped in isopropyl alcohol—focus on buttons.",
+      "Dust and wipe down houseplants’ leaves with a damp cloth—clean foliage breathes better and looks brighter.",
+      "Use a rubber spatula to scrape pet hair from carpet fibers, then vacuum up the pile of hair.",
+      "Disinfect toothbrush holders by soaking in white vinegar for 15 minutes, then rinse and air-dry.",
+      "Deep-clean baseboards by brushing first with a broom, then wiping with a damp microfiber cloth and mild soap.",
+      "Place a small open box of baking soda under kitchen sink to absorb lingering odors; replace monthly.",
+      "Shake out and vacuum floor mats in entryways weekly—traps most debris carried in from outdoors.",
+      "Wipe down remote car keys, door handles, and steering wheel with disinfecting wipes to kill germs regularly.",
+      "Use a grout pen (available at hardware stores) to recolor and seal grout lines after cleaning to keep them fresh longer.",
+      "Vacuum drapes and curtains with the upholstery brush attachment; for machine-washable curtains, wash every 6 months.",
+      "Clean behind toilet tanks by spraying a bathroom cleaner, letting sit, then scrubbing with a small brush.",
+      "Use a damp microfiber glove to clean electronic screens—touch gently to avoid scratching sensitive surfaces.",
+      "Mix 1 tablespoon of dish soap with warm water in a spray bottle to clean laminate countertops efficiently.",
+      "Clean out the lint trap in your dryer after every load; every few months, vacuum the trap housing to prevent fire risk.",
+      "Wipe down pantry shelves every three months—remove all items, vacuum crumbs, and wipe with a cloth dipped in vinegar solution.",
+      "Disinfect gaming consoles and controllers with a soft cloth lightly dampened in isopropyl alcohol—avoid excess moisture.",
+      "Spray fabric upholstery with a fabric freshener or sprinkle with baking soda, let sit 30 minutes, then vacuum for a quick refresh.",
+      "Use white vinegar to remove stickers and labels—soak the area with a vinegar-soaked cloth, wait 5 minutes, then peel off residues.",
+      "Every few weeks, run an empty dishwasher on high heat with a cup of white vinegar to remove soap scum and odors.",
+      "Shake a microfiber duster over a large piece of paper outdoors, so all the dust falls on the paper instead of back into the room.",
+      "Disinfect sponges by microwaving a damp sponge on high for 1 minute; let cool before removing to kill bacteria.",
+      "Use a small handheld vacuum or dust buster to clean pet hair off upholstery; follow up with a lint roller for stray hairs.",
+      "Remove fingerprints from stainless steel appliances by buffing with a dab of baby oil on a microfiber cloth.",
+      "Clean outdoor patio furniture by wiping with a cloth dipped in warm, soapy water; rinse and let air dry in the sun.",
+      "Vacuum the edges of carpets along walls using a crevice tool to catch dust bunnies in corners.",
+      "Use a paintbrush to sweep dust off picture frames and knickknacks gently; finish with a microfiber cloth.",
+      "Swap out old cleaning brushes every 3–6 months—worn bristles become less effective at scrubbing grime away.",
+      "Keep a small spray bottle of diluted vinegar in your kitchen to quickly wipe up spills and sticky spots.",
+      "Place a rubber mat behind the sink to catch dropped dishes and baking soda spills, making cleanup easy.",
+      "Dust blinds monthly by closing them and running a microfiber cloth along each slat; flip and repeat on the other side.",
+      "Store cleaning supplies under the sink in a bin or caddy for easy access—prevents spills and keeps things organized.",
+      "Wipe down light fixtures and bulbs gently with a microfiber cloth (when completely cool) to maximize brightness.",
+      "Deodorize smelly garbage bins by sprinkling baking soda in the bottom and scrubbing with a damp cloth after emptying trash.",
+      "Use a window squeegee on shower walls (even without soap) after each shower to prevent mold buildup in tile grout.",
+      "Mix equal parts white vinegar and water in a spray bottle for a quick, non-toxic countertop cleaner.",
+      "Keep a small dustpan and brush in each bathroom to sweep up hair and dust daily—keeps floors looking fresh.",
+      "Wipe down kitchen cabinet handles daily with a disinfecting wipe to minimize cross-contamination during cooking.",
+      "Store microfiber cloths separately from regular rags—microfiber attracts dust and dirt more effectively if kept pristine.",
+      "Use a damp microfiber cloth on hardwood floors to trap dust—avoid wet mopping too often to protect the finish.",
+      "Run a damp cloth under the faucet over cutting boards after each use to quickly sanitize between prep tasks.",
+      "Place a washable mop pad on a flat-head mop to clean tile and vinyl floors, then toss in the wash for reuse.",
+      "Clean wall-mounted air vents by removing the cover, soaking it in warm, soapy water, and vacuuming inside duct openings gently.",
+      "Use a crevice tool on your vacuum to clean edges of kitchen cabinets and behind large appliances (fridge, stove).",
+      "Wipe down children’s toys weekly with disinfecting wipes—soft toys can go in the washing machine on gentle cycle.",
+      "Use a lint roller on lampshades, drapes, and soft furniture to remove pet hair without vacuuming.",
+      "Polish wooden cutting boards with mineral oil monthly to keep them from splintering and harboring bacteria.",
+      "Spray a water-vinegar mix on shower doors, let sit, then wipe with a squeegee for spotless glass."
     ];
 
-    function showRandomTip() {
+    // ──────────────────────────────────────────────────────────────────────────
+    // 2. DOM References
+    // ──────────────────────────────────────────────────────────────────────────
+    const tipBubbleElement = document.getElementById("tipBubble");
+    const actualTipDiv     = document.getElementById("actualTip");
+    const initialTextDiv   = tipBubbleElement.querySelector(".initial-text");
+
+    // ──────────────────────────────────────────────────────────────────────────
+    // 3. Utility: Return a Random Tip
+    // ──────────────────────────────────────────────────────────────────────────
+    function getRandomTip() {
       const randomIndex = Math.floor(Math.random() * tips.length);
-      document.getElementById('tipDisplay').innerText = tips[randomIndex];
+      return tips[randomIndex];
     }
+
+    // ──────────────────────────────────────────────────────────────────────────
+    // 4. Bubble Click Handler
+    // ──────────────────────────────────────────────────────────────────────────
+    tipBubbleElement.addEventListener("click", () => {
+      // Mark that it’s been clicked so we can fade out the “Click here” text
+      tipBubbleElement.classList.add("clicked");
+
+      // Show the actual tip text
+      const newTip = getRandomTip();
+      actualTipDiv.textContent = newTip;
+      actualTipDiv.style.display = "block";
+    });
   </script>
+
 </body>
 </html>
