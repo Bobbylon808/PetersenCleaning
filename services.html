@@ -1,43 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Services - Petersen Cleaning</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       1. SEO: Title & Meta Description
+       ────────────────────────────────────────────────────────────────────────── -->
+  <title>Our Services | Petersen Cleaning &amp; Junk Removal</title>
+  <meta
+    name="description"
+    content="Explore our expert cleaning and junk removal services in Las Vegas—commercial cleaning, move-out deep cleaning, residential cleaning, and responsible junk removal. Call (702) 123-4567!"
+  />
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       2. LocalBusiness Schema (Structured Data)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Petersen Cleaning & Junk Removal",
+    "image": "https://www.petersencleaning.com/assets/images/logo.png",
+    "@id": "https://www.petersencleaning.com",
+    "url": "https://www.petersencleaning.com",
+    "telephone": "(702) 123-4567",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "5940 S Rainbow Blvd",
+      "addressLocality": "Las Vegas",
+      "addressRegion": "NV",
+      "postalCode": "89118",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 36.095,
+      "longitude": -115.181
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ],
+    "priceRange": "$$",
+    "sameAs": [
+      "https://www.facebook.com/petersencleaning",
+      "https://www.yelp.com/biz/petersen-cleaning-las-vegas",
+      "https://www.thumbtack.com/nv/las-vegas/petersen-cleaning"
+    ]
+  }
+  </script>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       3. Fonts & Inline CSS (Same as Other Pages)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4faff; margin: 0; padding: 2rem; }
-    h1 { text-align: center; color: #0056b3; }
-    .services { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 2rem; }
-    .card {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
+      color: #1a1a1a;
+    }
+    header {
+      position: relative;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #007bff 0%, #0056b3 100%);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/bubbles.png');
+      opacity: 0.2;
+      z-index: 1;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      z-index: 2;
+    }
+    header p {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      z-index: 2;
+    }
+    .cta-button {
+      background-color: white;
+      color: #007bff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      z-index: 2;
+      transition: background 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #f0f8ff;
+    }
+    nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav a {
+      text-decoration: none;
+      color: #0056b3;
+      font-weight: bold;
+    }
+    section {
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .service-card {
       background: white;
-      border-radius: 10px;
-      width: 280px;
-      padding: 1.5rem;
+      border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
     }
-    .card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    .service-card:hover {
+      transform: scale(1.02);
+    }
+    .service-card img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      object-fit: cover;
+    }
+    .service-card h2 {
+      margin-bottom: 0.75rem;
+    }
+    .service-card p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .service-card a {
+      background-color: #007bff;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+    .service-card a:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      background-color: #0056b3;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+    }
+    .footer-nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: none;
+    }
+    .ai-avatar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      background: url('https://cdn-icons-png.flaticon.com/512/4712/4712027.png')
+                  no-repeat center center / contain;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 1000;
     }
   </style>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       4. Fade-in JavaScript (Same as Other Pages)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const faders = document.querySelectorAll('.fade-in');
+      const options = { threshold: 0.1 };
+      const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        });
+      }, options);
+
+      faders.forEach(fader => appearOnScroll.observe(fader));
+    });
+  </script>
 </head>
+
 <body>
-  <h1>🧹 Our Services</h1>
-  <div class="services">
-    <div class="card">
-      <h3>Residential Cleaning</h3>
-      <p>From bedrooms to bathrooms, we deep clean and sanitize every inch.</p>
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       5. Header Section
+       ────────────────────────────────────────────────────────────────────────── -->
+  <header>
+    <h1>Our Services</h1>
+    <p>Discover how Petersen Cleaning &amp; Junk Removal keeps Las Vegas spotless</p>
+  </header>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       6. Navigation (Highlight “Services”)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html" style="color: #007bff;">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="cleaning-tips.html">Cleaning Tips</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       7. Services Section (Four Core Offerings)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <section>
+    <!-- Commercial Cleaning Card -->
+    <div class="service-card fade-in">
+      <img
+        src="assets/images/commercial-cleaning.jpg"
+        alt="Petersen Cleaning team performing office cleaning in Las Vegas"
+        loading="lazy"
+      />
+      <h2>Commercial Cleaning</h2>
+      <p>
+        Professionally clean offices, retail spaces, and warehouses with our customized
+        commercial cleaning packages. We use eco-friendly products, disinfect high-touch
+        surfaces, and ensure a healthy workspace for your employees and clients.
+      </p>
+      <a href="contact.html">Get a Free Quote</a>
     </div>
-    <div class="card">
-      <h3>Commercial Janitorial</h3>
-      <p>Professional nightly or weekly service for your office or retail space.</p>
+
+    <!-- Move-Out Deep Cleaning Card -->
+    <div class="service-card fade-in">
+      <img
+        src="assets/images/move-out-cleaning.jpg"
+        alt="Before and after move-out deep cleaning by Petersen Cleaning"
+        loading="lazy"
+      />
+      <h2>Move-Out Deep Cleaning</h2>
+      <p>
+        Moving out? Leave your old place spotless and secure your full deposit return.
+        Our deep cleaning covers baseboards, carpets, appliances, bathrooms, and more—
+        exactly what property managers expect.
+      </p>
+      <a href="contact.html">Get a Free Quote</a>
     </div>
-    <div class="card">
-      <h3>Junk Removal</h3>
-      <p>We haul off unwanted items fast — from furniture to appliances and more.</p>
+
+    <!-- Junk Removal Card -->
+    <div class="service-card fade-in">
+      <img
+        src="assets/images/junk-removal.jpg"
+        alt="Petersen Cleaning junk removal truck loading old furniture"
+        loading="lazy"
+      />
+      <h2>Junk Removal</h2>
+      <p>
+        Clear out clutter fast with our responsible junk removal service. From furniture
+        to appliances and yard debris, we haul it all—sorting items for donation or
+        recycling whenever possible to minimize landfill waste.
+      </p>
+      <a href="contact.html">Get a Free Quote</a>
     </div>
+
+    <!-- Residential Cleaning Card -->
+    <div class="service-card fade-in">
+      <img
+        src="assets/images/residential-cleaning.jpg"
+        alt="Petersen Cleaning team performing home cleaning in Las Vegas"
+        loading="lazy"
+      />
+      <h2>Residential Cleaning</h2>
+      <p>
+        Keep your home sparkling with our recurring or one-time residential cleaning.
+        We pay attention to detail—dusting, vacuuming, mopping, kitchens, bathrooms,
+        bedrooms, and living spaces—using safe, non-toxic products for families and pets.
+      </p>
+      <a href="contact.html">Get a Free Quote</a>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       8. Footer with NAP & Footer Navigation
+       ────────────────────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-content">
+      <p>
+        <strong>Petersen Cleaning &amp; Junk Removal</strong><br />
+        5940 S Rainbow Blvd<br />
+        Las Vegas, NV 89118<br />
+        <a href="tel:7021234567" style="color: white; text-decoration: none;">
+          (702) 123-4567
+        </a>
+      </p>
+      <nav class="footer-nav" style="margin: 1rem 0;">
+        <a href="index.html">Home</a> |
+        <a href="about.html">About</a> |
+        <a href="services.html">Services</a> |
+        <a href="gallery.html">Gallery</a> |
+        <a href="cleaning-tips.html">Cleaning Tips</a> |
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+        &copy; 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       9. AI Avatar Icon
+       ────────────────────────────────────────────────────────────────────────── -->
+  <div class="ai-avatar" title="Ask Neo a tip!"></div>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       10. Random Tip & “Get a Free Estimate” Buttons
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    const tips = [
+      "Use vinegar and baking soda to unclog drains naturally.",
+      "Lemons can remove rust stains on sinks.",
+      "Use a lint roller on lampshades to clean dust.",
+      "Dryer sheets can polish chrome and repel dust.",
+      "Clean baseboards with a dryer sheet to prevent static dust cling."
+    ];
+    function showRandomTip() {
+      const tip = tips[Math.floor(Math.random() * tips.length)];
+      alert("🧼 Tip: " + tip);
+    }
+  </script>
+  <div style="position: fixed; bottom: 120px; right: 20px; z-index: 999;">
+    <button onclick="showRandomTip()" style="background: #00c3ff; color: white; padding: 1rem 1.5rem; border: none; border-radius: 50px; font-weight: bold;">
+      ✨ Random Tip
+    </button>
   </div>
+  <div style="position: fixed; bottom: 20px; left: 20px; z-index: 999;">
+    <a href="contact.html"
+       style="background: #007bff; color: white; padding: 1rem 1.25rem; border-radius: 50px; font-weight: bold; text-decoration: none;">
+      📋 Get a Free Estimate
+    </a>
+  </div>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       11. Bubble-Trail & Exit-Intent Scripts
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    document.addEventListener("mousemove", function(e) {
+      const bubble = document.createElement("div");
+      bubble.style.position = "absolute";
+      bubble.style.width = "10px";
+      bubble.style.height = "10px";
+      bubble.style.borderRadius = "50%";
+      bubble.style.background = "rgba(0, 123, 255, 0.5)";
+      bubble.style.left = e.pageX + "px";
+      bubble.style.top = e.pageY + "px";
+      bubble.style.pointerEvents = "none";
+      bubble.style.zIndex = 999;
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 500);
+    });
+
+    let exitPopupShown = false;
+    document.addEventListener("mouseout", function(e) {
+      if (e.clientY < 50 && !exitPopupShown) {
+        alert("💥 Wait! Get 10% off your first clean — just mention this popup when you contact us!");
+        exitPopupShown = true;
+      }
+    });
+  </script>
 </body>
 </html>
