@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Petersen Cleaning – Cleaning Tips</title>
   <style>
-    /* ──────────────────────────────────────────────────────────────────────────
-       1. Page Reset & Base Styles
-       ────────────────────────────────────────────────────────────────────────── */
+    /* ―――――[1] Page Reset & Base Styles ――――― */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,7 +13,7 @@
     }
     html, body {
       height: 100%;
-      background: #f4faff;           /* Very light blue background */
+      background: #f4faff; /* Light blue background */
       font-family: Arial, sans-serif;
     }
     body {
@@ -27,27 +25,25 @@
       padding: 1rem;
     }
 
-    /* ──────────────────────────────────────────────────────────────────────────
-       2. Tip Bubble Styles
-       ────────────────────────────────────────────────────────────────────────── */
+    /* ―――――[2] Tip Bubble Styles ――――― */
     .tip-bubble {
       position: relative;
-      width: 80vmin;                 /* Bubble scales with viewport */
+      width: 80vmin;
       height: 80vmin;
-      max-width: 400px;              /* Cap size for large screens */
+      max-width: 400px;
       max-height: 400px;
-      background-color: #007BFF;     /* Petersen Cleaning blue */
-      color: #ffffff;                /* White text */
-      border-radius: 50%;            /* Circle shape */
+      background-color: #007BFF; /* Petersen blue */
+      color: #ffffff;
+      border-radius: 50%;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;               /* Space for text inside */
-      font-size: 1.2rem;             /* Base font size (scales down on small screens) */
+      padding: 1.5rem;
+      font-size: 1.2rem;
       line-height: 1.4;
       cursor: pointer;
-      user-select: none;             /* Prevent text selection on double-click */
+      user-select: none;
       transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
     .tip-bubble:hover {
@@ -58,27 +54,53 @@
       transform: translateY(2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-
-    /* Fade-out initial prompt inside bubble after first click */
     .initial-text {
       font-size: 1rem;
       opacity: 0.75;
       transition: opacity 0.3s ease;
     }
     .tip-bubble.clicked .initial-text {
-      opacity: 0;    /* Hide once first tip is generated */
+      opacity: 0;
     }
 
-    /* ──────────────────────────────────────────────────────────────────────────
-       3. Instructional Hint Below the Bubble
-       ────────────────────────────────────────────────────────────────────────── */
+    /* ―――――[3] Instructional Hint Below ――――― */
     .hint {
       margin-top: 1rem;
       font-size: 1rem;
       color: #333333;
       opacity: 0.85;
     }
-    /* Optional: make hint slightly smaller on narrow screens */
+
+    /* ―――――[4] Button Layout & Styles ――――― */
+    .button-row {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #ffffff;
+      transition: background-color 0.2s ease;
+    }
+    .home-btn {
+      background-color: #28a745; /* Green */
+    }
+    .home-btn:hover {
+      background-color: #218838;
+    }
+    .share-btn {
+      background-color: #17a2b8; /* Teal */
+    }
+    .share-btn:hover {
+      background-color: #138496;
+    }
     @media (max-width: 480px) {
       .hint {
         font-size: 0.9rem;
@@ -88,13 +110,21 @@
         padding: 1rem;
       }
     }
+    @media (max-width: 400px) {
+      .button-row {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Big Cleaning Bubble 
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ―――――[5] Big Cleaning Bubble ――――― -->
   <div id="tipBubble" class="tip-bubble">
     <div>
       <div class="initial-text">Click here for a cleaning tip!</div>
@@ -102,17 +132,19 @@
     </div>
   </div>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Instructional Hint Below
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ―――――[6] Instructional Hint Below ――――― -->
   <div class="hint">
     Click the bubble for a tip, then keep clicking for more!
   </div>
 
+  <!-- ―――――[7] Return to Home & Share Buttons ――――― -->
+  <div class="button-row">
+    <a href="index.html" class="btn home-btn">Home</a>
+    <button id="shareBtn" class="btn share-btn">Share This Tip</button>
+  </div>
+
   <script>
-    // ──────────────────────────────────────────────────────────────────────────
-    // 1. Array of 150 Unique Cleaning Tips
-    // ──────────────────────────────────────────────────────────────────────────
+    // ―――――[8] Array of 150 Unique Cleaning Tips ―――――
     const tips = [
       "Use a microfiber cloth dampened with vinegar to clean windows without streaks.",
       "Add a few drops of essential oil (like lemon) to your mop water for a fresh scent.",
@@ -256,36 +288,76 @@
       "Wipe down children’s toys weekly with disinfecting wipes—soft toys can go in the washing machine on gentle cycle.",
       "Use a lint roller on lampshades, drapes, and soft furniture to remove pet hair without vacuuming.",
       "Polish wooden cutting boards with mineral oil monthly to keep them from splintering and harboring bacteria.",
-      "Spray a water-vinegar mix on shower doors, let sit, then wipe with a squeegee for spotless glass."
+      "Spray a water-vinegar mix on shower doors, let sit, then wipe with a squeegee for spotless glass.",
+      "Use a damp microfiber cloth to clean kitchen cabinet exteriors weekly to prevent grease buildup.",
+      "Polish stainless steel appliances by wiping with a mixture of baby oil and a microfiber cloth for a streak-free finish.",
+      "Clean shower curtain rings monthly by soaking in vinegar and baking soda to prevent buildup.",
+      "Use a magic eraser to remove hard water spots on bathroom faucets and glass doors.",
+      "Clean the refrigerator drip pan every month to avoid mold and foul odors.",
+      "Use a vacuum with a HEPA filter to capture allergens when cleaning carpets.",
+      "Sanitize kitchen sponges by placing them in the dishwasher on the top rack once a week."
     ];
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 2. DOM References
-    // ──────────────────────────────────────────────────────────────────────────
+    // ―――――[9] DOM References ―――――
     const tipBubbleElement = document.getElementById("tipBubble");
     const actualTipDiv     = document.getElementById("actualTip");
+    const shareBtn         = document.getElementById("shareBtn");
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 3. Utility: Return a Random Tip
-    // ──────────────────────────────────────────────────────────────────────────
+    // ―――――[10] Utility: Return a Random Tip ―――――
     function getRandomTip() {
       const randomIndex = Math.floor(Math.random() * tips.length);
       return tips[randomIndex];
     }
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // 4. Bubble Click Handler
-    // ──────────────────────────────────────────────────────────────────────────
+    // ―――――[11] Bubble Click Handler ―――――
     tipBubbleElement.addEventListener("click", () => {
-      // Mark that it’s been clicked so we can fade out the “Click here” text
       tipBubbleElement.classList.add("clicked");
-
-      // Show the actual tip text
       const newTip = getRandomTip();
       actualTipDiv.textContent = newTip;
       actualTipDiv.style.display = "block";
     });
-  </script>
 
+    // ―――――[12] Share Button Handler ―――――
+    shareBtn.addEventListener("click", async () => {
+      const tipText = actualTipDiv.textContent.trim();
+
+      if (!tipText) {
+        alert("First, click the bubble to generate a tip—then you can share it!");
+        return;
+      }
+
+      // 1) Use Web Share API if available (mobile devices)
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "Cleaning Tip from Petersen Cleaning",
+            text: tipText,
+            url: window.location.href
+          });
+        } catch (err) {
+          console.error("Share failed:", err);
+        }
+      }
+      else {
+        // 2) Fallback: Facebook share dialog (desktop browsers)
+        const encodedTip = encodeURIComponent(
+          `"${tipText}"\n—via Petersen Cleaning Tips`
+        );
+        const shareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          window.location.href
+        )}&quote=${encodedTip}`;
+
+        window.open(
+          shareURL,
+          "fbShareWindow",
+          "height=450,width=550,top=" +
+            (window.innerHeight / 2 - 225) +
+            ",left=" +
+            (window.innerWidth / 2 - 275) +
+            ",toolbar=0,location=0,menubar=0"
+        );
+      }
+    });
+  </script>
 </body>
 </html>
