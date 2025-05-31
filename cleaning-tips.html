@@ -15,11 +15,12 @@
     }
     html, body {
       height: 100%;
-      background: #f4faff;           /* Very light blue background to match your site */
+      background: #f4faff;           /* Very light blue background */
       font-family: Arial, sans-serif;
     }
     body {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -58,9 +59,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* ──────────────────────────────────────────────────────────────────────────
-       3. “Click to Start” Fade-Out Prompt
-       ────────────────────────────────────────────────────────────────────────── */
+    /* Fade-out initial prompt inside bubble after first click */
     .initial-text {
       font-size: 1rem;
       opacity: 0.75;
@@ -68,6 +67,26 @@
     }
     .tip-bubble.clicked .initial-text {
       opacity: 0;    /* Hide once first tip is generated */
+    }
+
+    /* ──────────────────────────────────────────────────────────────────────────
+       3. Instructional Hint Below the Bubble
+       ────────────────────────────────────────────────────────────────────────── */
+    .hint {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #333333;
+      opacity: 0.85;
+    }
+    /* Optional: make hint slightly smaller on narrow screens */
+    @media (max-width: 480px) {
+      .hint {
+        font-size: 0.9rem;
+      }
+      .tip-bubble {
+        font-size: 1rem;
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -81,6 +100,13 @@
       <div class="initial-text">Click here for a cleaning tip!</div>
       <div id="actualTip" style="display: none;"></div>
     </div>
+  </div>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       Instructional Hint Below
+       ────────────────────────────────────────────────────────────────────────── -->
+  <div class="hint">
+    Click the bubble for a tip, then keep clicking for more!
   </div>
 
   <script>
@@ -238,7 +264,6 @@
     // ──────────────────────────────────────────────────────────────────────────
     const tipBubbleElement = document.getElementById("tipBubble");
     const actualTipDiv     = document.getElementById("actualTip");
-    const initialTextDiv   = tipBubbleElement.querySelector(".initial-text");
 
     // ──────────────────────────────────────────────────────────────────────────
     // 3. Utility: Return a Random Tip
