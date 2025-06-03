@@ -36,57 +36,10 @@
       box-sizing: border-box;
     }
     body, html {
-      /* Remove overflow:hidden to prevent clipping on mobile */
       height: 100%;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
       color: #1a1a1a;
-    }
-
-    /* Overlay forcing users to click "Find Out More About Us" */
-    #about-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-    #about-overlay .overlay-box {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 90%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    #about-overlay h2 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      color: #0056b3;
-    }
-    #about-overlay p {
-      margin-bottom: 1.5rem;
-      color: #333;
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-    #about-overlay .btn-overlay {
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    #about-overlay .btn-overlay:hover {
-      background: #0056b3;
     }
 
     /* Skip Link for Accessibility */
@@ -372,20 +325,6 @@
 </head>
 
 <body>
-  <!-- Overlay forcing users to click "Find Out More About Us" -->
-  <div id="about-overlay">
-    <div class="overlay-box">
-      <h2>Discover Petersen Cleaning &amp; Junk Removal</h2>
-      <p>Learn what makes us the most trusted, professional cleaning company in Las Vegas. Click below to find out why our clients rave about our 5-star service, eco-friendly cleaning solutions, and 100% satisfaction guarantee.</p>
-      <button
-        class="btn-overlay"
-        onclick="document.getElementById('about-overlay').style.display='none';"
-      >
-        Find Out More About Us
-      </button>
-    </div>
-  </div>
-
   <!-- Skip to main content for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
