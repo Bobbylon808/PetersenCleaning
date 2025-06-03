@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       Main CSS (Inline for demo; extract to main.min.css in production)
+       Main CSS (Inline; move to main.min.css in production)
        ────────────────────────────────────────────────────────────────────────── -->
   <style>
     * {
@@ -42,6 +42,7 @@
       background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
       color: #1a1a1a;
     }
+
     /* Overlay forcing users to click "Find Out More About Us" */
     #about-overlay {
       position: fixed;
@@ -114,6 +115,7 @@
       background: radial-gradient(circle, #007bff 0%, #0056b3 100%);
       color: white;
       text-align: center;
+      padding: 0 1rem;
     }
     header::after {
       content: "";
@@ -375,7 +377,12 @@
     <div class="overlay-box">
       <h2>Discover Petersen Cleaning &amp; Junk Removal</h2>
       <p>Learn what makes us the most trusted, professional cleaning company in Las Vegas. Click below to find out why our clients rave about our 5-star service, eco-friendly cleaning solutions, and 100% satisfaction guarantee.</p>
-      <button class="btn-overlay" onclick="window.location.href='about.html'">Find Out More About Us</button>
+      <button
+        class="btn-overlay"
+        onclick="document.getElementById('about-overlay').style.display='none';"
+      >
+        Find Out More About Us
+      </button>
     </div>
   </div>
 
