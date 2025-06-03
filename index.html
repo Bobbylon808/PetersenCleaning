@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ──────────────────────────────────────────────────────────────────────────
        SEO: Canonical, Open Graph & Twitter Cards
@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       Main CSS (Inline; consider moving to main.min.css)
+       Main CSS (Inline for demo; extract to main.min.css in production)
        ────────────────────────────────────────────────────────────────────────── -->
   <style>
     * {
@@ -42,7 +42,7 @@
       background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
       color: #1a1a1a;
     }
-    /* Skip Link */
+    /* Skip Link for Accessibility */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -133,6 +133,7 @@
     .card:hover {
       transform: scale(1.02);
     }
+
     /* ──────────────────────────────────────────────────────────────────────────
        Zip-Code Grid & Tooltip Styles
        ────────────────────────────────────────────────────────────────────────── */
@@ -144,10 +145,12 @@
     }
     .zip-grid-container h2 {
       margin-bottom: 0.5rem;
+      font-size: 1.5rem;
     }
     .zip-grid-container p {
       margin-bottom: 1.5rem;
       font-size: 1rem;
+      color: #333;
     }
     .zip-grid {
       display: grid;
@@ -180,6 +183,7 @@
       font-size: 0.9rem;
       line-height: 1.3;
       z-index: 50;
+      pointer-events: none;
     }
     .zip-tooltip::after {
       content: "";
@@ -192,6 +196,7 @@
       bottom: -8px;
       left: 20px; /* adjust as needed */
     }
+
     footer {
       background-color: #0056b3;
       color: white;
@@ -343,22 +348,57 @@
     <!-- ──────────────────────────────────────────────────────────────────────────
          Zip-Code Grid Section
          ────────────────────────────────────────────────────────────────────────── -->
-    <section class="zip-grid-container">
-      <h2>We Service All Las Vegas Zip Codes</h2>
-      <p>Click on your zip code to see how we make your neighborhood shine!</p>
-
+   <section class="zip-grid-container">
+  <h2>We Service All Las Vegas Zip Codes</h2>
+  <p>Below is our coverage map—click your zip to get a quote:</p>
+  <img 
+    src="assets/images/MapofLV.png" 
+    alt="Las Vegas Neighborhood Coverage Map" 
+    style="max-width:100%;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);margin-bottom:1.5rem;"
+/>
       <!-- Grid of Zip Buttons -->
       <div class="zip-grid">
         <button class="zip-btn" data-zip="89101">89101</button>
         <button class="zip-btn" data-zip="89102">89102</button>
         <button class="zip-btn" data-zip="89103">89103</button>
+        <button class="zip-btn" data-zip="89104">89104</button>
         <button class="zip-btn" data-zip="89106">89106</button>
+        <button class="zip-btn" data-zip="89107">89107</button>
+        <button class="zip-btn" data-zip="89108">89108</button>
         <button class="zip-btn" data-zip="89109">89109</button>
+        <button class="zip-btn" data-zip="89110">89110</button>
+        <button class="zip-btn" data-zip="89115">89115</button>
         <button class="zip-btn" data-zip="89117">89117</button>
         <button class="zip-btn" data-zip="89118">89118</button>
         <button class="zip-btn" data-zip="89119">89119</button>
+        <button class="zip-btn" data-zip="89120">89120</button>
+        <button class="zip-btn" data-zip="89121">89121</button>
+        <button class="zip-btn" data-zip="89122">89122</button>
+        <button class="zip-btn" data-zip="89123">89123</button>
+        <button class="zip-btn" data-zip="89128">89128</button>
+        <button class="zip-btn" data-zip="89129">89129</button>
+        <button class="zip-btn" data-zip="89130">89130</button>
+        <button class="zip-btn" data-zip="89131">89131</button>
+        <button class="zip-btn" data-zip="89134">89134</button>
         <button class="zip-btn" data-zip="89135">89135</button>
-        <!-- Add more zip-code buttons as needed -->
+        <button class="zip-btn" data-zip="89138">89138</button>
+        <button class="zip-btn" data-zip="89139">89139</button>
+        <button class="zip-btn" data-zip="89141">89141</button>
+        <button class="zip-btn" data-zip="89142">89142</button>
+        <button class="zip-btn" data-zip="89144">89144</button>
+        <button class="zip-btn" data-zip="89145">89145</button>
+        <button class="zip-btn" data-zip="89146">89146</button>
+        <button class="zip-btn" data-zip="89147">89147</button>
+        <button class="zip-btn" data-zip="89148">89148</button>
+        <button class="zip-btn" data-zip="89149">89149</button>
+        <button class="zip-btn" data-zip="89156">89156</button>
+        <button class="zip-btn" data-zip="89161">89161</button>
+        <button class="zip-btn" data-zip="89166">89166</button>
+        <button class="zip-btn" data-zip="89169">89169</button>
+        <button class="zip-btn" data-zip="89178">89178</button>
+        <button class="zip-btn" data-zip="89179">89179</button>
+        <button class="zip-btn" data-zip="89183">89183</button>
+        <button class="zip-btn" data-zip="89185">89185</button>
       </div>
 
       <!-- Tooltip/Bubble -->
@@ -432,21 +472,52 @@
   </script>
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       Zip-Code Tooltip Logic
+       Zip-Code Tooltip & Redirect Logic
        ────────────────────────────────────────────────────────────────────────── -->
   <script>
-    // Custom messages for each zip code
+    // Tooltip messages (not strictly necessary since we immediately redirect)
     const zipData = {
-      "89101": "📍 Downtown (89101)! We’re here to make your home or office sparkle—call us today!",
-      "89102": "📍 Central Las Vegas (89102)! Fast, eco-friendly cleaning on your schedule.",
-      "89103": "📍 North Las Vegas (89103)! Enjoy a spotless space without lifting a finger.",
-      "89106": "📍 East Las Vegas (89106)! Reliable service to keep your place shining.",
-      "89109": "📍 Southwest (89109)! From homes to offices, we’ve got you covered.",
-      "89117": "📍 Centennial Hills (89117)! Experience our top-rated residential cleaning.",
-      "89118": "📍 South Las Vegas (89118)! Let us handle the mess so you don’t have to.",
-      "89119": "📍 Summerlin South (89119)! Premium cleaning you can trust—schedule today.",
-      "89135": "📍 Summerlin (89135)! We keep this neighborhood spotless—join our happy clients!",
-      // …add more zip codes as needed…
+      "89101": "Downtown (89101) ⭐ We serve your area—click OK to get a quote!",
+      "89102": "Central Las Vegas (89102) ⭐ Fast, eco-friendly cleaning awaits!",
+      "89103": "North Las Vegas (89103) ⭐ Ready to schedule a spotless clean?",
+      "89104": "East Las Vegas (89104) ⭐ Your neighborhood is on our map!",
+      "89106": "Eastside (89106) ⭐ Let us transform your space today!",
+      "89107": "East (89107) ⭐ Quality cleaning just a click away!",
+      "89108": "West Central (89108) ⭐ Shine on—book your cleaning now!",
+      "89109": "Southwest (89109) ⭐ Top-tier service in your zip code!",
+      "89110": "West (89110) ⭐ We’ve got your area covered—get a quote!",
+      "89115": "Southwest (89115) ⭐ Let us make your home sparkle!",
+      "89117": "Centennial Hills (89117) ⭐ Premium cleaning at your fingertips!",
+      "89118": "South (89118) ⭐ Ready for a spotless experience?",
+      "89119": "Summerlin South (89119) ⭐ Your home deserves the best!",
+      "89120": "East (89120) ⭐ We bring shine to your doorstep!",
+      "89121": "Southeast (89121) ⭐ Have us keep your place gleaming!",
+      "89122": "Northeast (89122) ⭐ Sparkling results start here!",
+      "89123": "North (89123) ⭐ We service your zip—get a free quote!",
+      "89128": "Eastside (89128) ⭐ Discover our eco-friendly cleaning!",
+      "89129": "West (89129) ⭐ A cleaner home is a click away!",
+      "89130": "Southeast (89130) ⭐ Book now for a spotless refresh!",
+      "89131": "Southwest (89131) ⭐ Quality cleaning in your area!",
+      "89134": "Spring Valley (89134) ⭐ We keep Spring Valley sparkling!",
+      "89135": "Summerlin (89135) ⭐ Join our happy, clean clients!",
+      "89138": "South (89138) ⭐ Let us do the dirty work for you!",
+      "89139": "West (89139) ⭐ Excellence in every corner of your home!",
+      "89141": "North (89141) ⭐ Experience our top-rated services!",
+      "89142": "Southwest (89142) ⭐ We make clean easy—click to book!",
+      "89144": "South (89144) ⭐ Professional shine is just a click away!",
+      "89145": "West (89145) ⭐ Book your free estimate now!",
+      "89146": "South (89146) ⭐ We service your neighborhood—get a quote!",
+      "89147": "South (89147) ⭐ Schedule a deep clean today!",
+      "89148": "West (89148) ⭐ Your clean home starts here!",
+      "89149": "East (89149) ⭐ Let us handle the hard work!",
+      "89156": "Far East (89156) ⭐ Premium, eco-friendly cleaning!",
+      "89161": "North (89161) ⭐ Click to keep your home spotless!",
+      "89166": "East (89166) ⭐ Quality service in your zip code!",
+      "89169": "West (89169) ⭐ Your clean home is our mission!",
+      "89178": "West (89178) ⭐ Discover the Petersen difference!",
+      "89179": "South (89179) ⭐ Book your free quote today!",
+      "89183": "Spring Valley (89183) ⭐ Sparkle starts here—click now!",
+      "89185": "West (89185) ⭐ We make cleaning effortless—get a quote!"
     };
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -456,19 +527,22 @@
       zipButtons.forEach(button => {
         button.addEventListener("click", function(e) {
           const zip = this.getAttribute("data-zip");
-          const message = zipData[zip] || "We service this area—call us to get started!";
-          // Calculate tooltip position
-          const rect = this.getBoundingClientRect();
-          const x = rect.left + window.scrollX;
-          const y = rect.top + window.scrollY - 50;
-          tooltip.innerHTML = `<strong>Zip ${zip}</strong><br>${message}`;
-          tooltip.style.left = `${x}px`;
-          tooltip.style.top = `${y}px`;
-          tooltip.style.display = "block";
+          // Optionally show a tooltip momentarily (uncomment if desired)
+          // const message = zipData[zip] || "We service this area! Click OK to get a quote.";
+          // const rect = this.getBoundingClientRect();
+          // const x = rect.left + window.scrollX;
+          // const y = rect.top + window.scrollY - 50;
+          // tooltip.innerHTML = `<strong>Zip ${zip}</strong><br>${message}`;
+          // tooltip.style.left = `${x}px`;
+          // tooltip.style.top = `${y}px`;
+          // tooltip.style.display = "block";
+
+          // Redirect straight to contact.html, passing the zip as a query parameter
+          window.location.href = `contact.html?zip=${zip}`;
         });
       });
 
-      // Hide tooltip when clicking outside any zip button
+      // Hide tooltip if clicking outside (not strictly needed if we skip showing)
       document.addEventListener("click", function(e) {
         if (!e.target.classList.contains("zip-btn")) {
           tooltip.style.display = "none";
