@@ -5,16 +5,285 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       1. SEO: Title & Meta Description
+       SEO: Canonical, Open Graph & Twitter Cards
        ────────────────────────────────────────────────────────────────────────── -->
-  <title>About Us | Petersen Cleaning &amp; Junk Removal</title>
-  <meta
-    name="description"
-    content="Learn more about Petersen Cleaning &amp; Junk Removal—our mission, values, and the team that keeps Las Vegas sparkling. Call (702) 123-4567 for a free quote!"
-  />
+  <link rel="canonical" href="https://www.petersencleaning.com/" />
+  <meta property="og:title" content="Petersen Cleaning & Junk Removal – Las Vegas, NV" />
+  <meta property="og:description" content="Top-rated commercial & residential cleaning in Las Vegas. Call (702) 123-4567 for a free quote!" />
+  <meta property="og:image" content="https://www.petersencleaning.com/assets/images/logo.png" />
+  <meta property="og:url" content="https://www.petersencleaning.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Petersen Cleaning & Junk Removal – Las Vegas" />
+  <meta name="twitter:description" content="Top-rated commercial & residential cleaning in Las Vegas. Call (702) 123-4567 for a free quote!" />
+  <meta name="twitter:image" content="https://www.petersencleaning.com/assets/images/logo.png" />
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       2. LocalBusiness Schema (Same as index.html)
+       Preconnect & Preload Google Fonts
+       ────────────────────────────────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       Main CSS (Inline for demo; extract to main.min.css in production)
+       ────────────────────────────────────────────────────────────────────────── -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
+      color: #1a1a1a;
+    }
+    /* Overlay forcing users to click "Find Out More About Us" */
+    #about-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    #about-overlay .overlay-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    #about-overlay h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: #0056b3;
+    }
+    #about-overlay p {
+      margin-bottom: 1.5rem;
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    #about-overlay .btn-overlay {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #about-overlay .btn-overlay:hover {
+      background: #0056b3;
+    }
+
+    /* Skip Link for Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #007bff;
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #007bff 0%, #0056b3 100%);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/bubbles.png');
+      opacity: 0.2;
+      z-index: 1;
+    }
+    header h1 {
+      font-size: 3rem;
+      z-index: 2;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      z-index: 2;
+    }
+    .cta-button {
+      background-color: white;
+      color: #007bff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 2rem;
+      z-index: 2;
+      transition: background 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #f0f8ff;
+    }
+    nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav a {
+      text-decoration: none;
+      color: #0056b3;
+      font-weight: bold;
+    }
+    section {
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    /* ──────────────────────────────────────────────────────────────────────────
+       Zip-Code Grid & Tooltip Styles
+       ────────────────────────────────────────────────────────────────────────── */
+    .zip-grid-container {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .zip-grid-container h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+    .zip-grid-container p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: #333;
+    }
+    .zip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
+    .zip-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem;
+      width: 80px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .zip-btn:hover {
+      background: #0056b3;
+    }
+    .zip-tooltip {
+      position: absolute;
+      background: rgba(0, 123, 255, 0.95);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      display: none;
+      max-width: 220px;
+      font-size: 0.9rem;
+      line-height: 1.3;
+      z-index: 50;
+      pointer-events: none;
+    }
+    .zip-tooltip::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid rgba(0, 123, 255, 0.95);
+      bottom: -8px;
+      left: 20px; /* adjust as needed */
+    }
+
+    footer {
+      background-color: #0056b3;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+    }
+    .footer-nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: none;
+    }
+    /* Fixed Estimate Link */
+    .fixed-estimate {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      background: #007bff;
+      color: white;
+      padding: 1rem 1.25rem;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .fixed-estimate:hover {
+      background-color: #0056b3;
+    }
+  </style>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       LocalBusiness Schema (Structured Data)
        ────────────────────────────────────────────────────────────────────────── -->
   <script type="application/ld+json">
   {
@@ -56,124 +325,9 @@
   </script>
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       3. Fonts & CSS (Match your index.html exactly)
+       Fade-in & Intersection Observer Script (Deferred)
        ────────────────────────────────────────────────────────────────────────── -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body, html {
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
-      color: #1a1a1a;
-    }
-    header {
-      position: relative;
-      height: 60vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, #007bff 0%, #0056b3 100%);
-      color: white;
-      text-align: center;
-      overflow: hidden;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/bubbles.png');
-      opacity: 0.2;
-      z-index: 1;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      z-index: 2;
-    }
-    header p {
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      z-index: 2;
-    }
-    nav {
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    nav a {
-      text-decoration: none;
-      color: #0056b3;
-      font-weight: bold;
-    }
-    section {
-      padding: 3rem 1rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      transition: transform 0.2s ease;
-    }
-    .card:hover {
-      transform: scale(1.02);
-    }
-    footer {
-      background-color: #0056b3;
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 2rem;
-    }
-    .footer-nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in.show {
-      opacity: 1;
-      transform: none;
-    }
-    .ai-avatar {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 80px;
-      height: 80px;
-      background: url('https://cdn-icons-png.flaticon.com/512/4712/4712027.png')
-                  no-repeat center center / contain;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      z-index: 1000;
-    }
-  </style>
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       4. Fade-in JavaScript (Same as index.html)
-       ────────────────────────────────────────────────────────────────────────── -->
-  <script>
+  <script defer>
     document.addEventListener('DOMContentLoaded', function () {
       const faders = document.querySelectorAll('.fade-in');
       const options = { threshold: 0.1 };
@@ -184,26 +338,47 @@
           observer.unobserve(entry.target);
         });
       }, options);
-      faders.forEach(fader => appearOnScroll.observe(fader));
+
+      faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+      });
     });
   </script>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       Favicon
+       ────────────────────────────────────────────────────────────────────────── -->
+  <link rel="icon" href="/assets/images/favicon-32x32.png" />
 </head>
 
 <body>
+  <!-- Overlay forcing users to click "Find Out More About Us" -->
+  <div id="about-overlay">
+    <div class="overlay-box">
+      <h2>Discover Petersen Cleaning &amp; Junk Removal</h2>
+      <p>Learn what makes us the most trusted, professional cleaning company in Las Vegas. Click below to find out why our clients rave about our 5-star service, eco-friendly cleaning solutions, and 100% satisfaction guarantee.</p>
+      <button class="btn-overlay" onclick="window.location.href='about.html'">Find Out More About Us</button>
+    </div>
+  </div>
+
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ──────────────────────────────────────────────────────────────────────────
-       5. Header Section
+       Header Section
        ────────────────────────────────────────────────────────────────────────── -->
   <header>
-    <h1>About Petersen Cleaning &amp; Junk Removal</h1>
-    <p>Learn who we are, what we stand for, and why Las Vegas trusts us to keep things spotless.</p>
+    <h1>Petersen Cleaning &amp; Junk Removal</h1>
+    <p>Clean never looked this cool. See why people are obsessed with our shine.</p>
+    <button class="cta-button" onclick="window.location.href='contact.html'">Get a Quote</button>
   </header>
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       6. Navigation (Same Links as index.html)
+       Navigation
        ────────────────────────────────────────────────────────────────────────── -->
   <nav>
     <a href="index.html">Home</a>
-    <a href="about.html" style="color: #007bff;">About</a> <!-- Highlight current page -->
+    <a href="about.html">About</a>
     <a href="services.html">Services</a>
     <a href="gallery.html">Gallery</a>
     <a href="cleaning-tips.html">Cleaning Tips</a>
@@ -211,56 +386,174 @@
   </nav>
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       7. Main “About Us” Content
+       Main Content
        ────────────────────────────────────────────────────────────────────────── -->
-  <section>
-    <div class="card fade-in">
-      <h2>Our Story</h2>
-      <p>
-        Petersen Cleaning &amp; Junk Removal began in 2021 when Bobby and Allison petersen realized
-        that Las Vegas needed a cleaning company that combined cutting-edge efficiency
-        with a personal touch. What started as a one-team operation with a single vaccum
-        has grown into a team of over 15 trained professionals serving both residential
-        and commercial clients across the valley.
-      </p>
-    </div>
+  <main id="main-content">
+    <section>
+      <div class="card fade-in">
+        <h2>Why We’re Not Just Another Cleaning Company</h2>
+        <p>
+          At Petersen Cleaning &amp; Junk Removal, our certified, licensed, and insured team delivers
+          professional-grade results every time. We use eco-friendly, hospital-grade cleaning products
+          to ensure a safe, healthy environment for your family or employees. Our punctual staff is
+          committed to excellence, offering meticulous attention to detail and 100% satisfaction
+          guaranteed. Choose us for reliable service, transparent pricing, and the highest standards
+          in the industry.
+        </p>
+      </div>
+      <!-- Removed the "Scroll Down for Magic" card per your request -->
+    </section>
 
-    <div class="card fade-in">
-      <h2>Our Mission</h2>
-      <p>
-        We believe a clean environment improves quality of life—whether it’s a small
-        home, a bustling office, or a large retail space. Our mission is to provide
-        eco-friendly, reliable, and affordable cleaning and junk removal services
-        that our neighbors can trust. We’re not just here to clean; we’re here to build
-        lasting relationships based on honesty, respect, and exceptional results.
-      </p>
-    </div>
+    <!-- ──────────────────────────────────────────────────────────────────────────
+         Zip-Code Grid Section
+         ────────────────────────────────────────────────────────────────────────── -->
+    <section class="zip-grid-container">
+      <h2>We Service All Las Vegas Zip Codes</h2>
+      <p>Below is a quick neighborhood map plus a list of every zip we cover. Click your zip to get a quote!</p>
 
-    <div class="card fade-in">
-      <h2>Meet the Team</h2>
-      <p>
-        Every member of our crew undergoes background checks and thorough training
-        before stepping into your home or business. Our supervisor, <strong>Allison</strong>,
-        has over 10 years of experience in commercial facility maintenance, ensuring
-        that we use the best industry practices. Meanwhile, <strong>Bobby</strong>
-        leads our junk removal division, coordinating safe, eco-friendly disposal
-        methods in compliance with Las Vegas recycling regulations.
-      </p>
-    </div>
+      <!-- Neighborhood Coverage Map (MapofLV.png) -->
+      <img
+        src="MapofLV.png"
+        alt="Las Vegas neighborhood coverage map"
+        style="max-width:100%; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom:1.5rem;"
+      />
 
-    <div class="card fade-in">
-      <h2>Why We’re Different</h2>
-      <ul>
-        <li>AI-Driven Scheduling &amp; Route Optimization to arrive on time, every time</li>
-        <li>Green-Certified Cleaning Products that are safe for kids, pets, and the planet</li>
-        <li>Fully Insured &amp; Bonded—your peace of mind is our priority</li>
-        <li>Flat-Rate Pricing with No Hidden Fees—what we quote is what you pay</li>
-      </ul>
-    </div>
-  </section>
+      <!-- Grid of Zip Buttons (Sorted High to Low) -->
+      <div class="zip-grid">
+        <button class="zip-btn" data-zip="89199">89199</button>
+        <button class="zip-btn" data-zip="89195">89195</button>
+        <button class="zip-btn" data-zip="89193">89193</button>
+        <button class="zip-btn" data-zip="89191">89191</button>
+        <button class="zip-btn" data-zip="89185">89185</button>
+        <button class="zip-btn" data-zip="89183">89183</button>
+        <button class="zip-btn" data-zip="89180">89180</button>
+        <button class="zip-btn" data-zip="89179">89179</button>
+        <button class="zip-btn" data-zip="89178">89178</button>
+        <button class="zip-btn" data-zip="89177">89177</button>
+        <button class="zip-btn" data-zip="89173">89173</button>
+        <button class="zip-btn" data-zip="89170">89170</button>
+        <button class="zip-btn" data-zip="89169">89169</button>
+        <button class="zip-btn" data-zip="89166">89166</button>
+        <button class="zip-btn" data-zip="89165">89165</button>
+        <button class="zip-btn" data-zip="89164">89164</button>
+        <button class="zip-btn" data-zip="89163">89163</button>
+        <button class="zip-btn" data-zip="89162">89162</button>
+        <button class="zip-btn" data-zip="89161">89161</button>
+        <button class="zip-btn" data-zip="89160">89160</button>
+        <button class="zip-btn" data-zip="89159">89159</button>
+        <button class="zip-btn" data-zip="89158">89158</button>
+        <button class="zip-btn" data-zip="89157">89157</button>
+        <button class="zip-btn" data-zip="89156">89156</button>
+        <button class="zip-btn" data-zip="89155">89155</button>
+        <button class="zip-btn" data-zip="89154">89154</button>
+        <button class="zip-btn" data-zip="89153">89153</button>
+        <button class="zip-btn" data-zip="89152">89152</button>
+        <button class="zip-btn" data-zip="89151">89151</button>
+        <button class="zip-btn" data-zip="89150">89150</button>
+        <button class="zip-btn" data-zip="89149">89149</button>
+        <button class="zip-btn" data-zip="89148">89148</button>
+        <button class="zip-btn" data-zip="89147">89147</button>
+        <button class="zip-btn" data-zip="89146">89146</button>
+        <button class="zip-btn" data-zip="89145">89145</button>
+        <button class="zip-btn" data-zip="89144">89144</button>
+        <button class="zip-btn" data-zip="89143">89143</button>
+        <button class="zip-btn" data-zip="89142">89142</button>
+        <button class="zip-btn" data-zip="89141">89141</button>
+        <button class="zip-btn" data-zip="89140">89140</button>
+        <button class="zip-btn" data-zip="89139">89139</button>
+        <button class="zip-btn" data-zip="89138">89138</button>
+        <button class="zip-btn" data-zip="89137">89137</button>
+        <button class="zip-btn" data-zip="89136">89136</button>
+        <button class="zip-btn" data-zip="89135">89135</button>
+        <button class="zip-btn" data-zip="89134">89134</button>
+        <button class="zip-btn" data-zip="89133">89133</button>
+        <button class="zip-btn" data-zip="89132">89132</button>
+        <button class="zip-btn" data-zip="89131">89131</button>
+        <button class="zip-btn" data-zip="89130">89130</button>
+        <button class="zip-btn" data-zip="89129">89129</button>
+        <button class="zip-btn" data-zip="89128">89128</button>
+        <button class="zip-btn" data-zip="89127">89127</button>
+        <button class="zip-btn" data-zip="89126">89126</button>
+        <button class="zip-btn" data-zip="89125">89125</button>
+        <button class="zip-btn" data-zip="89124">89124</button>
+        <button class="zip-btn" data-zip="89123">89123</button>
+        <button class="zip-btn" data-zip="89122">89122</button>
+        <button class="zip-btn" data-zip="89121">89121</button>
+        <button class="zip-btn" data-zip="89120">89120</button>
+        <button class="zip-btn" data-zip="89119">89119</button>
+        <button class="zip-btn" data-zip="89118">89118</button>
+        <button class="zip-btn" data-zip="89117">89117</button>
+        <button class="zip-btn" data-zip="89116">89116</button>
+        <button class="zip-btn" data-zip="89115">89115</button>
+        <button class="zip-btn" data-zip="89114">89114</button>
+        <button class="zip-btn" data-zip="89113">89113</button>
+        <button class="zip-btn" data-zip="89112">89112</button>
+        <button class="zip-btn" data-zip="89111">89111</button>
+        <button class="zip-btn" data-zip="89110">89110</button>
+        <button class="zip-btn" data-zip="89109">89109</button>
+        <button class="zip-btn" data-zip="89108">89108</button>
+        <button class="zip-btn" data-zip="89107">89107</button>
+        <button class="zip-btn" data-zip="89106">89106</button>
+        <button class="zip-btn" data-zip="89105">89105</button>
+        <button class="zip-btn" data-zip="89104">89104</button>
+        <button class="zip-btn" data-zip="89103">89103</button>
+        <button class="zip-btn" data-zip="89102">89102</button>
+        <button class="zip-btn" data-zip="89101">89101</button>
+        <button class="zip-btn" data-zip="89087">89087</button>
+        <button class="zip-btn" data-zip="89086">89086</button>
+        <button class="zip-btn" data-zip="89085">89085</button>
+        <button class="zip-btn" data-zip="89084">89084</button>
+        <button class="zip-btn" data-zip="89081">89081</button>
+        <button class="zip-btn" data-zip="89077">89077</button>
+        <button class="zip-btn" data-zip="89074">89074</button>
+        <button class="zip-btn" data-zip="89070">89070</button>
+        <button class="zip-btn" data-zip="89067">89067</button>
+        <button class="zip-btn" data-zip="89061">89061</button>
+        <button class="zip-btn" data-zip="89054">89054</button>
+        <button class="zip-btn" data-zip="89053">89053</button>
+        <button class="zip-btn" data-zip="89052">89052</button>
+        <button class="zip-btn" data-zip="89046">89046</button>
+        <button class="zip-btn" data-zip="89044">89044</button>
+        <button class="zip-btn" data-zip="89040">89040</button>
+        <button class="zip-btn" data-zip="89039">89039</button>
+        <button class="zip-btn" data-zip="89037">89037</button>
+        <button class="zip-btn" data-zip="89036">89036</button>
+        <button class="zip-btn" data-zip="89034">89034</button>
+        <button class="zip-btn" data-zip="89033">89033</button>
+        <button class="zip-btn" data-zip="89032">89032</button>
+        <button class="zip-btn" data-zip="89031">89031</button>
+        <button class="zip-btn" data-zip="89030">89030</button>
+        <button class="zip-btn" data-zip="89029">89029</button>
+        <button class="zip-btn" data-zip="89028">89028</button>
+        <button class="zip-btn" data-zip="89027">89027</button>
+        <button class="zip-btn" data-zip="89026">89026</button>
+        <button class="zip-btn" data-zip="89025">89025</button>
+        <button class="zip-btn" data-zip="89024">89024</button>
+        <button class="zip-btn" data-zip="89021">89021</button>
+        <button class="zip-btn" data-zip="89019">89019</button>
+        <button class="zip-btn" data-zip="89018">89018</button>
+        <button class="zip-btn" data-zip="89016">89016</button>
+        <button class="zip-btn" data-zip="89015">89015</button>
+        <button class="zip-btn" data-zip="89014">89014</button>
+        <button class="zip-btn" data-zip="89012">89012</button>
+        <button class="zip-btn" data-zip="89011">89011</button>
+        <button class="zip-btn" data-zip="89009">89009</button>
+        <button class="zip-btn" data-zip="89007">89007</button>
+        <button class="zip-btn" data-zip="89006">89006</button>
+        <button class="zip-btn" data-zip="89005">89005</button>
+        <button class="zip-btn" data-zip="89004">89004</button>
+        <button class="zip-btn" data-zip="89002">89002</button>
+        <button class="zip-btn" data-zip="88905">88905</button>
+        <button class="zip-btn" data-zip="88901">88901</button>
+      </div>
+
+      <!-- Tooltip/Bubble (hidden by default) -->
+      <div id="zip-tooltip" class="zip-tooltip"></div>
+    </section>
+  </main>
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       8. Footer with NAP & Links (Same Style as index.html)
+       Footer with Consistent NAP & Internal Links
        ────────────────────────────────────────────────────────────────────────── -->
   <footer>
     <div class="footer-content">
@@ -268,62 +561,34 @@
         <strong>Petersen Cleaning &amp; Junk Removal</strong><br />
         5940 S Rainbow Blvd<br />
         Las Vegas, NV 89118<br />
-        <a href="tel:7021234567" style="color: white; text-decoration: none;">
-          (702) 123-4567
-        </a>
+        <a href="tel:7021234567" style="color: white; text-decoration: none;">(702) 123-4567</a>
       </p>
       <nav class="footer-nav" style="margin: 1rem 0;">
-        <a href="index.html" style="color: white;">Home</a> |
-        <a href="about.html" style="color: white;">About</a> |
-        <a href="services.html" style="color: white;">Services</a> |
-        <a href="gallery.html" style="color: white;">Gallery</a> |
-        <a href="cleaning-tips.html" style="color: white;">Cleaning Tips</a> |
-        <a href="contact.html" style="color: white;">Contact</a>
+        <a href="index.html">Home</a> |
+        <a href="about.html">About</a> |
+        <a href="services.html">Services</a> |
+        <a href="gallery.html">Gallery</a> |
+        <a href="cleaning-tips.html">Cleaning Tips</a> |
+        <a href="contact.html">Contact</a>
       </nav>
-      <p style="font-size: 0.9rem; margin-top: 0.5rem;">
-        &copy; 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.
-      </p>
+      <p style="font-size: 0.9rem; margin-top: 0.5rem;">&copy; 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.</p>
     </div>
   </footer>
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       9. AI Avatar Icon (Same as index.html)
+       “Get a Free Estimate” Button (Fixed Position)
        ────────────────────────────────────────────────────────────────────────── -->
-  <div class="ai-avatar" title="Ask Neo a tip!"></div>
+  <a href="contact.html" class="fixed-estimate">📋 Get a Free Estimate</a>
 
   <!-- ──────────────────────────────────────────────────────────────────────────
-       10. Random Tip & “Get a Free Estimate” Buttons (Same as index.html)
+       Bubble-Trail Cursor Script (Throttled)
        ────────────────────────────────────────────────────────────────────────── -->
   <script>
-    const tips = [
-      "Use vinegar and baking soda to unclog drains naturally.",
-      "Lemons can remove rust stains on sinks.",
-      "Use a lint roller on lampshades to clean dust.",
-      "Dryer sheets can polish chrome and repel dust.",
-      "Clean baseboards with a dryer sheet to prevent static dust cling."
-    ];
-    function showRandomTip() {
-      const tip = tips[Math.floor(Math.random() * tips.length)];
-      alert("🧼 Tip: " + tip);
-    }
-  </script>
-  <div style="position: fixed; bottom: 120px; right: 20px; z-index: 999;">
-    <button onclick="showRandomTip()" style="background: #00c3ff; color: white; padding: 1rem 1.5rem; border: none; border-radius: 50px; font-weight: bold;">
-      ✨ Random Tip
-    </button>
-  </div>
-  <div style="position: fixed; bottom: 20px; left: 20px; z-index: 999;">
-    <a href="contact.html"
-       style="background: #007bff; color: white; padding: 1rem 1.25rem; border-radius: 50px; font-weight: bold; text-decoration: none;">
-      📋 Get a Free Estimate
-    </a>
-  </div>
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       11. Bubble-Trail & Exit-Intent Scripts (Same as index.html)
-       ────────────────────────────────────────────────────────────────────────── -->
-  <script>
+    let lastTime = 0;
     document.addEventListener("mousemove", function(e) {
+      const now = Date.now();
+      if (now - lastTime < 100) return;
+      lastTime = now;
       const bubble = document.createElement("div");
       bubble.style.position = "absolute";
       bubble.style.width = "10px";
@@ -337,13 +602,35 @@
       document.body.appendChild(bubble);
       setTimeout(() => bubble.remove(), 500);
     });
+  </script>
 
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       Exit-Intent Popup Script
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
     let exitPopupShown = false;
     document.addEventListener("mouseout", function(e) {
       if (e.clientY < 50 && !exitPopupShown) {
         alert("💥 Wait! Get 10% off your first clean — just mention this popup when you contact us!");
         exitPopupShown = true;
       }
+    });
+  </script>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+       Zip-Code Redirect Logic
+       ────────────────────────────────────────────────────────────────────────── -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const zipButtons = document.querySelectorAll(".zip-btn");
+
+      zipButtons.forEach(button => {
+        button.addEventListener("click", function() {
+          const zip = this.getAttribute("data-zip");
+          // Redirect to contact.html with the zip query parameter
+          window.location.href = `contact.html?zip=${zip}`;
+        });
+      });
     });
   </script>
 </body>
