@@ -4,9 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       SEO: Canonical, Open Graph & Twitter Cards
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- SEO: Canonical, Open Graph & Twitter Cards -->
   <link rel="canonical" href="https://www.petersencleaning.com/" />
   <meta property="og:title" content="Petersen Cleaning & Junk Removal – Las Vegas, NV" />
   <meta property="og:description" content="Top-rated commercial & residential cleaning in Las Vegas. Call (702) 123-4567 for a free quote!" />
@@ -18,17 +16,13 @@
   <meta name="twitter:description" content="Top-rated commercial & residential cleaning in Las Vegas. Call (702) 123-4567 for a free quote!" />
   <meta name="twitter:image" content="https://www.petersencleaning.com/assets/images/logo.png" />
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Preconnect & Preload Google Fonts
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Preconnect & Preload Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Main CSS (Inline; move to main.min.css in production)
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Main CSS (inline) -->
   <style>
     * {
       margin: 0;
@@ -59,8 +53,7 @@
 
     header {
       position: relative;
-      /* Use min-height instead of height to avoid iOS address bar issues */
-      min-height: 100vh;
+      min-height: 100vh; /* avoids clipping on mobile */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -134,7 +127,7 @@
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 2rem 1rem; /* add side padding */
+      padding: 2rem 1rem; /* side padding so text doesn’t touch edges */
       margin-bottom: 2rem;
       transition: transform 0.2s ease;
     }
@@ -152,68 +145,46 @@
     }
 
     /* ──────────────────────────────────────────────────────────────────────────
-       Zip-Code Grid & Tooltip Styles
+       Neighborhood Grid Styles
        ────────────────────────────────────────────────────────────────────────── */
-    .zip-grid-container {
+    .area-grid-container {
       position: relative;
       max-width: 800px;
       margin: 2rem auto;
       text-align: center;
-      padding: 0 1rem; /* ensure padding on small screens */
+      padding: 0 1rem; /* ensures no clipping on narrow screens */
     }
-    .zip-grid-container h2 {
+    .area-grid-container h2 {
       margin-bottom: 0.5rem;
       font-size: 1.5rem;
     }
-    .zip-grid-container p {
+    .area-grid-container p {
       margin-bottom: 1.5rem;
       font-size: 1rem;
       color: #333;
     }
-    .zip-grid {
+    .area-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 1rem;
       justify-items: center;
     }
-    .zip-btn {
+    .area-btn {
       background: #007bff;
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 0.75rem;
+      padding: 0.75rem 1rem;
       width: 100%;
-      max-width: 80px;
+      max-width: 160px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 0.95rem;
       transition: background 0.3s;
+      text-align: center;
     }
-    .zip-btn:hover {
+    .area-btn:hover {
       background: #0056b3;
-    }
-    .zip-tooltip {
-      position: absolute;
-      background: rgba(0, 123, 255, 0.95);
-      color: white;
-      padding: 1rem;
-      border-radius: 8px;
-      display: none;
-      max-width: 220px;
-      font-size: 0.9rem;
-      line-height: 1.3;
-      z-index: 50;
-      pointer-events: none;
-    }
-    .zip-tooltip::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 8px solid rgba(0, 123, 255, 0.95);
-      bottom: -8px;
-      left: 20px; /* adjust as needed */
     }
 
     footer {
@@ -228,6 +199,7 @@
       text-decoration: none;
       margin: 0 0.5rem;
     }
+
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -237,7 +209,8 @@
       opacity: 1;
       transform: none;
     }
-    /* Fixed Estimate Link */
+
+    /* “Get a Free Estimate” link */
     .fixed-estimate {
       position: fixed;
       bottom: 20px;
@@ -254,92 +227,22 @@
       background-color: #0056b3;
     }
   </style>
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       LocalBusiness Schema (Structured Data)
-       ────────────────────────────────────────────────────────────────────────── -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Petersen Cleaning & Junk Removal",
-    "image": "https://www.petersencleaning.com/assets/images/logo.png",
-    "@id": "https://www.petersencleaning.com",
-    "url": "https://www.petersencleaning.com",
-    "telephone": "(702) 123-4567",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "5940 S Rainbow Blvd",
-      "addressLocality": "Las Vegas",
-      "addressRegion": "NV",
-      "postalCode": "89118",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 36.095,
-      "longitude": -115.181
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "08:00",
-        "closes": "18:00"
-      }
-    ],
-    "priceRange": "$$",
-    "sameAs": [
-      "https://www.facebook.com/petersencleaning",
-      "https://www.yelp.com/biz/petersen-cleaning-las-vegas",
-      "https://www.thumbtack.com/nv/las-vegas/petersen-cleaning"
-    ]
-  }
-  </script>
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Fade-in & Intersection Observer Script (Deferred)
-       ────────────────────────────────────────────────────────────────────────── -->
-  <script defer>
-    document.addEventListener('DOMContentLoaded', function () {
-      const faders = document.querySelectorAll('.fade-in');
-      const options = { threshold: 0.1 };
-      const appearOnScroll = new IntersectionObserver(function (entries, observer) {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
-        });
-      }, options);
-
-      faders.forEach(fader => {
-        appearOnScroll.observe(fader);
-      });
-    });
-  </script>
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Favicon
-       ────────────────────────────────────────────────────────────────────────── -->
-  <link rel="icon" href="/assets/images/favicon-32x32.png" />
 </head>
 
 <body>
   <!-- Skip to main content for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Header Section
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Header -->
   <header>
     <h1>Petersen Cleaning &amp; Junk Removal</h1>
     <p>Clean never looked this cool. See why people are obsessed with our shine.</p>
-    <button class="cta-button" onclick="window.location.href='contact.html'">Get a Quote</button>
+    <button class="cta-button" onclick="window.location.href='contact.html'">
+      Get a Quote
+    </button>
   </header>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Navigation
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Navigation -->
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -349,9 +252,7 @@
     <a href="contact.html">Contact</a>
   </nav>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Main Content
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Main Content -->
   <main id="main-content">
     <section>
       <div class="card fade-in">
@@ -365,160 +266,39 @@
           in the industry.
         </p>
       </div>
-      <!-- "Scroll Down for Magic" card has been removed -->
     </section>
 
-    <!-- ──────────────────────────────────────────────────────────────────────────
-         Zip-Code Grid Section
-         ────────────────────────────────────────────────────────────────────────── -->
-    <section class="zip-grid-container">
-      <h2>We Service All Las Vegas Zip Codes</h2>
-      <p>Below is a quick neighborhood map plus a list of every zip we cover. Click your zip to get a quote!</p>
+    <!-- Neighborhood Grid Section -->
+    <section class="area-grid-container">
+      <h2>We Service All Parts of Las Vegas</h2>
+      <p>Below are the neighborhoods we proudly cover. Click your area to get a quote!</p>
 
-      <!-- Neighborhood Coverage Map (MapofLV.png) -->
+      <!-- Neighborhood Coverage Map -->
       <img
         src="MapofLV.png"
         alt="Las Vegas neighborhood coverage map"
         style="max-width:100%; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom:1.5rem;"
       />
 
-      <!-- Grid of Zip Buttons (Sorted High to Low) -->
-      <div class="zip-grid">
-        <button class="zip-btn" data-zip="89199">89199</button>
-        <button class="zip-btn" data-zip="89195">89195</button>
-        <button class="zip-btn" data-zip="89193">89193</button>
-        <button class="zip-btn" data-zip="89191">89191</button>
-        <button class="zip-btn" data-zip="89185">89185</button>
-        <button class="zip-btn" data-zip="89183">89183</button>
-        <button class="zip-btn" data-zip="89180">89180</button>
-        <button class="zip-btn" data-zip="89179">89179</button>
-        <button class="zip-btn" data-zip="89178">89178</button>
-        <button class="zip-btn" data-zip="89177">89177</button>
-        <button class="zip-btn" data-zip="89173">89173</button>
-        <button class="zip-btn" data-zip="89170">89170</button>
-        <button class="zip-btn" data-zip="89169">89169</button>
-        <button class="zip-btn" data-zip="89166">89166</button>
-        <button class="zip-btn" data-zip="89165">89165</button>
-        <button class="zip-btn" data-zip="89164">89164</button>
-        <button class="zip-btn" data-zip="89163">89163</button>
-        <button class="zip-btn" data-zip="89162">89162</button>
-        <button class="zip-btn" data-zip="89161">89161</button>
-        <button class="zip-btn" data-zip="89160">89160</button>
-        <button class="zip-btn" data-zip="89159">89159</button>
-        <button class="zip-btn" data-zip="89158">89158</button>
-        <button class="zip-btn" data-zip="89157">89157</button>
-        <button class="zip-btn" data-zip="89156">89156</button>
-        <button class="zip-btn" data-zip="89155">89155</button>
-        <button class="zip-btn" data-zip="89154">89154</button>
-        <button class="zip-btn" data-zip="89153">89153</button>
-        <button class="zip-btn" data-zip="89152">89152</button>
-        <button class="zip-btn" data-zip="89151">89151</button>
-        <button class="zip-btn" data-zip="89150">89150</button>
-        <button class="zip-btn" data-zip="89149">89149</button>
-        <button class="zip-btn" data-zip="89148">89148</button>
-        <button class="zip-btn" data-zip="89147">89147</button>
-        <button class="zip-btn" data-zip="89146">89146</button>
-        <button class="zip-btn" data-zip="89145">89145</button>
-        <button class="zip-btn" data-zip="89144">89144</button>
-        <button class="zip-btn" data-zip="89143">89143</button>
-        <button class="zip-btn" data-zip="89142">89142</button>
-        <button class="zip-btn" data-zip="89141">89141</button>
-        <button class="zip-btn" data-zip="89140">89140</button>
-        <button class="zip-btn" data-zip="89139">89139</button>
-        <button class="zip-btn" data-zip="89138">89138</button>
-        <button class="zip-btn" data-zip="89137">89137</button>
-        <button class="zip-btn" data-zip="89136">89136</button>
-        <button class="zip-btn" data-zip="89135">89135</button>
-        <button class="zip-btn" data-zip="89134">89134</button>
-        <button class="zip-btn" data-zip="89133">89133</button>
-        <button class="zip-btn" data-zip="89132">89132</button>
-        <button class="zip-btn" data-zip="89131">89131</button>
-        <button class="zip-btn" data-zip="89130">89130</button>
-        <button class="zip-btn" data-zip="89129">89129</button>
-        <button class="zip-btn" data-zip="89128">89128</button>
-        <button class="zip-btn" data-zip="89127">89127</button>
-        <button class="zip-btn" data-zip="89126">89126</button>
-        <button class="zip-btn" data-zip="89125">89125</button>
-        <button class="zip-btn" data-zip="89124">89124</button>
-        <button class="zip-btn" data-zip="89123">89123</button>
-        <button class="zip-btn" data-zip="89122">89122</button>
-        <button class="zip-btn" data-zip="89121">89121</button>
-        <button class="zip-btn" data-zip="89120">89120</button>
-        <button class="zip-btn" data-zip="89119">89119</button>
-        <button class="zip-btn" data-zip="89118">89118</button>
-        <button class="zip-btn" data-zip="89117">89117</button>
-        <button class="zip-btn" data-zip="89116">89116</button>
-        <button class="zip-btn" data-zip="89115">89115</button>
-        <button class="zip-btn" data-zip="89114">89114</button>
-        <button class="zip-btn" data-zip="89113">89113</button>
-        <button class="zip-btn" data-zip="89112">89112</button>
-        <button class="zip-btn" data-zip="89111">89111</button>
-        <button class="zip-btn" data-zip="89110">89110</button>
-        <button class="zip-btn" data-zip="89109">89109</button>
-        <button class="zip-btn" data-zip="89108">89108</button>
-        <button class="zip-btn" data-zip="89107">89107</button>
-        <button class="zip-btn" data-zip="89106">89106</button>
-        <button class="zip-btn" data-zip="89105">89105</button>
-        <button class="zip-btn" data-zip="89104">89104</button>
-        <button class="zip-btn" data-zip="89103">89103</button>
-        <button class="zip-btn" data-zip="89102">89102</button>
-        <button class="zip-btn" data-zip="89101">89101</button>
-        <button class="zip-btn" data-zip="89087">89087</button>
-        <button class="zip-btn" data-zip="89086">89086</button>
-        <button class="zip-btn" data-zip="89085">89085</button>
-        <button class="zip-btn" data-zip="89084">89084</button>
-        <button class="zip-btn" data-zip="89081">89081</button>
-        <button class="zip-btn" data-zip="89077">89077</button>
-        <button class="zip-btn" data-zip="89074">89074</button>
-        <button class="zip-btn" data-zip="89070">89070</button>
-        <button class="zip-btn" data-zip="89067">89067</button>
-        <button class="zip-btn" data-zip="89061">89061</button>
-        <button class="zip-btn" data-zip="89054">89054</button>
-        <button class="zip-btn" data-zip="89053">89053</button>
-        <button class="zip-btn" data-zip="89052">89052</button>
-        <button class="zip-btn" data-zip="89046">89046</button>
-        <button class="zip-btn" data-zip="89044">89044</button>
-        <button class="zip-btn" data-zip="89040">89040</button>
-        <button class="zip-btn" data-zip="89039">89039</button>
-        <button class="zip-btn" data-zip="89037">89037</button>
-        <button class="zip-btn" data-zip="89036">89036</button>
-        <button class="zip-btn" data-zip="89034">89034</button>
-        <button class="zip-btn" data-zip="89033">89033</button>
-        <button class="zip-btn" data-zip="89032">89032</button>
-        <button class="zip-btn" data-zip="89031">89031</button>
-        <button class="zip-btn" data-zip="89030">89030</button>
-        <button class="zip-btn" data-zip="89029">89029</button>
-        <button class="zip-btn" data-zip="89028">89028</button>
-        <button class="zip-btn" data-zip="89027">89027</button>
-        <button class="zip-btn" data-zip="89026">89026</button>
-        <button class="zip-btn" data-zip="89025">89025</button>
-        <button class="zip-btn" data-zip="89024">89024</button>
-        <button class="zip-btn" data-zip="89021">89021</button>
-        <button class="zip-btn" data-zip="89019">89019</button>
-        <button class="zip-btn" data-zip="89018">89018</button>
-        <button class="zip-btn" data-zip="89016">89016</button>
-        <button class="zip-btn" data-zip="89015">89015</button>
-        <button class="zip-btn" data-zip="89014">89014</button>
-        <button class="zip-btn" data-zip="89012">89012</button>
-        <button class="zip-btn" data-zip="89011">89011</button>
-        <button class="zip-btn" data-zip="89009">89009</button>
-        <button class="zip-btn" data-zip="89007">89007</button>
-        <button class="zip-btn" data-zip="89006">89006</button>
-        <button class="zip-btn" data-zip="89005">89005</button>
-        <button class="zip-btn" data-zip="89004">89004</button>
-        <button class="zip-btn" data-zip="89002">89002</button>
-        <button class="zip-btn" data-zip="88905">88905</button>
-        <button class="zip-btn" data-zip="88901">88901</button>
+      <!-- Grid of Neighborhood Buttons -->
+      <div class="area-grid">
+        <button class="area-btn" data-area="Centennial%20Hills">Centennial Hills</button>
+        <button class="area-btn" data-area="Downtown">Downtown</button>
+        <button class="area-btn" data-area="North%20Las%20Vegas">North Las Vegas</button>
+        <button class="area-btn" data-area="Historic%20Westside">Historic Westside</button>
+        <button class="area-btn" data-area="Henderson">Henderson</button>
+        <button class="area-btn" data-area="Paradise">Paradise</button>
+        <button class="area-btn" data-area="Peccole%20Ranch%20%2F%20The%20Lakes">Peccole Ranch / The Lakes</button>
+        <button class="area-btn" data-area="Summerlin">Summerlin</button>
+        <button class="area-btn" data-area="Spring%20Valley">Spring Valley</button>
+        <button class="area-btn" data-area="Southwest">Southwest</button>
+        <button class="area-btn" data-area="Sunrise">Sunrise</button>
+        <button class="area-btn" data-area="Whitney">Whitney</button>
       </div>
-
-      <!-- Tooltip/Bubble (hidden by default) -->
-      <div id="zip-tooltip" class="zip-tooltip"></div>
     </section>
   </main>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Footer with Consistent NAP & Internal Links
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <p>
@@ -539,38 +319,30 @@
     </div>
   </footer>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       “Get a Free Estimate” Button (Fixed Position)
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- “Get a Free Estimate” Button (Fixed) -->
   <a href="contact.html" class="fixed-estimate">📋 Get a Free Estimate</a>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Bubble-Trail Cursor Script (Throttled)
-       ────────────────────────────────────────────────────────────────────────── -->
-  <script>
-    let lastTime = 0;
-    document.addEventListener("mousemove", function(e) {
-      const now = Date.now();
-      if (now - lastTime < 100) return;
-      lastTime = now;
-      const bubble = document.createElement("div");
-      bubble.style.position = "absolute";
-      bubble.style.width = "10px";
-      bubble.style.height = "10px";
-      bubble.style.borderRadius = "50%";
-      bubble.style.background = "rgba(0, 123, 255, 0.5)";
-      bubble.style.left = e.pageX + "px";
-      bubble.style.top = e.pageY + "px";
-      bubble.style.pointerEvents = "none";
-      bubble.style.zIndex = 999;
-      document.body.appendChild(bubble);
-      setTimeout(() => bubble.remove(), 500);
+  <!-- Fade-in Observer -->
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+      const faders = document.querySelectorAll('.fade-in');
+      const options = { threshold: 0.1 };
+      const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        });
+      }, options);
+
+      faders.forEach(fader => appearOnScroll.observe(fader));
     });
   </script>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Exit-Intent Popup Script
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/favicon-32x32.png" />
+
+  <!-- Exit-Intent Popup (unchanged) -->
   <script>
     let exitPopupShown = false;
     document.addEventListener("mouseout", function(e) {
@@ -581,18 +353,15 @@
     });
   </script>
 
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Zip-Code Redirect Logic
-       ────────────────────────────────────────────────────────────────────────── -->
+  <!-- Neighborhood Redirect Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const zipButtons = document.querySelectorAll(".zip-btn");
-
-      zipButtons.forEach(button => {
+      const areaButtons = document.querySelectorAll(".area-btn");
+      areaButtons.forEach(button => {
         button.addEventListener("click", function() {
-          const zip = this.getAttribute("data-zip");
-          // Redirect to contact.html with the zip query parameter
-          window.location.href = `contact.html?zip=${zip}`;
+          const area = this.getAttribute("data-area");
+          // Redirect to contact.html with the area query parameter
+          window.location.href = `contact.html?area=${area}`;
         });
       });
     });
