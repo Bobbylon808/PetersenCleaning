@@ -3,238 +3,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       SEO: Canonical, Open Graph & Twitter Cards
-       ────────────────────────────────────────────────────────────────────────── -->
-  <link rel="canonical" href="https://www.petersencleaning.com/contact.html" />
-  <meta property="og:title" content="Contact Petersen Cleaning & Junk Removal – Las Vegas, NV" />
-  <meta property="og:description" content="Get in touch with Petersen Cleaning & Junk Removal for a free quote. Call or text us directly!" />
-  <meta property="og:image" content="https://www.petersencleaning.com/assets/images/logo.png" />
-  <meta property="og:url" content="https://www.petersencleaning.com/contact.html" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Contact Petersen Cleaning & Junk Removal – Las Vegas" />
-  <meta name="twitter:description" content="Get in touch with Petersen Cleaning & Junk Removal for a free quote. Call or text us directly!" />
-  <meta name="twitter:image" content="https://www.petersencleaning.com/assets/images/logo.png" />
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Preconnect & Preload Google Fonts
-       ────────────────────────────────────────────────────────────────────────── -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
+  <title>About Us - Petersen Cleaning & Junk Removal</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- ──────────────────────────────────────────────────────────────────────────
-       Main CSS (Inline for demo; move to external stylesheet in production)
-       ────────────────────────────────────────────────────────────────────────── -->
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body, html {
-      height: 100%;
+    body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
       color: #1a1a1a;
+      margin: 0;
+      padding: 0;
     }
-
-    /* Skip Link for Accessibility */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
+    header {
       background: #007bff;
       color: white;
-      padding: 8px;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
-
-    header {
-      position: relative;
-      /* Use min-height instead of height to avoid iOS address bar issues */
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, #007bff 0%, #0056b3 100%);
-      color: white;
       text-align: center;
-      padding: 0 1rem;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/bubbles.png');
-      opacity: 0.2;
-      z-index: 1;
+      padding: 3rem 1rem 2rem;
     }
     header h1 {
-      font-size: 3rem;
-      z-index: 2;
-      padding: 0 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
     }
     header p {
       font-size: 1.2rem;
-      margin-top: 1rem;
-      z-index: 2;
-      padding: 0 1rem;
     }
-    .cta-button {
-      background-color: white;
-      color: #007bff;
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 2rem;
-      z-index: 2;
-      transition: background 0.3s;
-    }
-    .cta-button:hover {
-      background-color: #f0f8ff;
-    }
-
     nav {
-      background-color: #ffffff;
+      background: white;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
       padding: 1rem 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
     }
     nav a {
-      text-decoration: none;
-      color: #0056b3;
+      color: #007bff;
       font-weight: bold;
+      text-decoration: none;
       padding: 0.5rem 1rem;
     }
-
     main {
-      padding: 3rem 1rem;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
+      padding: 2rem 1rem;
     }
-
-    /* Call/Text button styles */
-    .contact-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .contact-button {
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      transition: background 0.3s;
-    }
-    .contact-button:hover {
-      background: #0056b3;
-    }
-
-    /* Original form styling */
-    .contact-form {
+    .card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
     }
-    .contact-form label {
-      font-weight: 600;
+    .card h2 {
+      color: #0056b3;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    .card p, .card ul {
+      font-size: 1rem;
       color: #333;
+      line-height: 1.6;
     }
-    .contact-form input[type="text"],
-    .contact-form input[type="email"],
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
+    .card ul {
+      padding-left: 1.2rem;
     }
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-    .submit-button {
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      align-self: flex-start;
-      transition: background 0.3s;
-    }
-    .submit-button:hover {
-      background: #1e7e34;
-    }
-
     footer {
-      background-color: #0056b3;
+      background: #0056b3;
       color: white;
       text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 2rem;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
     }
     .footer-nav a {
       color: white;
       text-decoration: none;
       margin: 0 0.5rem;
     }
-
-    /* Fade-in effect for cards (if used) */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in.show {
-      opacity: 1;
-      transform: none;
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 1rem 0 2rem;
     }
   </style>
 </head>
-
 <body>
-  <!-- Skip to main content for accessibility -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <!-- Header Section -->
+  <!-- Header -->
   <header>
-    <h1>Contact Petersen Cleaning &amp; Junk Removal</h1>
-    <p>Have questions or want a free estimate? Call or text us directly, or fill out the form below.</p>
-    <button class="cta-button" onclick="window.location.href='contact.html'">Get a Quote</button>
+    <h1>About Petersen Cleaning & Junk Removal</h1>
+    <p>Committed to Excellence in Every Clean</p>
   </header>
 
   <!-- Navigation -->
@@ -249,54 +107,81 @@
 
   <!-- Main Content -->
   <main id="main-content">
-    <!-- Call/Text buttons -->
-    <div class="contact-options">
-      <a href="tel:7021234567" class="contact-button">
-        📞 Call Us: (702) 123-4567
-      </a>
-      <a href="sms:7021234567" class="contact-button">
-        💬 Text Us: (702) 123-4567
-      </a>
+    <div class="card">
+      <h2>Our Story</h2>
+      <p>
+        Petersen Cleaning &amp; Junk Removal began in 2021 when Bobby and Allison Petersen realized
+        that Las Vegas needed a cleaning company that combined cutting-edge efficiency
+        with a personal touch. What started as a one-team operation with a single vacuum
+        has grown into a team of over 15 trained professionals serving both residential
+        and commercial clients across the valley.
+      </p>
     </div>
 
-    <!-- Original Contact Form -->
-    <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
-      <!-- Replace “your-form-id” with your Formspree (or chosen endpoint) -->
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required />
+    <div class="card">
+      <h2>Why We’re Not Just Another Cleaning Company</h2>
+      <p>
+        At Petersen Cleaning &amp; Junk Removal, our certified, licensed, and insured team delivers
+        professional-grade results every time. We use eco-friendly, hospital-grade cleaning products
+        to ensure a safe, healthy environment for your family or employees. Our punctual staff is
+        committed to excellence, offering meticulous attention to detail and 100% satisfaction
+        guaranteed. Choose us for reliable service, transparent pricing, and the highest standards
+        in the industry.
+      </p>
+    </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="_replyto" required />
+    <div class="card">
+      <h2>Our Mission</h2>
+      <p>
+        We believe a clean environment improves quality of life—whether it’s a small
+        home, a bustling office, or a large retail space. Our mission is to provide
+        eco-friendly, reliable, and affordable cleaning and junk removal services
+        that our neighbors can trust. We’re not just here to clean; we’re here to build
+        lasting relationships based on honesty, respect, and exceptional results.
+      </p>
+    </div>
 
-      <label for="phone">Phone Number</label>
-      <input type="text" id="phone" name="phone" />
+    <div class="card">
+      <h2>Meet the Team</h2>
+      <p>
+        Every member of our crew undergoes background checks and thorough training
+        before stepping into your home or business. Our supervisor, <strong>Allison</strong>,
+        has over 10 years of experience in commercial facility maintenance, ensuring
+        that we use the best industry practices. Meanwhile, <strong>Bobby</strong>
+        leads our junk removal division, coordinating safe, eco-friendly disposal
+        methods in compliance with Las Vegas recycling regulations.
+      </p>
+    </div>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" required></textarea>
+    <img src="MapofLV.png" alt="Las Vegas neighborhood coverage map" />
 
-      <button type="submit" class="submit-button">Send Message</button>
-    </form>
+    <div class="card">
+      <h2>Why We’re Different</h2>
+      <ul>
+        <li>AI-Driven Scheduling &amp; Route Optimization to arrive on time, every time</li>
+        <li>Green-Certified Cleaning Products that are safe for kids, pets, and the planet</li>
+        <li>Fully Insured &amp; Bonded—your peace of mind is our priority</li>
+        <li>Flat-Rate Pricing with No Hidden Fees—what we quote is what you pay</li>
+      </ul>
+    </div>
   </main>
 
-  <!-- Footer Section -->
+  <!-- Footer -->
   <footer>
-    <div class="footer-content">
-      <p>
-        <strong>Petersen Cleaning &amp; Junk Removal</strong><br />
-        5940 S Rainbow Blvd<br />
-        Las Vegas, NV 89118<br />
-        <a href="tel:7021234567" style="color: white; text-decoration: none;">(702) 123-4567</a>
-      </p>
-      <nav class="footer-nav" style="margin: 1rem 0;">
-        <a href="index.html">Home</a> |
-        <a href="about.html">About</a> |
-        <a href="services.html">Services</a> |
-        <a href="gallery.html">Gallery</a> |
-        <a href="cleaning-tips.html">Cleaning Tips</a> |
-        <a href="contact.html">Contact</a>
-      </nav>
-      <p style="font-size: 0.9rem; margin-top: 0.5rem;">© 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.</p>
-    </div>
+    <p>
+      <strong>Petersen Cleaning &amp; Junk Removal</strong><br />
+      5940 S Rainbow Blvd · Las Vegas, NV 89118<br />
+      <a href="tel:7021234567" style="color:white;">(702) 123-4567</a>
+    </p>
+    <nav class="footer-nav" style="margin: 1rem 0;">
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a> |
+      <a href="services.html">Services</a> |
+      <a href="gallery.html">Gallery</a> |
+      <a href="cleaning-tips.html">Cleaning Tips</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p style="font-size: 0.9rem;">&copy; 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.</p>
   </footer>
 </body>
 </html>
