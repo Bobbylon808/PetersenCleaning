@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Petersen Cleaning — Smart AI Experience</title>
+<meta name="description" content="Petersen Cleaning: Interactive AI-powered experience for Cleaning, Waste Removal, and Party Rentals. Call or text 808-319-5819." />
+<style>
+  :root{
+    --bg1:#0f1f3a; --bg2:#0b1630; --glow1:#5fb6ff; --glow2:#a9d6ff;
+    --brand:#2c7cf6; --ink:#0b1220; --card:#0f203fbb; --white:#ffffff; --muted:#cfe6ff;
+    --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--white); background: radial-gradient(1200px 600px at 15% 10%,#12305f 0%,transparent 55%),
+               radial-gradient(1000px 500px at 85% 90%,#0b2c55 0%,transparent 50%),
+               linear-gradient(180deg,var(--bg1),var(--bg2));
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    overflow-x:hidden;
+  }
+
+  /* Energy mesh */
+  .fx{
+    position:fixed; inset:-20vmax;
+    background:
+      radial-gradient(60vmax 60vmax at var(--x,40%) var(--y,60%), rgba(95,182,255,.10), transparent 60%),
+      radial-gradient(50vmax 50vmax at calc(100% - var(--x,40%)) calc(100% - var(--y,60%)), rgba(169,214,255,.10), transparent 60%);
+    filter:saturate(120%) blur(6px);
+    pointer-events:none; z-index:0;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift{ 0%{--x:30%;--y:65%} 100%{--x:70%;--y:35%} }
+
+  /* Bubbles (desktop) */
+  @media (hover:hover){
+    .bubble{ position:fixed; width:10px; height:10px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--glow2), var(--glow1));
+      pointer-events:none; opacity:.9; filter:blur(.3px);
+      animation: float 800ms ease-out forwards; mix-blend-mode:screen;
+    }
+    @keyframes float{ to{transform:translateY(-16px) scale(0.5); opacity:0} }
+  }
+
+  .wrap{position:relative; z-index:1; min-height:100%; display:grid; place-items:center; padding:clamp(16px,3vw,36px)}
+  .shell{
+    width:min(1100px, 92vw); backdrop-filter: blur(10px);
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+    border:1px solid rgba(255,255,255,.12); border-radius:calc(var(--radius) + 6px); box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .topbar{
+    display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+    flex-wrap:wrap;
+  }
+  .logo{ width:42px;height:42px; border-radius:50%; background:
+    radial-gradient(circle at 30% 30%, var(--glow2), var(--glow1));
+    box-shadow:0 0 20px rgba(95,182,255,.6) inset, 0 0 24px rgba(95,182,255,.4);
+  }
+  .brand{font-weight:800; letter-spacing:.3px}
+  .brand small{display:block; opacity:.8; font-weight:600; margin-top:2px; font-size:.85rem}
+
+  .cta-bar{ margin-left:auto; display:flex; gap:8px; flex-wrap:wrap }
+  .btn{
+    all:unset; cursor:pointer; text-align:center; font-weight:800; padding:10px 12px; border-radius:999px;
+    background:linear-gradient(180deg, rgba(44,124,246,.92), rgba(44,124,246,.7));
+    border:1px solid rgba(95,182,255,.6); box-shadow:0 8px 20px rgba(44,124,246,.28);
+  }
+  .btn.secondary{ background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); font-weight:700 }
+  .tiny-link{ font-size:.85rem; opacity:.8; text-decoration:underline; }
+
+  .hero{ display:grid; grid-template-columns: 330px 1fr; gap:20px; padding:16px 16px 22px }
+  @media (max-width:880px){ .hero{grid-template-columns:1fr; gap:16px} }
+
+  .agent{
+    background:linear-gradient(180deg, rgba(12,26,54,.7), rgba(12,26,54,.55));
+    border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:16px; position:relative; overflow:hidden;
+  }
+  .agent .face{
+    width:100%; aspect-ratio: 4/5; border-radius:14px; background:#091227 center/cover no-repeat;
+    border:1px solid rgba(255,255,255,.1);
+  }
+  .agent .chip{
+    position:absolute; top:16px; right:16px; display:flex; gap:8px; align-items:center;
+    background:rgba(44,124,246,.15); border:1px solid rgba(44,124,246,.35); padding:6px 10px; border-radius:100px;
+    font-size:.85rem
+  }
+  .agent .chip button{ all:unset; background:rgba(255,255,255,.12); padding:6px 10px; border-radius:100px; cursor:pointer }
+
+  .dialog{
+    background:linear-gradient(180deg, rgba(12,26,54,.65), rgba(12,26,54,.5));
+    border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:16px;
+    display:grid; gap:14px;
+  }
+  .bubble-talk{
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:16px;
+    padding:12px 14px; line-height:1.4
+  }
+  .choices{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+  @media (max-width:880px){ .choices{grid-template-columns:1fr} }
+
+  .card{
+    position:relative; isolation:isolate;
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px; min-height:120px;
+    overflow:hidden; cursor:pointer; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    text-align:left;
+  }
+  .card:hover{ transform: translateY(-3px); border-color: rgba(95,182,255,.55); box-shadow: 0 10px 28px rgba(44,124,246,.25) }
+  .card:active{ transform: translateY(0) scale(.99) }
+  .card h3{margin:2px 0 4px; font-size:1.05rem}
+  .card p{margin:0; opacity:.85; font-size:.95rem}
+  .pill{ display:inline-flex; gap:8px; align-items:center; margin-top:10px;
+    background:rgba(95,182,255,.18); border:1px solid rgba(95,182,255,.4); padding:6px 10px; border-radius:100px; font-size:.85rem }
+  .shine{ position:absolute; inset:-40% -10% auto -10%; height:140%;
+    background: radial-gradient(60% 40% at 30% 20%, rgba(169,214,255,.35), transparent 60%);
+    transform: rotate(12deg); filter: blur(16px); opacity:.45; z-index:-1; pointer-events:none; }
+
+  .section{
+    display:none; opacity:0; transform:translateY(10px); transition: opacity .35s ease, transform .35s ease;
+    margin:0 16px 16px; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:16px;
+    background:linear-gradient(180deg, rgba(12,26,54,.6), rgba(12,26,54,.45));
+  }
+  .section.active{display:block; opacity:1; transform:none}
+
+  /* Language modal */
+  .modal{ position:fixed; inset:0; display:grid; place-items:center; background:rgba(5,10,20,.7); z-index:5; }
+  .sheet{
+    width:min(560px,92vw); background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
+    border:1px solid rgba(255,255,255,.15); border-radius:18px; padding:18px; box-shadow:var(--shadow)
+  }
+  .lang-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px}
+
+  /* Sticky mobile dock */
+  .dock{
+    position:fixed; left:0; right:0; bottom:0; z-index:10; display:flex; gap:10px; padding:10px 12px;
+    background: linear-gradient(180deg, rgba(6,12,24,.0), rgba(6,12,24,.9) 30%, rgba(6,12,24,.95));
+    backdrop-filter: blur(8px);
+  }
+  .dock .dock-btn{ flex:1; text-align:center; padding:14px 10px; border-radius:14px; font-weight:900 }
+  .dock .call{ background:linear-gradient(180deg, rgba(0,184,98,.9), rgba(0,184,98,.75)); border:1px solid rgba(0,220,130,.7) }
+  .dock .text{ background:linear-gradient(180deg, rgba(44,124,246,.92), rgba(44,124,246,.72)); border:1px solid rgba(95,182,255,.7) }
+  @media (min-width:900px){ .dock{display:none} }
+
+  :focus-visible{outline:2px solid var(--glow2); outline-offset:2px; border-radius:10px}
+</style>
+</head>
+<body>
+<div class="fx" aria-hidden="true"></div>
+
+<!-- Sticky Call/Text dock (mobile) -->
+<nav class="dock" aria-label="Quick actions">
+  <a class="dock-btn call" id="dockCall" href="tel:+18083195819">📞 Call 808-319-5819</a>
+  <a class="dock-btn text" id="dockText" href="#" role="button">💬 Text us</a>
+</nav>
+
+<div class="wrap" id="app">
+  <div class="shell" role="application" aria-label="Petersen Cleaning AI interface">
+    <div class="topbar">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <div class="brand">Petersen Cleaning</div>
+        <small class="brand">AI-powered Cleaning • Waste Removal • Party Rentals</small>
+      </div>
+
+      <!-- Call/Text first, Email last -->
+      <div class="cta-bar">
+        <a class="btn" id="callTop" href="tel:+18083195819">📞 Call</a>
+        <button class="btn secondary" id="textTop" type="button">💬 Text</button>
+        <a class="tiny-link" href="mailto:Bobby@petersencleaning.com?subject=Service%20Request%20-%20Petersen%20Cleaning">Email (optional)</a>
+        <button class="btn secondary" id="changeLangBtn" aria-label="Change language">🌐</button>
+        <button class="btn secondary" id="muteBtn" aria-label="Mute voice">🔊</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <!-- Agent / Avatar -->
+      <aside class="agent">
+        <div class="chip">
+          <span id="statusDot">🟢</span>
+          <span id="statusText">AI Online</span>
+          <button id="swapAvatar" title="Use your photo">Swap</button>
+        </div>
+        <!-- Replace url with your headshot or embed D-ID/HeyGen player -->
+        <div class="face" id="avatar" role="img" aria-label="AI Avatar of Bobby"
+             style="background-image:url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=1200&auto=format&fit=crop');">
+        </div>
+      </aside>
+
+      <!-- Conversational UI -->
+      <section class="dialog">
+        <div class="bubble-talk" id="greeting">
+          👋 <strong id="helloTxt">Welcome to Petersen Cleaning!</strong><br>
+          <span id="promptTxt">What can I help you with today?</span>
+        </div>
+
+        <div class="choices" role="list" aria-label="Primary choices">
+          <button class="card" id="optCleaning" role="listitem">
+            <div class="shine"></div>
+            <h3>🧽 <span data-i18n="Cleaning Services">Cleaning Services</span></h3>
+            <p data-i18n="Cleaning Desc">Residential, commercial, move-out & deep clean.</p>
+            <span class="pill">Get an instant quote →</span>
+          </button>
+
+          <button class="card" id="optWaste" role="listitem">
+            <div class="shine"></div>
+            <h3>🗑️ <span data-i18n="Waste Removal">Waste Removal</span></h3>
+            <p data-i18n="Waste Desc">Junk removal, bulky pickups, same-day options.</p>
+            <span class="pill">Build your pickup →</span>
+          </button>
+
+          <button class="card" id="optParty" role="listitem">
+            <div class="shine"></div>
+            <h3>🎉 <span data-i18n="Party Rentals">Party Rentals</span></h3>
+            <p data-i18n="Party Desc">Tables, chairs, canopies—delivered & setup.</p>
+            <span class="pill">Browse catalog →</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Cleaning -->
+    <section class="section" id="secCleaning" aria-live="polite">
+      <h2>🧽 Cleaning — Instant Smart Quote</h2>
+      <p class="sub">Answer 4 quick questions to see a live estimate. Prefer to chat? <a class="tiny-link" href="#" id="textQuick1">Text us instead</a>.</p>
+      <form id="cleanForm">
+        <div style="display:grid; gap:12px; margin-top:10px">
+          <label>Property type
+            <select name="ptype" required>
+              <option>Residential</option><option>Commercial</option><option>Move-out</option>
+            </select>
+          </label>
+          <label>Square footage
+            <input name="sqft" type="number" min="200" step="50" placeholder="e.g. 1500" required />
+          </label>
+          <label>Bedrooms / Offices
+            <input name="rooms" type="number" min="1" step="1" value="3" />
+          </label>
+          <label>Urgency
+            <select name="urgency">
+              <option>Flexible (3-7 days)</option><option>Rush (48h)</option><option>Same-day (call)</option>
+            </select>
+          </label>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn" type="submit">Calculate</button>
+            <a class="btn secondary" href="tel:+18083195819">📞 Call now</a>
+            <button class="btn secondary" id="textClean" type="button">💬 Text us</button>
+          </div>
+        </div>
+      </form>
+      <div id="cleanQuote" style="margin-top:14px; font-weight:800"></div>
+      <div id="cleanCTA" style="margin-top:10px"></div>
+    </section>
+
+    <!-- Waste -->
+    <section class="section" id="secWaste" aria-live="polite">
+      <h2>🗑️ Waste Removal — Visual Bin</h2>
+      <p class="sub">Tap items to add them. Then text us your pickup list.</p>
+      <div id="wasteGrid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:12px"></div>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn" id="wasteGetQuote">Get estimate</button>
+        <a class="btn secondary" href="tel:+18083195819">📞 Call now</a>
+        <button class="btn secondary" id="textWaste" type="button">💬 Text list</button>
+        <strong id="wasteTotal" style="margin-left:6px"></strong>
+      </div>
+    </section>
+
+    <!-- Party -->
+    <section class="section" id="secParty" aria-live="polite">
+      <h2>🎉 Party Rentals — Quick Browse</h2>
+      <p class="sub">Add what you need; we’ll confirm availability by text or call.</p>
+      <div id="partyList" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px"></div>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn" id="partyCheckout">Request availability</button>
+        <a class="btn secondary" href="tel:+18083195819">📞 Call now</a>
+        <button class="btn secondary" id="textParty" type="button">💬 Text list</button>
+        <strong id="partyTotal" style="margin-left:6px"></strong>
+      </div>
+    </section>
+
+    <div style="padding:8px 16px 16px; opacity:.8; font-size:.9rem">
+      Prefer email? <a class="tiny-link" href="mailto:Bobby@petersencleaning.com?subject=Service%20Request%20-%20Petersen%20Cleaning">Bobby@petersencleaning.com</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Language Gate -->
+<div class="modal" id="langModal" role="dialog" aria-modal="true" aria-label="Choose language">
+  <div class="sheet">
+    <h2 style="margin:4px 0 4px">Choose your language</h2>
+    <p class="sub">We’ll remember your preference for next time.</p>
+    <div class="lang-grid">
+      <button class="btn" data-lang="en">English</button>
+      <button class="btn" data-lang="es">Español</button>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+      <button class="btn secondary" id="skipVoice">Mute voice by default</button>
+      <button class="btn secondary" id="allowVoice">Allow voice</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ----------- Helpers: Call / Text ----------- */
+const PHONE_E164 = '+18083195819';
+const DISPLAY = '808-319-5819';
+
+// Composes a cross-platform sms: link and navigates.
+function openSMS(message){
+  const body = encodeURIComponent(message || 'Hi, I need service. Can you help?');
+  // iOS and many others accept sms:+number&body=...
+  let href = `sms:${PHONE_E164}&body=${body}`;
+  // Some Android variants prefer ?body
+  if (navigator.userAgent.toLowerCase().includes('android')) {
+    href = `sms:${PHONE_E164}?body=${body}`;
+  }
+  // Fallback: try navigator.share if SMS handlers are missing
+  try {
+    window.location.href = href;
+  } catch(e) {
+    if (navigator.share) {
+      navigator.share({text: decodeURIComponent(body)});
+    } else {
+      alert("If your SMS app doesn't open automatically, text us at " + DISPLAY + ".");
+    }
+  }
+}
+
+/* ----------- i18n ----------- */
+const I18N = {
+  en:{ hello:"Welcome to Petersen Cleaning!", prompt:"What can I help you with today?",
+       cleaning:"Cleaning Services", cdesc:"Residential, commercial, move-out & deep clean.",
+       waste:"Waste Removal", wdesc:"Junk removal, bulky pickups, same-day options.",
+       party:"Party Rentals", pdesc:"Tables, chairs, canopies—delivered & setup.", aiOnline:"AI Online" },
+  es:{ hello:"¡Bienvenido a Petersen Cleaning!", prompt:"¿En qué puedo ayudarte hoy?",
+       cleaning:"Servicios de Limpieza", cdesc:"Residencial, comercial, mudanzas y limpieza profunda.",
+       waste:"Retiro de Desechos", wdesc:"Remoción de basura, artículos voluminosos, servicio el mismo día.",
+       party:"Renta de Fiestas", pdesc:"Mesas, sillas, carpas—entrega e instalación.", aiOnline:"IA en línea" }
+};
+let LANG = localStorage.getItem('lang') || 'en';
+let VOICE = localStorage.getItem('voice') || 'off';
+const langModal = document.getElementById('langModal');
+document.querySelectorAll('.lang-grid .btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    LANG = btn.dataset.lang; localStorage.setItem('lang', LANG);
+    applyLang(); langModal.style.display='none';
+    speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`);
+  });
+});
+document.getElementById('skipVoice').onclick=()=>{ VOICE='off'; localStorage.setItem('voice','off'); };
+document.getElementById('allowVoice').onclick=()=>{ VOICE='on'; localStorage.setItem('voice','on'); };
+if(localStorage.getItem('visited')){ langModal.style.display='none'; } else { localStorage.setItem('visited','1'); }
+function applyLang(){
+  const t = I18N[LANG];
+  helloTxt.textContent = t.hello; promptTxt.textContent = t.prompt; statusText.textContent = t.aiOnline;
+  document.querySelector('#optCleaning h3 span').textContent=t.cleaning;
+  document.querySelector('#optCleaning p').textContent=t.cdesc;
+  document.querySelector('#optWaste h3 span').textContent=t.waste;
+  document.querySelector('#optWaste p').textContent=t.wdesc;
+  document.querySelector('#optParty h3 span').textContent=t.party;
+  document.querySelector('#optParty p').textContent=t.pdesc;
+}
+applyLang();
+document.getElementById('changeLangBtn').onclick=()=>{ langModal.style.display='grid'; };
+
+/* ----------- Voice ----------- */
+const muteBtn = document.getElementById('muteBtn');
+function speak(text){
+  if(VOICE!=='on') return;
+  try{
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 1.02; u.pitch = 1.0; u.lang = (LANG==='es' ? 'es-US' : 'en-US');
+    window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+muteBtn.onclick = ()=>{
+  VOICE = (VOICE==='on' ? 'off' : 'on'); localStorage.setItem('voice', VOICE);
+  muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇');
+};
+muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇');
+
+/* ----------- Avatar swap placeholder ----------- */
+document.getElementById('swapAvatar').onclick=()=>{
+  const el = document.getElementById('avatar');
+  const a = 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=1200&auto=format&fit=crop';
+  const b = 'https://images.unsplash.com/photo-1547106634-56dcd53ae883?q=80&w=1200&auto=format&fit=crop';
+  const cur = el.style.backgroundImage.includes(a) ? b : a;
+  el.style.backgroundImage = `url('${cur}')`;
+};
+
+/* ----------- Sections ----------- */
+const secCleaning = document.getElementById('secCleaning');
+const secWaste = document.getElementById('secWaste');
+const secParty = document.getElementById('secParty');
+function showSection(section){
+  [secCleaning, secWaste, secParty].forEach(s=> s.classList.remove('active'));
+  section.classList.add('active');
+  window.scrollTo({top: document.querySelector('.hero').offsetTop + 12, behavior:'smooth'});
+}
+document.getElementById('optCleaning').onclick = ()=>{
+  showSection(secCleaning);
+  speak(LANG==='es' ? 'Perfecto. Te haré algunas preguntas rápidas para darte un presupuesto.' : 'Perfect. I’ll ask a few quick questions to give you a quote.');
+};
+document.getElementById('optWaste').onclick = ()=>{
+  showSection(secWaste);
+  speak(LANG==='es' ? 'Agrega artículos a tu lista y calcula el costo.' : 'Add items to your list and get a cost.');
+};
+document.getElementById('optParty').onclick = ()=>{
+  showSection(secParty);
+  speak(LANG==='es' ? 'Explora el catálogo y solicita disponibilidad.' : 'Browse the catalog and request availability.');
+};
+
+/* ----------- Cleaning quote (with SMS/Call CTAs) ----------- */
+document.getElementById('cleanForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const sqft = Number(fd.get('sqft')||0);
+  const rooms = Number(fd.get('rooms')||0);
+  const ptype = fd.get('ptype');
+  const urgency = fd.get('urgency');
+
+  const base = (ptype==='Commercial') ? 0.22 : (ptype==='Move-out' ? 0.25 : 0.18);
+  const roomAdj = 12 * rooms;
+  let est = Math.max(95, Math.round(sqft * base + roomAdj));
+
+  const out = (LANG==='es')
+    ? `Estimado inicial: $${est} (pre-impuestos) • Tipo: ${ptype}, ${sqft} sqft, ${rooms} hab/esp, Urgencia: ${urgency}.`
+    : `Starter estimate: $${est} (pre-tax) • Type: ${ptype}, ${sqft} sqft, ${rooms} rooms/offices, Urgency: ${urgency}.`;
+  cleanQuote.textContent = out;
+
+  const sms = `[Petersen Cleaning] Quote request:
+Type: ${ptype}
+Sqft: ${sqft}
+Rooms/Offices: ${rooms}
+Urgency: ${urgency}
+Shown estimate: $${est}
+Name: (your name)
+Address: (your address)
+Preferred date/time: (add here)`;
+
+  cleanCTA.innerHTML = `
+    <div style="display:flex; gap:10px; flex-wrap:wrap">
+      <a class="btn" href="tel:${PHONE_E164}">📞 Call now</a>
+      <button class="btn secondary" id="cleanSMSBtn" type="button">💬 Text this quote</button>
+    </div>`;
+  document.getElementById('cleanSMSBtn').onclick = ()=> openSMS(sms);
+});
+
+/* ----------- Waste visual bin ----------- */
+const WASTE_ITEMS = [
+  {name:'Sofa', price:75}, {name:'Mattress', price:60}, {name:'Fridge', price:95},
+  {name:'TV', price:30}, {name:'Desk', price:45}, {name:'Washer', price:80},
+  {name:'Dryer', price:70}, {name:'Tires (pair)', price:35}, {name:'Boxes (10)', price:25}, {name:'Yard bags (5)', price:30}
+];
+const wasteSel = new Map();
+const wasteGrid = document.getElementById('wasteGrid');
+WASTE_ITEMS.forEach((it)=>{
+  const b = document.createElement('button');
+  b.className='card'; b.setAttribute('aria-label',`${it.name} $${it.price}`);
+  b.innerHTML = `<div class="shine"></div><h3>${it.name}</h3><p>$${it.price}</p><span class="pill">Add</span>`;
+  b.onclick = ()=>{
+    const cur = wasteSel.get(it.name)||0;
+    wasteSel.set(it.name, cur+1);
+    b.querySelector('.pill').textContent = `Added ×${cur+1}`;
+  };
+  wasteGrid.appendChild(b);
+});
+
+document.getElementById('wasteGetQuote').onclick=()=>{
+  let total = 0; const lines=[];
+  for(const [k,v] of wasteSel){
+    const item = WASTE_ITEMS.find(x=>x.name===k);
+    total += (item.price*v); lines.push(`${k} ×${v} ($${item.price} ea)`);
+  }
+  if(total>0 && total<120) total += 39; // stop fee (demo)
+  wasteTotal.textContent = (LANG==='es') ? `Estimado: $${total||0}` : `Estimate: $${total||0}`;
+  const sms = `[Petersen Cleaning] Junk pickup:
+${lines.join('\n') || '(No items yet)'}
+Estimated total (subject to onsite confirmation): $${total||0}
+Address: (your address)
+Preferred date/time: (add here)`;
+  document.getElementById('textWaste').onclick = ()=> openSMS(sms);
+};
+
+/* ----------- Party rentals ----------- */
+const PARTY = [
+  {name:'Table (6ft)', price:10}, {name:'Folding Chair', price:2.5}, {name:'Canopy (10x10)', price:45},
+  {name:'Cooler', price:8}, {name:'String Lights', price:12}, {name:'Bluetooth Speaker', price:16},
+  {name:'Cocktail Table', price:9}, {name:'Ice Tub', price:6}
+];
+const partySel = new Map();
+const partyList = document.getElementById('partyList');
+PARTY.forEach(it=>{
+  const b = document.createElement('button'); b.className='card';
+  b.innerHTML = `<div class="shine"></div><h3>${it.name}</h3><p>$${it.price}</p><span class="pill">Add</span>`;
+  b.onclick = ()=>{
+    const cur = partySel.get(it.name)||0; partySel.set(it.name, cur+1);
+    b.querySelector('.pill').textContent = `Added ×${cur+1}`; updatePartyTotal();
+  };
+  partyList.appendChild(b);
+});
+function updatePartyTotal(){
+  let t=0; for(const [k,v] of partySel){ const item = PARTY.find(x=>x.name===k); t += (item.price*v); }
+  partyTotal.textContent = (LANG==='es') ? `Total: $${t.toFixed(2)}` : `Total: $${t.toFixed(2)}`;
+}
+document.getElementById('partyCheckout').onclick=()=>{
+  const items=[...partySel.entries()].map(([k,v])=>`${k} ×${v}`).join(', ');
+  alert((LANG==='es' ? 'Solicitud enviada (demo): ' : 'Request sent (demo): ') + (items|| (LANG==='es'?'(Vacío)':'(Empty)')));
+};
+document.getElementById('textParty').onclick=()=>{
+  const lines=[...partySel.entries()].map(([k,v])=>`${k} ×${v}`);
+  const sms = `[Petersen Cleaning] Party rentals:
+${lines.join('\n') || '(No items yet)'}
+Delivery address:
+Event date/time:`;
+  openSMS(sms);
+};
+
+/* ----------- Topbar / Dock text actions ----------- */
+document.getElementById('textTop').onclick=()=> openSMS('[Petersen Cleaning] Hi Bobby, I need service. Can we text?');
+document.getElementById('dockText').onclick=(e)=>{ e.preventDefault(); openSMS('[Petersen Cleaning] Hi Bobby, I need service.'); };
+document.getElementById('textQuick1').onclick=(e)=>{ e.preventDefault(); openSMS('[Petersen Cleaning] Hi, I need a cleaning quote.'); };
+
+/* ----------- Bubble trail (desktop) ----------- */
+if(matchMedia('(pointer:fine)').matches){
+  window.addEventListener('mousemove', e=>{
+    const b = document.createElement('div'); b.className='bubble';
+    b.style.left = (e.clientX-5)+'px'; b.style.top=(e.clientY-5)+'px';
+    document.body.appendChild(b);
+    setTimeout(()=> b.remove(), 800);
+  });
+}
+
+/* ----------- Welcome voice on load ----------- */
+window.addEventListener('load', ()=>{
+  if(VOICE==='on'){ speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); }
+});
+</script>
+
+<!-- Integration tips:
+1) Replace the #avatar background with your headshot, or embed your D-ID/HeyGen player there.
+2) All “Call” buttons use tel:+18083195819. All “Text” actions open the phone SMS app with prefilled messages.
+3) Email is present but de-emphasized (<a href="mailto:...">).
+4) You can tune the estimate math easily in the JS blocks above.
+5) For production, route "Request availability" to a Netlify Function and still keep Call/Text front-and-center.
+-->
+</body>
+</html>
