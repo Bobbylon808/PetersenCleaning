@@ -7,41 +7,40 @@
 <meta name="description" content="Petersen Cleaning: Cleaning, Waste Removal, and Party Rentals in Las Vegas. Call or text 808-319-5819 for a fast quote." />
 <style>
   :root{
-    /* Light gray + dark blue theme */
-    --bg:#e5e7eb;          /* page gray */
-    --panel:#f9fafb;       /* card gray */
-    --ink:#0F172A;         /* text */
+    --bg1:#0f172a;         /* dark blue background */
+    --bg2:#1e293b;         /* lighter blue */
+    --panel:#f9fafb;       /* cards */
+    --ink:#0F172A;         /* main text */
     --muted:#475569;       /* secondary */
     --line:#CBD5E1;        /* borders */
-    --accent:#1e3a8a;      /* dark blue */
+    --accent:#1e3a8a;      /* dark blue accent */
     --accent-ink:#1e40af;
-    --good:#16a34a;
     --radius:16px;
-    --shadow:0 10px 22px rgba(2,6,23,.08);
+    --shadow:0 10px 22px rgba(2,6,23,.25);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0; color:var(--ink);
-    /* Add a darker blue corner so bubbles show up */
     background:
       radial-gradient(900px 420px at 85% 85%, rgba(30,58,138,0.85) 0%, rgba(30,58,138,0.0) 60%),
       radial-gradient(700px 320px at 12% 15%, rgba(11,18,32,0.75) 0%, rgba(11,18,32,0.0) 55%),
-      var(--bg);
+      linear-gradient(180deg, var(--bg1), var(--bg2));
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    overflow-x:hidden;
   }
-
   .wrap{position:relative; min-height:100%; padding:clamp(16px,3vw,32px)}
   .shell{ width:min(1100px, 94vw); margin:0 auto; background:var(--panel); border:1px solid var(--line); border-radius:calc(var(--radius) + 4px); box-shadow:var(--shadow); overflow:hidden }
-
   .topbar{ display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); background:#f1f5f9 }
   .logo{ width:40px;height:40px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #e0f2fe, #93c5fd); }
   .brand{ font-weight:800; }
   .brand small{ display:block; color:var(--muted); font-weight:600; margin-top:2px; font-size:.9rem }
   .cta-bar{ margin-left:auto; display:flex; gap:8px; flex-wrap:wrap }
-  .btn{ all:unset; cursor:pointer; text-align:center; font-weight:800; padding:10px 12px; border-radius:999px; color:white; background:linear-gradient(180deg, var(--accent), #1d4ed8); border:1px solid #1d4ed8 }
+  .btn{ all:unset; display:inline-block; cursor:pointer; text-align:center; font-weight:800; padding:10px 12px; border-radius:999px; color:white;
+        background:linear-gradient(180deg, var(--accent), #1d4ed8); border:1px solid #1d4ed8 }
   .btn.secondary{ color:var(--accent-ink); background:#E0E7FF; border:1px solid #c7d2fe }
 
+  /* HERO with choices so sections can be opened */
   .hero{ display:grid; grid-template-columns: 330px 1fr; gap:20px; padding:16px }
   @media (max-width:880px){ .hero{grid-template-columns:1fr; gap:16px} }
   .agent{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:16px; position:relative }
@@ -50,40 +49,25 @@
   .bubble-talk{ background:#F8FAFC; border:1px solid var(--line); border-radius:12px; padding:12px 14px; line-height:1.45 }
   .choices{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
   @media (max-width:880px){ .choices{grid-template-columns:1fr} }
-  .card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; cursor:pointer }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease }
+  .card:hover{ transform:translateY(-2px); box-shadow:var(--shadow) }
 
+  /* Sections */
   .section{ display:none; margin:16px; padding:16px; border:1px solid var(--line); border-radius:16px; background:#fff }
   .section.active{display:block}
 
-  /* About block — continue dark-blue theme */
+  /* About block with dark-blue theme so links/buttons pop */
   .about{ margin:16px; padding:16px; border-radius:16px; color:#fff; background:linear-gradient(180deg, #1e3a8a, #0f1f3a) }
   .about a{ color:#bfdbfe; font-weight:700; text-decoration:underline }
-
-  /* Floating white bubbles on right side */
-  .float-bubbles{ position:fixed; right:12px; bottom:12%; width:160px; height:340px; pointer-events:none; z-index:3 }
-  .fb{ position:absolute; bottom:-20px; background:#fff; border-radius:50%; opacity:.9; filter:blur(.2px); animation: rise 7s linear infinite }
-  .fb.s1{ left:12px; width:10px; height:10px; animation-duration:6s }
-  .fb.s2{ left:46px; width:12px; height:12px; animation-duration:7.2s; animation-delay:1s }
-  .fb.s3{ left:92px; width:8px; height:8px; animation-duration:5.6s; animation-delay:2s }
-  .fb.s4{ left:128px; width:14px; height:14px; animation-duration:8.2s; animation-delay:1.6s }
-  .fb.s5{ left:66px; width:9px; height:9px; animation-duration:6.4s; animation-delay:3s }
-  @keyframes rise{ to{ transform:translateY(-360px) scale(.7); opacity:0 } }
 
   /* Waste controls */
   .item{ background:#F8FAFC; border:1px solid var(--line); border-radius:14px; padding:12px; display:grid; grid-template-columns:1fr auto; gap:6px; align-items:center }
   .qty{ display:flex; gap:6px; align-items:center }
   .step{ all:unset; width:34px; height:34px; text-align:center; border-radius:10px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:900 }
   .note{ width:100%; min-height:72px; resize:vertical; padding:10px; border:1px solid var(--line); border-radius:10px }
-
-  :focus-visible{outline:2px solid #93c5fd; outline-offset:2px; border-radius:10px}
 </style>
 </head>
 <body>
-<!-- Floating bubbles (no floating call/text dock anymore) -->
-<div class="float-bubbles" aria-hidden="true">
-  <div class="fb s1"></div><div class="fb s2"></div><div class="fb s3"></div><div class="fb s4"></div><div class="fb s5"></div>
-</div>
-
 <div class="wrap">
   <div class="shell">
     <div class="topbar">
@@ -98,13 +82,14 @@
       </div>
     </div>
 
+    <!-- Hero with visible choices to open sections -->
     <div class="hero">
       <aside class="agent">
         <div class="face" aria-label="Avatar" style="background-image:url('https://github.com/Bobbylon808/PetersenCleaning/raw/new-website-design/Gemini_Generated_Image_6bdfpu6bdfpu6bdf.png');"></div>
       </aside>
 
       <section class="dialog">
-        <div class="bubble-talk" id="greeting">
+        <div class="bubble-talk">
           👋 <strong>Welcome to Petersen Cleaning!</strong><br>
           <span>What can I help you with today?</span>
         </div>
@@ -190,7 +175,7 @@ function openSMS(message){
   window.location.href = href;
 }
 
-// Simple section toggles for the hero cards
+// Section toggles (make sections visible when clicking cards)
 const secCleaning=document.getElementById('secCleaning');
 const secWaste=document.getElementById('secWaste');
 const secParty=document.getElementById('secParty');
@@ -221,7 +206,7 @@ const WASTE_ITEMS=['Sofa','Mattress','Fridge','TV','Desk','Washer','Dryer','Tire
 const wasteSel=new Map(); const wasteGrid=document.getElementById('wasteGrid');
 WASTE_ITEMS.forEach(name=>{
   const d=document.createElement('div'); d.className='item';
-  d.innerHTML=`${name}<div class="qty"><button class="step">-</button><span>0</span><button class="step">+</button></div>`;
+  d.innerHTML=`<div class="title">${name}</div><div class="qty"><button class="step" aria-label="minus">-</button><span>0</span><button class="step" aria-label="plus">+</button></div>`;
   const [minus,count,plus]=d.querySelectorAll('.step, span');
   let val=0; minus.onclick=()=>{val=Math.max(0,val-1); count.textContent=val; wasteSel.set(name,val)};
   plus.onclick=()=>{val=val+1; count.textContent=val; wasteSel.set(name,val)};
@@ -251,3 +236,4 @@ document.getElementById('textParty').onclick=()=>{
 </script>
 </body>
 </html>
+
