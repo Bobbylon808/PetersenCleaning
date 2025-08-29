@@ -7,13 +7,13 @@
 <meta name="description" content="Petersen Cleaning: Cleaning, Waste Removal, and Party Rentals in Las Vegas. Call or text 808-319-5819 for a fast quote." />
 <style>
   :root{
-    --bg1:#0f172a;
-    --bg2:#1e293b;
-    --panel:#f9fafb;
-    --ink:#0F172A;
-    --muted:#475569;
-    --line:#CBD5E1;
-    --accent:#1e3a8a;
+    --bg1:#0f172a;           /* dark blue */
+    --bg2:#1e293b;           /* slightly lighter */
+    --panel:#f9fafb;         /* card bg */
+    --ink:#0F172A;           /* main text */
+    --muted:#475569;         /* secondary */
+    --line:#CBD5E1;          /* borders */
+    --accent:#1e3a8a;        /* blue accent */
     --accent-ink:#1e40af;
     --radius:16px;
     --shadow:0 10px 22px rgba(2,6,23,.25);
@@ -29,38 +29,55 @@
   .wrap{position:relative; min-height:100%; padding:clamp(16px,3vw,32px)}
   .shell{ width:min(1100px, 94vw); margin:0 auto; background:var(--panel); border:1px solid var(--line); border-radius:calc(var(--radius) + 4px); box-shadow:var(--shadow); overflow:hidden }
   .topbar{ display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); background:#f1f5f9 }
-  .logo{ width:40px; height:40px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #e0f2fe, #93c5fd); flex-shrink:0; }
+  .logo{ width:40px; height:40px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #e0f2fe, #93c5fd); flex-shrink:0 }
   .brand{ font-weight:800; }
   .brand small{ display:block; color:var(--muted); font-weight:600; margin-top:2px; font-size:.9rem }
   .cta-bar{ margin-left:auto; display:flex; gap:8px; flex-wrap:wrap }
   .btn{ all:unset; cursor:pointer; text-align:center; font-weight:800; padding:10px 12px; border-radius:999px; color:white;
         background:linear-gradient(180deg, var(--accent), #1d4ed8); border:1px solid #1d4ed8; display:inline-block }
   .btn.secondary{ color:var(--accent-ink); background:#E0E7FF; border:1px solid #c7d2fe }
+  .btn.ghost{ all:unset; cursor:pointer; padding:10px 12px; border-radius:999px; font-weight:800; color:var(--muted); border:1px solid var(--line); background:#fff }
 
+  /* Section containers */
   .dialog{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:16px; display:grid; gap:14px; margin:16px }
   .bubble-talk{ background:#F8FAFC; border:1px solid var(--line); border-radius:12px; padding:12px 14px; line-height:1.45 }
-
   .section{ display:none; margin:16px; padding:16px; border:1px solid var(--line); border-radius:16px; background:#fff }
   .section.active{display:block}
 
-  .item{ background:#F8FAFC; border:1px solid var(--line); border-radius:14px; padding:12px; display:grid; grid-template-columns:1fr auto; gap:6px; align-items:center }
-  .qty{ display:flex; gap:6px; align-items:center }
-  .step{ all:unset; width:34px; height:34px; text-align:center; border-radius:10px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:900 }
-
-  /* Language modal */
-  .modal{ position:fixed; inset:0; display:none; place-items:center; background:rgba(5,10,20,.55); z-index:20 }
-  .sheet{ width:min(560px,92vw); background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:var(--shadow) }
-  .lang-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px }
+  /* Simple nav for sections */
+  .nav{ display:flex; gap:10px; padding:0 16px 8px }
+  .nav .pill{ all:unset; cursor:pointer; padding:10px 14px; border-radius:999px; font-weight:800; border:1px solid var(--line); background:#fff; color:var(--ink) }
+  .nav .pill.active{ color:#fff; background:linear-gradient(180deg, var(--accent), #1d4ed8); border-color:#1d4ed8 }
 
   /* About band (blue) */
   .about-band{ background:linear-gradient(180deg,#1e3a8a,#0f172a); border-color:#1e3a8a; color:#fff }
   .about-band a{ color:#bfdbfe; font-weight:700; text-decoration:underline }
 
-  /* Translatable headings spacing */
-  h2{ margin:0 0 10px }
+  /* Waste items */
+  .item{ background:#F8FAFC; border:1px solid var(--line); border-radius:14px; padding:12px; display:grid; grid-template-columns:1fr auto; gap:6px; align-items:center }
+  .qty{ display:flex; gap:6px; align-items:center }
+  .step{ all:unset; width:34px; height:34px; text-align:center; border-radius:10px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:900 }
+  .count{ min-width:28px; text-align:center; font-weight:800 }
+  textarea.note{ width:100%; min-height:80px; resize:vertical; padding:10px; border:1px solid var(--line); border-radius:10px }
+
+  /* Floating white bubbles (visual flourish) */
+  .dock-bubbles{ position:fixed; right:8px; bottom:80px; width:120px; height:260px; pointer-events:none; z-index:9 }
+  .bubble{ position:absolute; bottom:-20px; width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.9); filter:blur(.4px); animation: rise 6s linear infinite; opacity:.85 }
+  .bubble:nth-child(2){ left:20px; width:8px; height:8px; animation-duration:5.2s; animation-delay:1s }
+  .bubble:nth-child(3){ left:60px; width:12px; height:12px; animation-duration:6.8s; animation-delay:2s }
+  .bubble:nth-child(4){ left:90px; width:7px; height:7px; animation-duration:4.8s; animation-delay:1.6s }
+  .bubble:nth-child(5){ left:40px; width:9px; height:9px; animation-duration:6.2s; animation-delay:3s }
+  @keyframes rise{ to{ transform:translateY(-260px) scale(.6); opacity:0 } }
+
+  :focus-visible{outline:2px solid #93c5fd; outline-offset:2px; border-radius:10px}
 </style>
 </head>
 <body>
+<!-- floating white bubbles -->
+<div class="dock-bubbles" aria-hidden="true">
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+</div>
+
 <div class="wrap">
   <div class="shell">
     <div class="topbar">
@@ -80,8 +97,15 @@
       <p id="aboutText"><strong>About Us</strong>: Bobby and Allison Petersen are the proud owners of Petersen Cleaning. For over 5 years we have served Las Vegas 24/7, working around the clock to deliver excellence. Our goal is to provide outstanding service to the families and friends of Las Vegas. Please <strong>call us at <a href="tel:+18083195819">808-319-5819</a></strong> with any questions or emergencies, day or night—we are always available. If you prefer email, contact us at <a href="mailto:Bobby@petersencleaning.com">Bobby@petersencleaning.com</a>.</p>
     </section>
 
+    <!-- Section nav -->
+    <div class="nav">
+      <button class="pill active" id="navCleaning">🧽 Cleaning</button>
+      <button class="pill" id="navWaste">🗑️ Waste Removal</button>
+      <button class="pill" id="navParty">🎉 Party Rentals</button>
+    </div>
+
     <!-- Cleaning -->
-    <section id="secCleaning" class="section active">
+    <section id="secCleaning" class="section active" aria-live="polite">
       <h2 id="cleanTitle">🧽 Cleaning — Instant Smart Quote</h2>
       <form id="cleanForm" style="display:grid; gap:12px">
         <label id="lblPtype">Property type
@@ -90,10 +114,12 @@
         <label id="lblSqft">Square footage <input name="sqft" type="number" placeholder="e.g. 1500" /></label>
         <label id="lblRooms">Bedrooms / Offices <input name="rooms" type="number" value="3" /></label>
         <label id="lblUrgency">Urgency
-          <select name="urgency"><option>Flexible (3-7 days)</option><option>Rush (48h)</option><option>Same-day (call)</option></select>
+          <select name="urgency"><option>Flexible (3-7 days)</option><option>Rush (48h)</option><option>Same-day / Emergency</option></select>
         </label>
-        <label id="lblAddress">Address <input name="address" placeholder="Enter address" /></label>
-        <iframe src="https://www.google.com/maps" style="width:100%;height:200px;border:0;margin-top:8px"></iframe>
+        <label id="lblAddress">Address / Cross-streets (optional)
+          <input name="addr" type="text" placeholder="e.g., Tropicana & Rainbow or full address" />
+        </label>
+        <small style="color:var(--muted)">Tip: You can also send a <a href="https://maps.google.com" target="_blank" class="tiny-link">Google Maps pin</a> in your text for faster routing.</small>
         <button class="btn" type="submit" id="btnCalc">Calculate</button>
       </form>
       <div class="bubble-talk" id="cleanQuote"></div>
@@ -101,27 +127,35 @@
     </section>
 
     <!-- Waste -->
-    <section id="secWaste" class="section">
+    <section id="secWaste" class="section" aria-live="polite">
       <h2 id="wasteTitle">🗑️ Waste Removal — Build Your List</h2>
-      <div id="wasteGrid"></div>
-      <label id="lblOther">Other items:
-        <textarea id="wasteOther" style="width:100%;min-height:80px"></textarea>
-      </label>
-      <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap">
-        <a class="btn" href="tel:+18083195819" id="btnCall">📞 Call</a>
-        <button class="btn secondary" id="textWaste">💬 Text list</button>
+      <div id="wasteGrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px"></div>
+      <div style="margin-top:12px">
+        <label id="lblOther">Other items / notes
+          <textarea class="note" id="wasteOther" placeholder="e.g., piano on 2nd floor, shed panels, large aquarium..."></textarea>
+        </label>
+      </div>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="tel:+18083195819" id="btnCall">📞 Call now</a>
+        <button class="btn secondary" id="textWaste" type="button">💬 Text list</button>
       </div>
     </section>
 
     <!-- Party -->
-    <section id="secParty" class="section">
-      <h2 id="partyTitle">🎉 Party Rentals</h2>
-      <div id="partyList" style="display:flex; flex-wrap:wrap; gap:10px"></div>
+    <section id="secParty" class="section" aria-live="polite">
+      <h2 id="partyTitle">🎉 Party Rentals — Quick Browse</h2>
+      <div id="partyList" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px"></div>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="tel:+18083195819">📞 Call now</a>
+        <button class="btn secondary" id="textParty" type="button">💬 Text list</button>
+        <strong id="partyTotal" style="margin-left:6px"></strong>
+      </div>
     </section>
+
   </div>
 </div>
 
-<!-- Language / Voice Modal (always appears on load) -->
+<!-- Language / Voice Modal (show on every visit) -->
 <div class="modal" id="langModal" role="dialog" aria-modal="true" aria-label="Choose language">
   <div class="sheet">
     <h2 style="margin:4px 0 4px">Choose your language</h2>
@@ -138,133 +172,129 @@
 </div>
 
 <script>
-/* ---------------- i18n strings ---------------- */
+/* =============== Helpers =============== */
+const PHONE_E164 = '+18083195819';
+function openSMS(message){
+  const body = encodeURIComponent(message || 'Hi, I need service. Can you help?');
+  let href = `sms:${PHONE_E164}&body=${body}`;
+  if (navigator.userAgent.toLowerCase().includes('android')) href = `sms:${PHONE_E164}?body=${body}`;
+  window.location.href = href;
+}
+
+/* =============== i18n strings =============== */
 const I18N = {
-  en: {
-    tagline: "Cleaning • Waste Removal • Party Rentals",
-    about: `<strong>About Us</strong>: Bobby and Allison Petersen are the proud owners of Petersen Cleaning. For over 5 years we have served Las Vegas 24/7, working around the clock to deliver excellence. Our goal is to provide outstanding service to the families and friends of Las Vegas. Please <strong>call us at <a href="tel:+18083195819">808-319-5819</a></strong> with any questions or emergencies, day or night—we are always available. If you prefer email, contact us at <a href="mailto:Bobby@petersencleaning.com">Bobby@petersencleaning.com</a>.`,
-    cleanTitle: "🧽 Cleaning — Instant Smart Quote",
-    wasteTitle: "🗑️ Waste Removal — Build Your List",
-    partyTitle: "🎉 Party Rentals",
-    lblPtype: "Property type",
-    lblSqft: "Square footage",
-    lblRooms: "Bedrooms / Offices",
-    lblUrgency: "Urgency",
-    lblAddress: "Address",
-    lblOther: "Other items:",
-    btnCalc: "Calculate",
-    btnCall: "📞 Call",
-    status: "Online",
-    smsQuoteLead: "[Petersen Cleaning] Quote request:"
+  en:{
+    tagline:"Cleaning • Waste Removal • Party Rentals",
+    about:`<strong>About Us</strong>: Bobby and Allison Petersen are the proud owners of Petersen Cleaning. For over 5 years we have served Las Vegas 24/7, working around the clock to deliver excellence. Our goal is to provide outstanding service to the families and friends of Las Vegas. Please <strong>call us at <a href=\"tel:+18083195819\">808-319-5819</a></strong> with any questions or emergencies, day or night—we are always available. If you prefer email, contact us at <a href=\"mailto:Bobby@petersencleaning.com\">Bobby@petersencleaning.com</a>.`,
+    cleanTitle:"🧽 Cleaning — Instant Smart Quote",
+    wasteTitle:"🗑️ Waste Removal — Build Your List",
+    partyTitle:"🎉 Party Rentals — Quick Browse",
+    lblPtype:"Property type",
+    lblSqft:"Square footage",
+    lblRooms:"Bedrooms / Offices",
+    lblUrgency:"Urgency",
+    lblAddress:"Address / Cross-streets (optional)",
+    lblOther:"Other items / notes",
+    btnCalc:"Calculate",
+    btnCall:"📞 Call now",
+    smsQuoteLead:"[Petersen Cleaning] Quote request:",
   },
-  es: {
-    tagline: "Limpieza • Retiro de Desechos • Renta de Fiestas",
-    about: `<strong>Sobre Nosotros</strong>: Bobby y Allison Petersen son los orgullosos dueños de Petersen Cleaning. Desde hace más de 5 años servimos a Las Vegas 24/7, trabajando sin parar para brindar excelencia. Nuestro objetivo es ofrecer un servicio excepcional a las familias y amigos de Las Vegas. <strong>Llámanos al <a href="tel:+18083195819">808-319-5819</a></strong> para cualquier duda o emergencia a cualquier hora. Si prefieres correo, escríbenos a <a href="mailto:Bobby@petersencleaning.com">Bobby@petersencleaning.com</a>.`,
-    cleanTitle: "🧽 Limpieza — Cotización Instantánea",
-    wasteTitle: "🗑️ Retiro de Desechos — Arma tu Lista",
-    partyTitle: "🎉 Renta de Fiestas",
-    lblPtype: "Tipo de propiedad",
-    lblSqft: "Pies cuadrados",
-    lblRooms: "Recámaras / Oficinas",
-    lblUrgency: "Urgencia",
-    lblAddress: "Dirección",
-    lblOther: "Otros artículos:",
-    btnCalc: "Calcular",
-    btnCall: "📞 Llamar",
-    status: "En línea",
-    smsQuoteLead: "[Petersen Cleaning] Solicitud de cotización:"
+  es:{
+    tagline:"Limpieza • Retiro de Desechos • Renta de Fiestas",
+    about:`<strong>Sobre Nosotros</strong>: Bobby y Allison Petersen son los dueños de Petersen Cleaning. Desde hace más de 5 años servimos a Las Vegas 24/7, trabajando sin parar para brindar excelencia. Nuestro objetivo es ofrecer un servicio excepcional a las familias y amigos de Las Vegas. <strong>Llámanos al <a href=\"tel:+18083195819\">808-319-5819</a></strong> para dudas o emergencias a cualquier hora. Si prefieres correo, escríbenos a <a href=\"mailto:Bobby@petersencleaning.com\">Bobby@petersencleaning.com</a>.`,
+    cleanTitle:"🧽 Limpieza — Cotización Instantánea",
+    wasteTitle:"🗑️ Retiro de Desechos — Arma tu Lista",
+    partyTitle:"🎉 Renta de Fiestas — Vista Rápida",
+    lblPtype:"Tipo de propiedad",
+    lblSqft:"Pies cuadrados",
+    lblRooms:"Recámaras / Oficinas",
+    lblUrgency:"Urgencia",
+    lblAddress:"Dirección / Cruces (opcional)",
+    lblOther:"Otros artículos / notas",
+    btnCalc:"Calcular",
+    btnCall:"📞 Llamar",
+    smsQuoteLead:"[Petersen Cleaning] Solicitud de cotización:",
   }
 };
+let LANG = localStorage.getItem('lang') || 'en';
+let VOICE = localStorage.getItem('voice') || 'off';
 
-let LANG = localStorage.getItem("lang") || "en";
-let VOICE = localStorage.getItem("voice") || "off";
-
-/* ---------------- apply translation ---------------- */
 function applyLang(){
   const t = I18N[LANG];
-  document.getElementById("tagline").textContent = t.tagline;
-  document.getElementById("aboutText").innerHTML = t.about;
-  document.getElementById("cleanTitle").textContent = t.cleanTitle;
-  document.getElementById("wasteTitle").textContent = t.wasteTitle;
-  document.getElementById("partyTitle").textContent = t.partyTitle;
-  document.getElementById("lblPtype").firstChild.textContent = t.lblPtype + " ";
-  document.getElementById("lblSqft").firstChild.textContent  = t.lblSqft + " ";
-  document.getElementById("lblRooms").firstChild.textContent = t.lblRooms + " ";
-  document.getElementById("lblUrgency").firstChild.textContent = t.lblUrgency + " ";
-  document.getElementById("lblAddress").firstChild.textContent = t.lblAddress + " ";
-  document.getElementById("lblOther").firstChild.textContent = t.lblOther + " ";
-  document.getElementById("btnCalc").textContent = t.btnCalc;
-  document.getElementById("btnCall").textContent = t.btnCall;
+  document.getElementById('tagline').textContent = t.tagline;
+  document.getElementById('aboutText').innerHTML = t.about;
+  document.getElementById('cleanTitle').textContent = t.cleanTitle;
+  document.getElementById('wasteTitle').textContent = t.wasteTitle;
+  document.getElementById('partyTitle').textContent = t.partyTitle;
+  document.getElementById('lblPtype').firstChild.textContent = t.lblPtype + ' ';
+  document.getElementById('lblSqft').firstChild.textContent = t.lblSqft + ' ';
+  document.getElementById('lblRooms').firstChild.textContent = t.lblRooms + ' ';
+  document.getElementById('lblUrgency').firstChild.textContent = t.lblUrgency + ' ';
+  document.getElementById('lblAddress').firstChild.textContent = t.lblAddress + ' ';
+  document.getElementById('lblOther').firstChild.textContent = t.lblOther + ' ';
+  document.getElementById('btnCalc').textContent = t.btnCalc;
+  document.getElementById('btnCall').textContent = t.btnCall;
 }
 applyLang();
 
-/* ---------------- Language modal behavior ---------------- */
-// Always show on load
-const langModal = document.getElementById("langModal");
-function showLang(){ langModal.style.display = "grid"; }
-function hideLang(){ langModal.style.display = "none"; }
+/* =============== Language modal =============== */
+const langModal = document.getElementById('langModal');
+function showLang(){ langModal.style.display='grid'; }
+function hideLang(){ langModal.style.display='none'; }
+window.addEventListener('load', ()=>{ showLang(); });
 
-window.addEventListener("load", () => { showLang(); });
+document.getElementById('chooseEN').onclick = ()=>{ LANG='en'; localStorage.setItem('lang','en'); applyLang(); hideLang(); speakSample(); };
+document.getElementById('chooseES').onclick = ()=>{ LANG='es'; localStorage.setItem('lang','es'); applyLang(); hideLang(); speakSample(); };
+document.getElementById('changeLangBtn').onclick=()=> showLang();
 
-document.getElementById("chooseEN").onclick = () => {
-  LANG = "en"; localStorage.setItem("lang","en"); applyLang(); hideLang(); speakSample();
-};
-document.getElementById("chooseES").onclick = () => {
-  LANG = "es"; localStorage.setItem("lang","es"); applyLang(); hideLang(); speakSample();
-};
-document.getElementById("changeLangBtn").onclick = () => showLang();
+document.getElementById('skipVoice').onclick=()=>{ VOICE='off'; localStorage.setItem('voice','off'); };
+document.getElementById('allowVoice').onclick=()=>{ VOICE='on'; localStorage.setItem('voice','on'); speakSample(); };
 
-document.getElementById("skipVoice").onclick = () => {
-  VOICE = "off"; localStorage.setItem("voice","off");
-};
-document.getElementById("allowVoice").onclick = () => {
-  VOICE = "on"; localStorage.setItem("voice","on"); speakSample();
-};
-
-/* ---------------- Voice selection (young male EN, sexy female ES) ---------------- */
-let VOICES = [];
-let voiceEN = null;
-let voiceES = null;
-
+/* =============== Voice (young male EN, sexy female ES) =============== */
+let VOICES=[]; let voiceEN=null; let voiceES=null;
 function pickVoices(){
   VOICES = window.speechSynthesis.getVoices();
   const byLang = (code)=> VOICES.filter(v=> (v.lang||'').toLowerCase().startsWith(code));
   const en = byLang('en');
-  voiceEN = en.find(v=>/male|boy|guy|dan|ryan|george|ben/i.test(v.name))
-          || en.find(v=>/google uk english male/i.test(v.name))
-          || en[0] || null;
+  voiceEN = en.find(v=>/male|boy|guy|dan|ryan|george|ben/i.test(v.name)) || en.find(v=>/google uk english male/i.test(v.name)) || en[0] || null;
   const es = byLang('es');
-  voiceES = es.find(v=>/female|woman|mujer|sofia|sara|sabina|lucia|paloma|elvira|camila/i.test(v.name))
-          || es[0] || null;
+  voiceES = es.find(v=>/female|woman|mujer|sofia|sara|sabina|lucia|paloma|elvira|camila/i.test(v.name)) || es[0] || null;
 }
 window.speechSynthesis.onvoiceschanged = pickVoices; pickVoices();
 
 function speak(text){
-  if(VOICE!=="on" || !window.speechSynthesis) return;
+  if(VOICE!=='on' || !window.speechSynthesis) return;
   try{
     const u = new SpeechSynthesisUtterance(text);
-    if(LANG==="es"){
-      u.voice = voiceES; u.lang = (voiceES?.lang || "es-US"); u.pitch = 0.9; u.rate = 0.95;
-    } else {
-      u.voice = voiceEN; u.lang = (voiceEN?.lang || "en-US"); u.pitch = 1.2; u.rate = 1.05;
-    }
+    if(LANG==='es'){ u.voice = voiceES; u.lang = (voiceES?.lang || 'es-US'); u.pitch = 0.9; u.rate = 0.95; }
+    else { u.voice = voiceEN; u.lang = (voiceEN?.lang || 'en-US'); u.pitch = 1.2; u.rate = 1.05; }
     window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
   }catch(e){}
 }
+function speakSample(){ speak(LANG==='es' ? 'Hola, ¿en qué puedo ayudarte hoy?' : 'Hi! How can I help you today?'); }
+const muteBtn = document.getElementById('muteBtn');
+muteBtn.onclick = ()=>{ VOICE = (VOICE==='on' ? 'off' : 'on'); localStorage.setItem('voice', VOICE); muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇'); };
+muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇');
 
-function speakSample(){
-  const sample = (LANG==="es") ? "Hola, ¿en qué puedo ayudarte hoy?" : "Hi! How can I help you today?";
-  speak(sample);
+/* =============== Section Nav =============== */
+const secCleaning=document.getElementById('secCleaning');
+const secWaste=document.getElementById('secWaste');
+const secParty=document.getElementById('secParty');
+const navC=document.getElementById('navCleaning');
+const navW=document.getElementById('navWaste');
+const navP=document.getElementById('navParty');
+function showSection(which){
+  [secCleaning,secWaste,secParty].forEach(s=>s.classList.remove('active'));
+  [navC,navW,navP].forEach(b=>b.classList.remove('active'));
+  which.section.classList.add('active');
+  which.nav.classList.add('active');
+  window.scrollTo({top: document.querySelector('.nav').offsetTop - 4, behavior:'smooth'});
 }
-const muteBtn = document.getElementById("muteBtn");
-muteBtn.onclick = ()=>{
-  VOICE = (VOICE==="on" ? "off" : "on");
-  localStorage.setItem("voice", VOICE);
-  muteBtn.textContent = (VOICE==="on" ? "🔊" : "🔇");
-};
-muteBtn.textContent = (VOICE==="on" ? "🔊" : "🔇");
+navC.onclick=()=>showSection({section:secCleaning, nav:navC});
+navW.onclick=()=>showSection({section:secWaste, nav:navW});
+navP.onclick=()=>showSection({section:secParty, nav:navP});
 
-/* ---------------- Cleaning logic ---------------- */
+/* =============== Cleaning Estimate (with surcharges) =============== */
 document.getElementById('cleanForm').addEventListener('submit', e=>{
   e.preventDefault();
   const fd=new FormData(e.target);
@@ -272,70 +302,61 @@ document.getElementById('cleanForm').addEventListener('submit', e=>{
   const rooms=+fd.get('rooms')||0;
   const ptype=fd.get('ptype');
   const urgency=fd.get('urgency');
-
+  const addr=(fd.get('addr')||'').trim();
   const base=(ptype==='Commercial')?0.22:(ptype==='Move-out'?0.25:0.18);
-  let est=Math.max(95,Math.round(sqft*base + rooms*12));
-  if(urgency.includes('48')) est+=50;             // Rush 48h
-  if(urgency.toLowerCase().includes('same')) est+=100; // Same-day/Emergency
-
-  const t = I18N[LANG];
-  const out = (LANG==='es')
-    ? `Estimado inicial: $${est} (pre-impuestos) • Tipo: ${ptype}, ${sqft} sqft, ${rooms} hab/esp, Urgencia: ${urgency}.`
-    : `Starter estimate: $${est} (pre-tax) • Type: ${ptype}, ${sqft} sqft, ${rooms} rooms/offices, Urgency: ${urgency}.`;
-  document.getElementById('cleanQuote').textContent = out;
-
-  const sms = `${t.smsQuoteLead}
-Type: ${ptype}
-Sqft: ${sqft}
-Rooms/Offices: ${rooms}
-Urgency: ${urgency}
-Shown estimate: $${est}
-Address: (your address)
-Name: (your name)
-Preferred date/time: (add here)`;
-
+  let est=Math.max(95, Math.round(sqft*base + rooms*12));
+  if(urgency.includes('48')) est+=50;                 // Rush 48h
+  if(urgency.toLowerCase().includes('same')||urgency.toLowerCase().includes('emergency')) est+=100; // Same-day
+  const out=(LANG==='es')
+   ? `Estimado inicial: $${est} (pre-impuestos) • Tipo: ${ptype}, ${sqft} sqft, ${rooms} hab/esp, Urgencia: ${urgency}.`
+   : `Starter estimate: $${est} (pre-tax) • Type: ${ptype}, ${sqft} sqft, ${rooms} rooms/offices, Urgency: ${urgency}.`;
+  document.getElementById('cleanQuote').textContent=out;
+  const sms = `${I18N[LANG].smsQuoteLead}\nType: ${ptype}\nSqft: ${sqft}\nRooms/Offices: ${rooms}\nUrgency: ${urgency}\nShown estimate: $${est}\nAddress: ${addr||'(your address)'}\nName: (your name)\nPreferred date/time: (add here)`;
   document.getElementById('cleanCTA').innerHTML = '<button class="btn secondary" id="cleanSMSBtn">💬 Text this quote</button>';
-  document.getElementById('cleanSMSBtn').onclick = ()=>{ window.location.href=`sms:+18083195819?body=${encodeURIComponent(sms)}`; };
+  document.getElementById('cleanSMSBtn').onclick=()=> openSMS(sms);
 });
 
-/* ---------------- Waste (+/- and text list) ---------------- */
-const items=['Sofa','Mattress','Fridge','TV','Desk','Washer','Dryer','Tires (pair)','Boxes (10)','Yard bags (5)'];
+/* =============== Waste (no prices; +/-; notes; text) =============== */
+const WASTE_ITEMS=['Sofa','Mattress','Fridge','TV','Desk','Washer','Dryer','Tires (pair)','Boxes (10)','Yard bags (5)'];
 const wasteGrid=document.getElementById('wasteGrid');
 const counts=new Map();
-
-items.forEach(name=>{
-  const d=document.createElement('div');
-  d.className='item';
-  d.innerHTML=`<div>${name}</div><div class="qty"><button class="step">-</button><span>0</span><button class="step">+</button></div>`;
-  const [minus,count,plus]=d.querySelectorAll('.step, span');
-  let val=0;
-  minus.onclick=()=>{ val=Math.max(0,val-1); count.textContent=val; counts.set(name,val); };
+WASTE_ITEMS.forEach(name=>{
+  const d=document.createElement('div'); d.className='item';
+  d.innerHTML = `<div>${name}</div><div class="qty"><button class="step" aria-label="minus">-</button><span class="count">0</span><button class="step" aria-label="plus">+</button></div>`;
+  const [minus,count,plus]=d.querySelectorAll('.step, .count, .step');
+  let val=0; minus.onclick=()=>{ val=Math.max(0,val-1); count.textContent=val; counts.set(name,val); };
   plus.onclick=()=>{ val=val+1; count.textContent=val; counts.set(name,val); };
   wasteGrid.appendChild(d);
 });
 
 document.getElementById('textWaste').onclick=()=>{
-  const lines=[];
-  for(const [k,v] of counts){ if(v>0) lines.push(`${k} ×${v}`); }
+  const lines=[]; for(const [k,v] of counts){ if(v>0) lines.push(`${k} ×${v}`); }
   const extra=(document.getElementById('wasteOther').value||'').trim();
-  const sms=`[Petersen Cleaning] Junk pickup
-${lines.join('\n')||'(No items yet)'}
-Notes: ${extra||'(none)'}
-Address: (your address)
-Preferred date/time:`;
-  window.location.href=`sms:+18083195819?body=${encodeURIComponent(sms)}`;
+  const sms=`[Petersen Cleaning] Junk pickup\n${lines.join('\n')||'(No items yet)'}\nNotes: ${extra||'(none)'}\nAddress: (your address)\nPreferred date/time:`;
+  openSMS(sms);
 };
 
-/* ---------------- Party items (favorites kept) ---------------- */
-const party=[{name:'Table (6ft)',price:10},{name:'Folding Chair',price:2.5},{name:'Canopy (10x10)',price:45},{name:'Cooler',price:8},{name:'String Lights',price:12},{name:'Bluetooth Speaker',price:16},{name:'Folding Picnic Table ⭐',price:20}];
-const pl=document.getElementById('partyList');
-party.forEach(it=>{
-  let b=document.createElement('button');
-  b.className='btn secondary';
-  b.style.flex='1 1 45%';
-  b.textContent=`${it.name} $${it.price}`;
-  pl.appendChild(b);
+/* =============== Party (updated items) =============== */
+const PARTY=[
+  {name:'Table (6ft)', price:10}, {name:'Folding Chair', price:2.5}, {name:'Canopy (10x10)', price:45},
+  {name:'Cooler', price:8}, {name:'String Lights', price:12}, {name:'Bluetooth Speaker', price:16},
+  {name:'Folding Picnic Table ★', price:20}
+];
+const partySel=new Map();
+const partyList=document.getElementById('partyList');
+PARTY.forEach(it=>{
+  const b=document.createElement('button'); b.className='btn secondary'; b.type='button'; b.style.textAlign='left';
+  b.textContent=`${it.name}  $${it.price}`;
+  b.onclick=()=>{ partySel.set(it.name,(partySel.get(it.name)||0)+1); updatePartyTotal(); };
+  partyList.appendChild(b);
 });
+function updatePartyTotal(){ let t=0; for(const [k,v] of partySel){ const item=PARTY.find(x=>x.name===k); if(item) t+=item.price*v; } document.getElementById('partyTotal').textContent=`Total: $${t.toFixed(2)}`; }
+
+document.getElementById('textParty').onclick=()=>{
+  const lines=[...partySel.entries()].map(([k,v])=>`${k} ×${v}`);
+  const sms=`[Petersen Cleaning] Party rentals\n${lines.join('\n')||'(No items yet)'}\nDelivery address:\nEvent date/time:`;
+  openSMS(sms);
+};
 </script>
 </body>
 </html>
