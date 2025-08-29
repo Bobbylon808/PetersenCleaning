@@ -382,15 +382,6 @@ muteBtn.onclick = ()=>{
 };
 muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇');
 
-/* ----------- Avatar swap placeholder ----------- */
-document.getElementById('swapAvatar').onclick=()=>{
-  const el = document.getElementById('avatar');
-  const a = 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=1200&auto=format&fit=crop';
-  const b = 'https://images.unsplash.com/photo-1547106634-56dcd53ae883?q=80&w=1200&auto=format&fit=crop';
-  const cur = el.style.backgroundImage.includes(a) ? b : a;
-  el.style.backgroundImage = `url('${cur}')`;
-};
-
 /* ----------- Sections ----------- */
 const secCleaning = document.getElementById('secCleaning');
 const secWaste = document.getElementById('secWaste');
