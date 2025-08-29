@@ -3,175 +3,111 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Petersen Cleaning — Smart AI Experience</title>
-<meta name="description" content="Petersen Cleaning: Interactive AI-powered experience for Cleaning, Waste Removal, and Party Rentals. Call or text 808-319-5819." />
+<title>Petersen Cleaning — Simple, Clear, Friendly</title>
+<meta name="description" content="Petersen Cleaning: Cleaning, Waste Removal, and Party Rentals in Las Vegas. Call or text 808-319-5819 for a fast quote." />
 <style>
   :root{
-    --bg1:#0f1f3a; --bg2:#0b1630; --glow1:#5fb6ff; --glow2:#a9d6ff;
-    --brand:#2c7cf6; --ink:#0b1220; --card:#0f203fbb; --white:#ffffff; --muted:#cfe6ff;
-    --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    /* Light, readable "ink & paper" palette */
+    --bg:#F7FAFC;          /* paper */
+    --panel:#FFFFFF;       /* cards */
+    --ink:#0F172A;         /* main text */
+    --muted:#475569;       /* secondary */
+    --line:#E2E8F0;        /* borders */
+    --accent:#0EA5E9;      /* sky */
+    --accent-ink:#075985;  /* darker sky */
+    --good:#22C55E;
+    --radius:16px;
+    --shadow:0 10px 22px rgba(2,6,23,.08);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; color:var(--white); background: radial-gradient(1200px 600px at 15% 10%,#12305f 0%,transparent 55%),
-               radial-gradient(1000px 500px at 85% 90%,#0b2c55 0%,transparent 50%),
-               linear-gradient(180deg,var(--bg1),var(--bg2));
+    margin:0; color:var(--ink); background:var(--bg);
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     overflow-x:hidden;
   }
 
-  /* Energy mesh */
-  .fx{
-    position:fixed; inset:-20vmax;
-    background:
-      radial-gradient(60vmax 60vmax at var(--x,40%) var(--y,60%), rgba(95,182,255,.10), transparent 60%),
-      radial-gradient(50vmax 50vmax at calc(100% - var(--x,40%)) calc(100% - var(--y,60%)), rgba(169,214,255,.10), transparent 60%);
-    filter:saturate(120%) blur(6px);
-    pointer-events:none; z-index:0;
-    animation: drift 18s ease-in-out infinite alternate;
-  }
-  @keyframes drift{ 0%{--x:30%;--y:65%} 100%{--x:70%;--y:35%} }
+  /* App shell */
+  .wrap{position:relative; min-height:100%; padding:clamp(16px,3vw,32px)}
+  .shell{ width:min(1100px, 94vw); margin:0 auto; background:var(--panel); border:1px solid var(--line); border-radius:calc(var(--radius) + 4px); box-shadow:var(--shadow); overflow:hidden }
 
-  /* Bubbles (desktop) */
-  @media (hover:hover){
-    .bubble{ position:fixed; width:10px; height:10px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, var(--glow2), var(--glow1));
-      pointer-events:none; opacity:.9; filter:blur(.3px);
-      animation: float 800ms ease-out forwards; mix-blend-mode:screen;
-    }
-    @keyframes float{ to{transform:translateY(-16px) scale(0.5); opacity:0} }
-  }
-
-  .wrap{position:relative; z-index:1; min-height:100%; display:grid; place-items:center; padding:clamp(16px,3vw,36px)}
-  .shell{
-    width:min(1100px, 92vw); backdrop-filter: blur(10px);
-    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-    border:1px solid rgba(255,255,255,.12); border-radius:calc(var(--radius) + 6px); box-shadow:var(--shadow);
-    overflow:hidden;
-  }
-  .topbar{
-    display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08);
-    background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0));
-    flex-wrap:wrap;
-  }
-  .logo{ width:42px;height:42px; border-radius:50%; background:
-    radial-gradient(circle at 30% 30%, var(--glow2), var(--glow1));
-    box-shadow:0 0 20px rgba(95,182,255,.6) inset, 0 0 24px rgba(95,182,255,.4);
-  }
-  .brand{font-weight:800; letter-spacing:.3px}
-  .brand small{display:block; opacity:.8; font-weight:600; margin-top:2px; font-size:.85rem}
+  /* Topbar */
+  .topbar{ display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); background:#ffffffcc; backdrop-filter:saturate(120%) blur(4px)}
+  .logo{ width:40px;height:40px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #bae6fd, #7dd3fc); box-shadow: inset 0 0 16px rgba(14,165,233,.35)}
+  .brand{ font-weight:800; letter-spacing:.2px }
+  .brand small{ display:block; color:var(--muted); font-weight:600; margin-top:2px; font-size:.9rem }
 
   .cta-bar{ margin-left:auto; display:flex; gap:8px; flex-wrap:wrap }
-  .btn{
-    all:unset; cursor:pointer; text-align:center; font-weight:800; padding:10px 12px; border-radius:999px;
-    background:linear-gradient(180deg, rgba(44,124,246,.92), rgba(44,124,246,.7));
-    border:1px solid rgba(95,182,255,.6); box-shadow:0 8px 20px rgba(44,124,246,.28);
-  }
-  .btn.secondary{ background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); font-weight:700 }
-  .tiny-link{ font-size:.85rem; opacity:.8; text-decoration:underline; }
+  .btn{ all:unset; cursor:pointer; text-align:center; font-weight:800; padding:10px 12px; border-radius:999px; color:white;
+        background:linear-gradient(180deg, var(--accent), #56c3ee); border:1px solid #7dd3fc; box-shadow:0 6px 18px rgba(14,165,233,.25) }
+  .btn.secondary{ color:var(--accent-ink); background:#E0F2FE; border-color:#BAE6FD; box-shadow:none }
+  .tiny-link{ font-size:.9rem; color:var(--muted); text-decoration:underline }
 
-  .hero{ display:grid; grid-template-columns: 330px 1fr; gap:20px; padding:16px 16px 22px }
+  /* Hero */
+  .hero{ display:grid; grid-template-columns: 330px 1fr; gap:20px; padding:16px 16px 22px; background:linear-gradient(180deg,#fff, #f7fbfe)}
   @media (max-width:880px){ .hero{grid-template-columns:1fr; gap:16px} }
 
-  .agent{
-    background:linear-gradient(180deg, rgba(12,26,54,.7), rgba(12,26,54,.55));
-    border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:16px; position:relative; overflow:hidden;
-  }
-  .agent .face{
-    width:100%; aspect-ratio: 4/5; border-radius:14px; background:#091227 center/cover no-repeat;
-    border:1px solid rgba(255,255,255,.1);
-  }
-  .agent .chip{
-    position:absolute; top:16px; right:16px; display:flex; gap:8px; align-items:center;
-    background:rgba(44,124,246,.15); border:1px solid rgba(44,124,246,.35); padding:6px 10px; border-radius:100px;
-    font-size:.85rem
-  }
-  .agent .chip button{ all:unset; background:rgba(255,255,255,.12); padding:6px 10px; border-radius:100px; cursor:pointer }
+  .agent{ background:#ffffff; border:1px solid var(--line); border-radius:var(--radius); padding:16px; position:relative; overflow:hidden }
+  .agent .face{ width:100%; aspect-ratio: 4/5; border-radius:14px; background:#EFF6FF center/cover no-repeat; border:1px solid var(--line) }
+  .agent .chip{ position:absolute; top:16px; right:16px; display:flex; gap:8px; align-items:center; background:#E0F2FE; border:1px solid #BAE6FD; padding:6px 10px; border-radius:100px; font-size:.85rem }
+  .agent .chip button{ all:unset; background:#ffffff; padding:6px 10px; border:1px solid #BAE6FD; border-radius:100px; cursor:pointer }
 
-  .dialog{
-    background:linear-gradient(180deg, rgba(12,26,54,.65), rgba(12,26,54,.5));
-    border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:16px;
-    display:grid; gap:14px;
-  }
-  .bubble-talk{
-    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:16px;
-    padding:12px 14px; line-height:1.4
-  }
+  .dialog{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:16px; display:grid; gap:14px }
+  .bubble-talk{ background:#F8FAFC; border:1px solid var(--line); border-radius:12px; padding:12px 14px; line-height:1.45 }
   .choices{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
   @media (max-width:880px){ .choices{grid-template-columns:1fr} }
 
-  .card{
-    position:relative; isolation:isolate;
-    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-    border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px; min-height:120px;
-    overflow:hidden; cursor:pointer; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-    text-align:left;
-  }
-  .card:hover{ transform: translateY(-3px); border-color: rgba(95,182,255,.55); box-shadow: 0 10px 28px rgba(44,124,246,.25) }
-  .card:active{ transform: translateY(0) scale(.99) }
-  .card h3{margin:2px 0 4px; font-size:1.05rem}
-  .card p{margin:0; opacity:.85; font-size:.95rem}
-  .pill{ display:inline-flex; gap:8px; align-items:center; margin-top:10px;
-    background:rgba(95,182,255,.18); border:1px solid rgba(95,182,255,.4); padding:6px 10px; border-radius:100px; font-size:.85rem }
-  .shine{ position:absolute; inset:-40% -10% auto -10%; height:140%;
-    background: radial-gradient(60% 40% at 30% 20%, rgba(169,214,255,.35), transparent 60%);
-    transform: rotate(12deg); filter: blur(16px); opacity:.45; z-index:-1; pointer-events:none; }
+  .card{ position:relative; isolation:isolate; background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; min-height:120px; overflow:hidden; cursor:pointer; transition: transform .2s ease, box-shadow .2s ease }
+  .card:hover{ transform: translateY(-2px); box-shadow:var(--shadow) }
+  .card h3{margin:2px 0 6px; font-size:1.05rem}
+  .card p{margin:0; color:var(--muted); font-size:.95rem}
+  .pill{ display:inline-flex; gap:8px; align-items:center; margin-top:10px; color:var(--accent-ink); background:#E0F2FE; border:1px solid #BAE6FD; padding:6px 10px; border-radius:100px; font-size:.85rem }
 
-  .section{
-    display:none; opacity:0; transform:translateY(10px); transition: opacity .35s ease, transform .35s ease;
-    margin:0 16px 16px; padding:16px; border:1px solid rgba(255,255,255,.12); border-radius:16px;
-    background:linear-gradient(180deg, rgba(12,26,54,.6), rgba(12,26,54,.45));
-  }
+  /* Sections */
+  .section{ display:none; opacity:0; transform:translateY(6px); transition: opacity .25s ease, transform .25s ease; margin:0 16px 16px; padding:16px; border:1px solid var(--line); border-radius:16px; background:#fff }
   .section.active{display:block; opacity:1; transform:none}
 
-  /* Language modal */
-  .modal{ position:fixed; inset:0; display:grid; place-items:center; background:rgba(5,10,20,.7); z-index:5; }
-  .sheet{
-    width:min(560px,92vw); background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
-    border:1px solid rgba(255,255,255,.15); border-radius:18px; padding:18px; box-shadow:var(--shadow)
-  }
-  .lang-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px}
+  /* Waste grid items (no price; + / - controls) */
+  .item{ background:#F8FAFC; border:1px solid var(--line); border-radius:14px; padding:12px; display:grid; grid-template-columns:1fr auto; gap:6px; align-items:center }
+  .title{ font-weight:700 }
+  .qty{ display:flex; gap:6px; align-items:center }
+  .step{ all:unset; width:34px; height:34px; display:grid; place-items:center; border-radius:10px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:900 }
+  .count{ min-width:30px; text-align:center; font-weight:800 }
 
-  /* Sticky mobile dock */
-  .dock{
-    position:fixed; left:0; right:0; bottom:0; z-index:10; display:flex; gap:10px; padding:10px 12px;
-    background: linear-gradient(180deg, rgba(6,12,24,.0), rgba(6,12,24,.9) 30%, rgba(6,12,24,.95));
-    backdrop-filter: blur(8px);
-  }
-  .dock .dock-btn{ flex:1; text-align:center; padding:14px 10px; border-radius:14px; font-weight:900 }
-  .dock .call{ background:linear-gradient(180deg, rgba(0,184,98,.9), rgba(0,184,98,.75)); border:1px solid rgba(0,220,130,.7) }
-  .dock .text{ background:linear-gradient(180deg, rgba(44,124,246,.92), rgba(44,124,246,.72)); border:1px solid rgba(95,182,255,.7) }
-  @media (min-width:900px){ .dock{display:none} }
+  /* Floating action dock (NEW STYLE) */
+  .dock{ position:fixed; left:50%; transform:translateX(-50%); bottom:14px; z-index:10; background:#ffffff; border:1px solid var(--line); box-shadow:var(--shadow); display:flex; gap:8px; padding:10px; border-radius:999px }
+  .dock .dock-btn{ all:unset; cursor:pointer; padding:12px 16px; border-radius:999px; font-weight:900; text-align:center }
+  .dock .call{ color:white; background:linear-gradient(180deg, #22c55e, #35da72); border:1px solid #86efac }
+  .dock .text{ color:white; background:linear-gradient(180deg, var(--accent), #56c3ee); border:1px solid #7dd3fc }
+  @media (min-width:900px){ .dock{ bottom:22px } }
 
-  :focus-visible{outline:2px solid var(--glow2); outline-offset:2px; border-radius:10px}
+  :focus-visible{outline:2px solid #93c5fd; outline-offset:2px; border-radius:10px}
 </style>
 </head>
 <body>
-<div class="fx" aria-hidden="true"></div>
-
-<!-- Sticky Call/Text dock (mobile) -->
+<!-- Floating Call/Text dock (new style) -->
 <nav class="dock" aria-label="Quick actions">
   <a class="dock-btn call" id="dockCall" href="tel:+18083195819">📞 Call 808-319-5819</a>
   <a class="dock-btn text" id="dockText" href="#" role="button">💬 Text us</a>
 </nav>
 
 <div class="wrap" id="app">
-  <div class="shell" role="application" aria-label="Petersen Cleaning AI interface">
+  <div class="shell" role="application" aria-label="Petersen Cleaning interface">
     <div class="topbar">
       <div class="logo" aria-hidden="true"></div>
       <div>
         <div class="brand">Petersen Cleaning</div>
-        <small class="brand">AI-powered Cleaning • Waste Removal • Party Rentals</small>
+        <!-- Subtitle cleaned: removed "AI-powered" wording -->
+        <small class="brand">Cleaning • Waste Removal • Party Rentals</small>
       </div>
 
-      <!-- Call/Text first, Email last -->
+      <!-- Call/Text only (email removed) -->
       <div class="cta-bar">
         <a class="btn" id="callTop" href="tel:+18083195819">📞 Call</a>
         <button class="btn secondary" id="textTop" type="button">💬 Text</button>
-        <a class="tiny-link" href="mailto:Bobby@petersencleaning.com?subject=Service%20Request%20-%20Petersen%20Cleaning">Email (optional)</a>
         <button class="btn secondary" id="changeLangBtn" aria-label="Change language">🌐</button>
-        <button class="btn secondary" id="muteBtn" aria-label="Mute voice">🔊</button>
+        <button class="btn secondary" id="muteBtn" aria-label="Toggle voice">🔊</button>
       </div>
     </div>
 
@@ -180,10 +116,9 @@
       <aside class="agent">
         <div class="chip">
           <span id="statusDot">🟢</span>
-          <span id="statusText">AI Online</span>
+          <span id="statusText">Online</span>
         </div>
-        <!-- Replace url with your headshot or embed D-ID/HeyGen player -->
-        <div class="face" id="avatar" role="img" aria-label="AI Avatar of Bobby"
+        <div class="face" id="avatar" role="img" aria-label="Avatar"
              style="background-image:url('https://github.com/Bobbylon808/PetersenCleaning/raw/new-website-design/Gemini_Generated_Image_6bdfpu6bdfpu6bdf.png');">
         </div>
       </aside>
@@ -197,21 +132,18 @@
 
         <div class="choices" role="list" aria-label="Primary choices">
           <button class="card" id="optCleaning" role="listitem">
-            <div class="shine"></div>
             <h3>🧽 <span data-i18n="Cleaning Services">Cleaning Services</span></h3>
             <p data-i18n="Cleaning Desc">Residential, commercial, move-out & deep clean.</p>
             <span class="pill">Get an instant quote →</span>
           </button>
 
           <button class="card" id="optWaste" role="listitem">
-            <div class="shine"></div>
             <h3>🗑️ <span data-i18n="Waste Removal">Waste Removal</span></h3>
-            <p data-i18n="Waste Desc">Junk removal, bulky pickups, same-day options.</p>
+            <p data-i18n="Waste Desc">Tap items to add or remove. Text us your list.</p>
             <span class="pill">Build your pickup →</span>
           </button>
 
           <button class="card" id="optParty" role="listitem">
-            <div class="shine"></div>
             <h3>🎉 <span data-i18n="Party Rentals">Party Rentals</span></h3>
             <p data-i18n="Party Desc">Tables, chairs, canopies—delivered & setup.</p>
             <span class="pill">Browse catalog →</span>
@@ -253,45 +185,39 @@
       <div id="cleanCTA" style="margin-top:10px"></div>
     </section>
 
-    <!-- Waste -->
+    <!-- Waste (NO prices; add/remove; bottom: Call + Text list only) -->
     <section class="section" id="secWaste" aria-live="polite">
-      <h2>🗑️ Waste Removal — Visual Bin</h2>
-      <p class="sub">Tap items to add them. Then text us your pickup list.</p>
-      <div id="wasteGrid" style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:12px"></div>
+      <h2>🗑️ Waste Removal — Build Your List</h2>
+      <p class="sub">Tap + or − to change quantities. When you’re ready, text us the list.</p>
+      <div id="wasteGrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px"></div>
       <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
-        <button class="btn" id="wasteGetQuote">Get estimate</button>
-        <a class="btn secondary" href="tel:+18083195819">📞 Call now</a>
+        <a class="btn" href="tel:+18083195819">📞 Call now</a>
         <button class="btn secondary" id="textWaste" type="button">💬 Text list</button>
-        <strong id="wasteTotal" style="margin-left:6px"></strong>
       </div>
     </section>
 
-    <!-- Party -->
+    <!-- Party (kept similar) -->
     <section class="section" id="secParty" aria-live="polite">
       <h2>🎉 Party Rentals — Quick Browse</h2>
       <p class="sub">Add what you need; we’ll confirm availability by text or call.</p>
-      <div id="partyList" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px"></div>
+      <div id="partyList" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px"></div>
       <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
-        <button class="btn" id="partyCheckout">Request availability</button>
-        <a class="btn secondary" href="tel:+18083195819">📞 Call now</a>
+        <a class="btn" href="tel:+18083195819">📞 Call now</a>
         <button class="btn secondary" id="textParty" type="button">💬 Text list</button>
         <strong id="partyTotal" style="margin-left:6px"></strong>
       </div>
     </section>
 
-    <div style="padding:8px 16px 16px; opacity:.8; font-size:.9rem">
-      Prefer email? <a class="tiny-link" href="mailto:Bobby@petersencleaning.com?subject=Service%20Request%20-%20Petersen%20Cleaning">Bobby@petersencleaning.com</a>
-    </div>
-
+    <!-- Email footer removed per request -->
   </div>
 </div>
 
 <!-- Language Gate -->
-<div class="modal" id="langModal" role="dialog" aria-modal="true" aria-label="Choose language">
-  <div class="sheet">
+<div class="modal" id="langModal" role="dialog" aria-modal="true" aria-label="Choose language" style="display:none">
+  <div class="sheet" style="width:min(560px,92vw); background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:var(--shadow)">
     <h2 style="margin:4px 0 4px">Choose your language</h2>
-    <p class="sub">We’ll remember your preference for next time.</p>
-    <div class="lang-grid">
+    <p class="sub" style="color:var(--muted)">We’ll remember your preference for next time.</p>
+    <div class="lang-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px">
       <button class="btn" data-lang="en">English</button>
       <button class="btn" data-lang="es">Español</button>
     </div>
@@ -306,42 +232,33 @@
 /* ----------- Helpers: Call / Text ----------- */
 const PHONE_E164 = '+18083195819';
 const DISPLAY = '808-319-5819';
-
-// Composes a cross-platform sms: link and navigates.
 function openSMS(message){
   const body = encodeURIComponent(message || 'Hi, I need service. Can you help?');
-  // iOS and many others accept sms:+number&body=...
   let href = `sms:${PHONE_E164}&body=${body}`;
-  // Some Android variants prefer ?body
-  if (navigator.userAgent.toLowerCase().includes('android')) {
-    href = `sms:${PHONE_E164}?body=${body}`;
-  }
-  // Fallback: try navigator.share if SMS handlers are missing
-  try {
-    window.location.href = href;
-  } catch(e) {
-    if (navigator.share) {
-      navigator.share({text: decodeURIComponent(body)});
-    } else {
-      alert("If your SMS app doesn't open automatically, text us at " + DISPLAY + ".");
-    }
-  }
+  if (navigator.userAgent.toLowerCase().includes('android')) href = `sms:${PHONE_E164}?body=${body}`;
+  try { window.location.href = href; }
+  catch(e){ if (navigator.share) { navigator.share({text: decodeURIComponent(body)}); } else { alert("If your SMS app doesn't open, text us at " + DISPLAY + "."); } }
 }
 
 /* ----------- i18n ----------- */
 const I18N = {
   en:{ hello:"Welcome to Petersen Cleaning!", prompt:"What can I help you with today?",
        cleaning:"Cleaning Services", cdesc:"Residential, commercial, move-out & deep clean.",
-       waste:"Waste Removal", wdesc:"Junk removal, bulky pickups, same-day options.",
-       party:"Party Rentals", pdesc:"Tables, chairs, canopies—delivered & setup.", aiOnline:"AI Online" },
+       waste:"Waste Removal", wdesc:"Tap items to add or remove. Text us your list.",
+       party:"Party Rentals", pdesc:"Tables, chairs, canopies—delivered & setup.", online:"Online" },
   es:{ hello:"¡Bienvenido a Petersen Cleaning!", prompt:"¿En qué puedo ayudarte hoy?",
        cleaning:"Servicios de Limpieza", cdesc:"Residencial, comercial, mudanzas y limpieza profunda.",
-       waste:"Retiro de Desechos", wdesc:"Remoción de basura, artículos voluminosos, servicio el mismo día.",
-       party:"Renta de Fiestas", pdesc:"Mesas, sillas, carpas—entrega e instalación.", aiOnline:"IA en línea" }
+       waste:"Retiro de Desechos", wdesc:"Toca para agregar o quitar. Envíanos tu lista.",
+       party:"Renta de Fiestas", pdesc:"Mesas, sillas, carpas—entrega e instalación.", online:"En línea" }
 };
 let LANG = localStorage.getItem('lang') || 'en';
 let VOICE = localStorage.getItem('voice') || 'off';
 const langModal = document.getElementById('langModal');
+function showLang(){ langModal.style.display='grid'; }
+
+// Show language once on first visit
+if(!localStorage.getItem('visited')){ localStorage.setItem('visited','1'); showLang(); }
+
 document.querySelectorAll('.lang-grid .btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     LANG = btn.dataset.lang; localStorage.setItem('lang', LANG);
@@ -351,10 +268,10 @@ document.querySelectorAll('.lang-grid .btn').forEach(btn=>{
 });
 document.getElementById('skipVoice').onclick=()=>{ VOICE='off'; localStorage.setItem('voice','off'); };
 document.getElementById('allowVoice').onclick=()=>{ VOICE='on'; localStorage.setItem('voice','on'); };
-if(localStorage.getItem('visited')){ langModal.style.display='none'; } else { localStorage.setItem('visited','1'); }
+
 function applyLang(){
   const t = I18N[LANG];
-  helloTxt.textContent = t.hello; promptTxt.textContent = t.prompt; statusText.textContent = t.aiOnline;
+  helloTxt.textContent = t.hello; promptTxt.textContent = t.prompt; statusText.textContent = t.online;
   document.querySelector('#optCleaning h3 span').textContent=t.cleaning;
   document.querySelector('#optCleaning p').textContent=t.cdesc;
   document.querySelector('#optWaste h3 span').textContent=t.waste;
@@ -363,45 +280,53 @@ function applyLang(){
   document.querySelector('#optParty p').textContent=t.pdesc;
 }
 applyLang();
-document.getElementById('changeLangBtn').onclick=()=>{ langModal.style.display='grid'; };
+document.getElementById('changeLangBtn').onclick=()=> showLang();
 
-/* ----------- Voice ----------- */
-const muteBtn = document.getElementById('muteBtn');
+/* ----------- Voice (pick voices by gender/style) ----------- */
+let VOICES = [];
+let voiceEN = null; // young man (en)
+let voiceES = null; // sexy woman (es)
+function pickVoices(){
+  VOICES = window.speechSynthesis.getVoices();
+  // Heuristics to find voices
+  const byLang = (code)=> VOICES.filter(v=> (v.lang||'').toLowerCase().startsWith(code));
+  // English male candidates
+  const en = byLang('en');
+  voiceEN = en.find(v=>/male|boy|guy|dan|ryan|george|ben/i.test(v.name)) || en.find(v=>/google uk english male/i.test(v.name)) || en[0] || null;
+  // Spanish female candidates
+  const es = byLang('es');
+  voiceES = es.find(v=>/female|woman|mujer|sofia|sara|sabina|lucia|paloma|elvira|camila/i.test(v.name)) || es[0] || null;
+}
+window.speechSynthesis.onvoiceschanged = pickVoices; pickVoices();
+
 function speak(text){
-  if(VOICE!=='on') return;
+  if(VOICE!=='on' || !window.speechSynthesis) return;
   try{
     const u = new SpeechSynthesisUtterance(text);
-    u.rate = 1.02; u.pitch = 1.0; u.lang = (LANG==='es' ? 'es-US' : 'en-US');
+    if(LANG==='es'){
+      u.voice = voiceES; u.lang = (voiceES?.lang || 'es-US');
+      u.pitch = 0.9;  // slightly lower, smoother
+      u.rate  = 0.95; // slower cadence
+    } else {
+      u.voice = voiceEN; u.lang = (voiceEN?.lang || 'en-US');
+      u.pitch = 1.2;  // brighter, youthful
+      u.rate  = 1.05; // a bit quicker
+    }
     window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
   }catch(e){}
 }
-muteBtn.onclick = ()=>{
-  VOICE = (VOICE==='on' ? 'off' : 'on'); localStorage.setItem('voice', VOICE);
-  muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇');
-};
+const muteBtn = document.getElementById('muteBtn');
+muteBtn.onclick = ()=>{ VOICE = (VOICE==='on' ? 'off' : 'on'); localStorage.setItem('voice', VOICE); muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇'); };
 muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇');
 
 /* ----------- Sections ----------- */
 const secCleaning = document.getElementById('secCleaning');
 const secWaste = document.getElementById('secWaste');
 const secParty = document.getElementById('secParty');
-function showSection(section){
-  [secCleaning, secWaste, secParty].forEach(s=> s.classList.remove('active'));
-  section.classList.add('active');
-  window.scrollTo({top: document.querySelector('.hero').offsetTop + 12, behavior:'smooth'});
-}
-document.getElementById('optCleaning').onclick = ()=>{
-  showSection(secCleaning);
-  speak(LANG==='es' ? 'Perfecto. Te haré algunas preguntas rápidas para darte un presupuesto.' : 'Perfect. I’ll ask a few quick questions to give you a quote.');
-};
-document.getElementById('optWaste').onclick = ()=>{
-  showSection(secWaste);
-  speak(LANG==='es' ? 'Agrega artículos a tu lista y calcula el costo.' : 'Add items to your list and get a cost.');
-};
-document.getElementById('optParty').onclick = ()=>{
-  showSection(secParty);
-  speak(LANG==='es' ? 'Explora el catálogo y solicita disponibilidad.' : 'Browse the catalog and request availability.');
-};
+function showSection(section){ [secCleaning, secWaste, secParty].forEach(s=> s.classList.remove('active')); section.classList.add('active'); window.scrollTo({top: document.querySelector('.hero').offsetTop + 12, behavior:'smooth'}); }
+document.getElementById('optCleaning').onclick = ()=>{ showSection(secCleaning); speak(LANG==='es' ? 'Perfecto. Te haré algunas preguntas rápidas para darte un presupuesto.' : 'Perfect. I’ll ask a few quick questions to give you a quote.'); };
+document.getElementById('optWaste').onclick = ()=>{ showSection(secWaste); speak(LANG==='es' ? 'Agrega o quita artículos y envíanos la lista.' : 'Add or remove items, then text us your list.'); };
+document.getElementById('optParty').onclick = ()=>{ showSection(secParty); speak(LANG==='es' ? 'Explora el catálogo y solicita disponibilidad.' : 'Browse the catalog and request availability.'); };
 
 /* ----------- Cleaning quote (with SMS/Call CTAs) ----------- */
 document.getElementById('cleanForm').addEventListener('submit', (e)=>{
@@ -421,15 +346,7 @@ document.getElementById('cleanForm').addEventListener('submit', (e)=>{
     : `Starter estimate: $${est} (pre-tax) • Type: ${ptype}, ${sqft} sqft, ${rooms} rooms/offices, Urgency: ${urgency}.`;
   cleanQuote.textContent = out;
 
-  const sms = `[Petersen Cleaning] Quote request:
-Type: ${ptype}
-Sqft: ${sqft}
-Rooms/Offices: ${rooms}
-Urgency: ${urgency}
-Shown estimate: $${est}
-Name: (your name)
-Address: (your address)
-Preferred date/time: (add here)`;
+  const sms = `[Petersen Cleaning] Quote request:\nType: ${ptype}\nSqft: ${sqft}\nRooms/Offices: ${rooms}\nUrgency: ${urgency}\nShown estimate: $${est}\nName: (your name)\nAddress: (your address)\nPreferred date/time: (add here)`;
 
   cleanCTA.innerHTML = `
     <div style="display:flex; gap:10px; flex-wrap:wrap">
@@ -439,43 +356,36 @@ Preferred date/time: (add here)`;
   document.getElementById('cleanSMSBtn').onclick = ()=> openSMS(sms);
 });
 
-/* ----------- Waste visual bin ----------- */
-const WASTE_ITEMS = [
-  {name:'Sofa', price:75}, {name:'Mattress', price:60}, {name:'Fridge', price:95},
-  {name:'TV', price:30}, {name:'Desk', price:45}, {name:'Washer', price:80},
-  {name:'Dryer', price:70}, {name:'Tires (pair)', price:35}, {name:'Boxes (10)', price:25}, {name:'Yard bags (5)', price:30}
-];
+/* ----------- Waste (no prices; add/remove; text list) ----------- */
+const WASTE_ITEMS = ['Sofa','Mattress','Fridge','TV','Desk','Washer','Dryer','Tires (pair)','Boxes (10)','Yard bags (5)'];
 const wasteSel = new Map();
 const wasteGrid = document.getElementById('wasteGrid');
-WASTE_ITEMS.forEach((it)=>{
-  const b = document.createElement('button');
-  b.className='card'; b.setAttribute('aria-label',`${it.name} $${it.price}`);
-  b.innerHTML = `<div class="shine"></div><h3>${it.name}</h3><p>$${it.price}</p><span class="pill">Add</span>`;
-  b.onclick = ()=>{
-    const cur = wasteSel.get(it.name)||0;
-    wasteSel.set(it.name, cur+1);
-    b.querySelector('.pill').textContent = `Added ×${cur+1}`;
-  };
-  wasteGrid.appendChild(b);
+
+WASTE_ITEMS.forEach((name)=>{
+  const wrap = document.createElement('div'); wrap.className='item'; wrap.setAttribute('aria-label',name);
+  const title = document.createElement('div'); title.className='title'; title.textContent = name;
+  const qty = document.createElement('div'); qty.className='qty';
+  const minus = document.createElement('button'); minus.className='step'; minus.textContent = '−';
+  const count = document.createElement('div'); count.className='count'; count.textContent = '0';
+  const plus  = document.createElement('button'); plus.className='step'; plus.textContent = '+';
+  qty.append(minus, count, plus);
+  wrap.append(title, qty);
+
+  function update(n){
+    const cur = wasteSel.get(name)||0; const next = Math.max(0, cur + n); wasteSel.set(name, next); count.textContent = String(next);
+  }
+  plus.onclick = ()=> update(1);
+  minus.onclick = ()=> update(-1);
+  wasteGrid.appendChild(wrap);
 });
 
-document.getElementById('wasteGetQuote').onclick=()=>{
-  let total = 0; const lines=[];
-  for(const [k,v] of wasteSel){
-    const item = WASTE_ITEMS.find(x=>x.name===k);
-    total += (item.price*v); lines.push(`${k} ×${v} ($${item.price} ea)`);
-  }
-  if(total>0 && total<120) total += 39; // stop fee (demo)
-  wasteTotal.textContent = (LANG==='es') ? `Estimado: $${total||0}` : `Estimate: $${total||0}`;
-  const sms = `[Petersen Cleaning] Junk pickup:
-${lines.join('\n') || '(No items yet)'}
-Estimated total (subject to onsite confirmation): $${total||0}
-Address: (your address)
-Preferred date/time: (add here)`;
-  document.getElementById('textWaste').onclick = ()=> openSMS(sms);
+document.getElementById('textWaste').onclick=()=>{
+  const lines=[]; for(const [k,v] of wasteSel){ if(v>0) lines.push(`${k} ×${v}`); }
+  const sms = `[Petersen Cleaning] Junk pickup:\n${lines.join('\n') || '(No items yet)'}\nAddress: (your address)\nPreferred date/time:`;
+  openSMS(sms);
 };
 
-/* ----------- Party rentals ----------- */
+/* ----------- Party (kept simple) ----------- */
 const PARTY = [
   {name:'Table (6ft)', price:10}, {name:'Folding Chair', price:2.5}, {name:'Canopy (10x10)', price:45},
   {name:'Cooler', price:8}, {name:'String Lights', price:12}, {name:'Bluetooth Speaker', price:16},
@@ -484,29 +394,14 @@ const PARTY = [
 const partySel = new Map();
 const partyList = document.getElementById('partyList');
 PARTY.forEach(it=>{
-  const b = document.createElement('button'); b.className='card';
-  b.innerHTML = `<div class="shine"></div><h3>${it.name}</h3><p>$${it.price}</p><span class="pill">Add</span>`;
-  b.onclick = ()=>{
-    const cur = partySel.get(it.name)||0; partySel.set(it.name, cur+1);
-    b.querySelector('.pill').textContent = `Added ×${cur+1}`; updatePartyTotal();
-  };
+  const b = document.createElement('button'); b.className='card'; b.type='button';
+  b.innerHTML = `<h3>${it.name}</h3><p>$${it.price}</p><span class="pill">Add</span>`;
+  b.onclick = ()=>{ const cur = partySel.get(it.name)||0; partySel.set(it.name, cur+1); b.querySelector('.pill').textContent = `Added ×${cur+1}`; updatePartyTotal(); };
   partyList.appendChild(b);
 });
-function updatePartyTotal(){
-  let t=0; for(const [k,v] of partySel){ const item = PARTY.find(x=>x.name===k); t += (item.price*v); }
-  partyTotal.textContent = (LANG==='es') ? `Total: $${t.toFixed(2)}` : `Total: $${t.toFixed(2)}`;
-}
-document.getElementById('partyCheckout').onclick=()=>{
-  const items=[...partySel.entries()].map(([k,v])=>`${k} ×${v}`).join(', ');
-  alert((LANG==='es' ? 'Solicitud enviada (demo): ' : 'Request sent (demo): ') + (items|| (LANG==='es'?'(Vacío)':'(Empty)')));
-};
+function updatePartyTotal(){ let t=0; for(const [k,v] of partySel){ const item = PARTY.find(x=>x.name===k); t += (item.price*v); } partyTotal.textContent = (LANG==='es') ? `Total: $${t.toFixed(2)}` : `Total: $${t.toFixed(2)}`; }
 document.getElementById('textParty').onclick=()=>{
-  const lines=[...partySel.entries()].map(([k,v])=>`${k} ×${v}`);
-  const sms = `[Petersen Cleaning] Party rentals:
-${lines.join('\n') || '(No items yet)'}
-Delivery address:
-Event date/time:`;
-  openSMS(sms);
+  const lines=[...partySel.entries()].map(([k,v])=>`${k} ×${v}`); const sms = `[Petersen Cleaning] Party rentals:\n${lines.join('\n') || '(No items yet)'}\nDelivery address:\nEvent date/time:`; openSMS(sms);
 };
 
 /* ----------- Topbar / Dock text actions ----------- */
@@ -514,28 +409,8 @@ document.getElementById('textTop').onclick=()=> openSMS('[Petersen Cleaning] Hi 
 document.getElementById('dockText').onclick=(e)=>{ e.preventDefault(); openSMS('[Petersen Cleaning] Hi Bobby, I need service.'); };
 document.getElementById('textQuick1').onclick=(e)=>{ e.preventDefault(); openSMS('[Petersen Cleaning] Hi, I need a cleaning quote.'); };
 
-/* ----------- Bubble trail (desktop) ----------- */
-if(matchMedia('(pointer:fine)').matches){
-  window.addEventListener('mousemove', e=>{
-    const b = document.createElement('div'); b.className='bubble';
-    b.style.left = (e.clientX-5)+'px'; b.style.top=(e.clientY-5)+'px';
-    document.body.appendChild(b);
-    setTimeout(()=> b.remove(), 800);
-  });
-}
-
 /* ----------- Welcome voice on load ----------- */
-window.addEventListener('load', ()=>{
-  if(VOICE==='on'){ speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); }
-});
+window.addEventListener('load', ()=>{ if(VOICE==='on'){ speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); } });
 </script>
-
-<!-- Integration tips:
-1) Replace the #avatar background with your headshot, or embed your D-ID/HeyGen player there.
-2) All “Call” buttons use tel:+18083195819. All “Text” actions open the phone SMS app with prefilled messages.
-3) Email is present but de-emphasized (<a href="mailto:...">).
-4) You can tune the estimate math easily in the JS blocks above.
-5) For production, route "Request availability" to a Netlify Function and still keep Call/Text front-and-center.
--->
 </body>
 </html>
