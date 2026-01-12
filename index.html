@@ -249,7 +249,7 @@
   </div>
 </div>
 
-<!-- Language / Voice Modal (always shows on load; globe can reopen) -->
+<!-- Language / Voice Modal (opens from the globe button) -->
 <div class="modal" id="langModal" role="dialog" aria-modal="true" aria-label="Choose language" style="position:fixed; inset:0; display:none; place-items:center; background:rgba(5,10,20,.55); z-index:20">
   <div class="sheet" style="width:min(560px,92vw); background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:var(--shadow)">
     <h2 style="margin:4px 0 4px">Choose your language</h2>
@@ -257,10 +257,6 @@
     <div class="lang-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px">
       <button class="btn" data-lang="en" id="chooseEN">English</button>
       <button class="btn" data-lang="es" id="chooseES">Español</button>
-    </div>
-    <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
-      <button class="btn secondary" id="skipVoice">Mute voice by default</button>
-      <button class="btn secondary" id="allowVoice">Allow voice</button>
     </div>
   </div>
 </div>
@@ -295,8 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const langModal = document.getElementById('langModal');
   const chooseEN = document.getElementById('chooseEN');
   const chooseES = document.getElementById('chooseES');
-  const skipVoice = document.getElementById('skipVoice');
-  const allowVoice = document.getElementById('allowVoice');
 
   const textQuick1 = document.getElementById('textQuick1');
   const wasteGrid = document.getElementById('wasteGrid');
@@ -373,9 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (chooseEN) chooseEN.onclick = ()=>{ LANG='en'; localStorage.setItem('lang','en'); applyLang(); hideLang(); speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); };
   if (chooseES) chooseES.onclick = ()=>{ LANG='es'; localStorage.setItem('lang','es'); applyLang(); hideLang(); speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); };
   if (changeLangBtn) changeLangBtn.onclick=()=> showLang();
-
-  if (skipVoice) skipVoice.onclick=()=>{ VOICE='off'; localStorage.setItem('voice','off'); };
-  if (allowVoice) allowVoice.onclick=()=>{ VOICE='on'; localStorage.setItem('voice','on'); speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); };
 
   applyLang();
 
@@ -546,5 +537,3 @@ Event date/time:`;
 </script>
 </body>
 </html>
-
- 
