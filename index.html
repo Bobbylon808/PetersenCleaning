@@ -369,7 +369,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showLang(){ if(langModal) langModal.style.display='grid'; }
   function hideLang(){ if(langModal) langModal.style.display='none'; }
-  showLang(); // always on load
 
   if (chooseEN) chooseEN.onclick = ()=>{ LANG='en'; localStorage.setItem('lang','en'); applyLang(); hideLang(); speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); };
   if (chooseES) chooseES.onclick = ()=>{ LANG='es'; localStorage.setItem('lang','es'); applyLang(); hideLang(); speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); };
