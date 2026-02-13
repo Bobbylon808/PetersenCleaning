@@ -1,392 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Petersen Cleaning — Simple, Clear, Friendly</title>
+<meta name="description" content="Petersen Cleaning: Cleaning, Waste Removal, and Party Rentals in Las Vegas. Call or text 808-319-5819 for a fast quote." />
+<style>
+  :root{
+    /* Readable gray + dark-blue theme */
+    --bg:#F3F4F6;           /* light gray page */
+    --panel:#FFFFFF;        /* cards */
+    --ink:#0F172A;          /* main text */
+    --muted:#475569;        /* secondary */
+    --line:#E5E7EB;         /* borders */
+    --accent:#0EA5E9;       /* sky */
+    --accent-ink:#075985;   /* darker sky */
+    --radius:16px;
+    --shadow:0 10px 22px rgba(2,6,23,.08);
+    --blue1:#0B1630;        /* deep blue */
+    --blue2:#132850;        /* mid blue */
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--ink); background:var(--bg);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17156697956">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  /* App shell */
+  .wrap{position:relative; min-height:100%; padding:clamp(16px,3vw,32px)}
+  .shell{ width:min(1100px, 94vw); margin:0 auto; background:var(--panel); border:1px solid var(--line); border-radius:calc(var(--radius) + 4px); box-shadow:var(--shadow); overflow:hidden }
 
-  gtag('config', 'AW-17156697956');
-</script>
+  /* Topbar */
+  .topbar{ display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); background:#ffffffcc; backdrop-filter:saturate(120%) blur(4px)}
+  .logo{
+    /* iPhone-safe perfect circle */
+    width:42px; height:42px; aspect-ratio:1/1; border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, #c7d2fe, #93c5fd);
+    box-shadow: inset 0 0 16px rgba(59,130,246,.28);
+    display:block; flex:0 0 42px; /* prevents stretching/oval on iOS flexbox */
+    -webkit-transform:translateZ(0); transform:translateZ(0); /* avoids subpixel warps */
+  }
+  @supports not (aspect-ratio: 1 / 1) {
+    .logo{ width:42px; height:42px; }
+  }
+  .brand{ font-weight:800; letter-spacing:.2px }
+  .brand small{ display:block; color:var(--muted); font-weight:600; margin-top:2px; font-size:.9rem }
 
+  .cta-bar{ margin-left:auto; display:flex; gap:8px; flex-wrap:wrap }
+  .btn{
+    all:unset; cursor:pointer; text-align:center; font-weight:800; padding:10px 12px; border-radius:999px; color:white;
+    background:linear-gradient(180deg, var(--accent), #56c3ee); border:1px solid #7dd3fc; box-shadow:0 6px 18px rgba(14,165,233,.25); display:inline-block
+  }
+  .btn.secondary{ color:var(--accent-ink); background:#E0F2FE; border:1px solid #BAE6FD; box-shadow:none }
+  .btn.ghost{ all:unset; cursor:pointer; padding:10px 12px; border-radius:999px; font-weight:800; color:var(--muted); border:1px solid var(--line); background:#fff }
 
-  <!-- SEO: Canonical, Open Graph & Twitter Cards -->
-  <link rel="canonical" href="https://www.petersencleaning.com/" />
-  <meta property="og:title" content="Petersen Cleaning & Junk Removal – Las Vegas, NV" />
-  <meta property="og:description" content="Top-rated commercial & residential cleaning in Las Vegas. Call (702) 123-4567 for a free quote!" />
-  <meta property="og:image" content="https://www.petersencleaning.com/assets/images/logo.png" />
-  <meta property="og:url" content="https://www.petersencleaning.com/" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Petersen Cleaning & Junk Removal – Las Vegas" />
-  <meta name="twitter:description" content="Top-rated commercial & residential cleaning in Las Vegas. Call (702) 123-4567 for a free quote!" />
-  <meta name="twitter:image" content="https://www.petersencleaning.com/assets/images/logo.png" />
+  /* Hero with dark-blue header band */
+  .hero-band{ background: radial-gradient(900px 400px at 20% 10%, #1e3a8a 0%, transparent 55%), linear-gradient(180deg,var(--blue1), var(--blue2)); color:#fff }
+  .hero{ display:grid; grid-template-columns: 330px 1fr; gap:20px; padding:18px 18px 26px }
+  @media (max-width:880px){ .hero{grid-template-columns:1fr; gap:16px} }
 
-  <!-- Preconnect & Preload Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  .agent{ background:#0f203f22; border:1px solid rgba(255,255,255,.15); border-radius:var(--radius); padding:16px; position:relative; overflow:hidden }
+  .agent .face{ width:100%; aspect-ratio: 4/5; border-radius:14px; background:#0b1220 center/cover no-repeat; border:1px solid rgba(255,255,255,.18) }
+  .agent .chip{ position:absolute; top:16px; right:16px; display:flex; gap:8px; align-items:center; background:#172554; border:1px solid #1e3a8a; padding:6px 10px; border-radius:100px; font-size:.85rem }
+  .agent .chip button{ all:unset; background:#0b1220; color:#fff; padding:6px 10px; border:1px solid #1e40af; border-radius:100px; cursor:pointer }
 
-  <!-- Main CSS (inline) -->
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body, html {
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
-      color: #1a1a1a;
-    }
+  .dialog{ background:#0b1220; border:1px solid rgba(255,255,255,.15); border-radius:var(--radius); padding:16px; display:grid; gap:14px }
+  .bubble-talk{ background:#0f203f55; border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:12px 14px; line-height:1.45 }
+  .choices{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+  @media (max-width:880px){ .choices{grid-template-columns:1fr} }
 
-    /* Skip Link for Accessibility */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #007bff;
-      color: white;
-      padding: 8px;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-    .skip-link:focus {
-      top: 0;
-    }
+  .card{ position:relative; isolation:isolate; background:#0b1220; color:#fff; border:1px solid rgba(255,255,255,.15); border-radius:14px; padding:16px; min-height:120px; overflow:hidden; cursor:pointer; transition: transform .2s ease, box-shadow .2s ease }
+  .card:hover{ transform: translateY(-2px); box-shadow:0 12px 26px rgba(2,6,23,.35) }
+  .card h3{margin:2px 0 6px; font-size:1.05rem}
+  .card p{margin:0; color:#cbd5e1; font-size:.95rem}
+  .pill{ display:inline-flex; gap:8px; align-items:center; margin-top:10px; color:#c7d2fe; background:#1e3a8a; border:1px solid #3b82f6; padding:6px 10px; border-radius:100px; font-size:.85rem }
 
-    header {
-      position: relative;
-      min-height: 100vh; /* avoids clipping on mobile */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, #007bff 0%, #0056b3 100%);
-      color: white;
-      text-align: center;
-      padding: 0 1rem;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/bubbles.png');
-      opacity: 0.2;
-      z-index: 1;
-    }
-    header h1 {
-      font-size: 3rem;
-      z-index: 2;
-      padding: 0 1rem;
-    }
-    header p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      z-index: 2;
-      padding: 0 1rem;
-    }
-    .cta-button {
-      background-color: white;
-      color: #007bff;
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 2rem;
-      z-index: 2;
-      transition: background 0.3s;
-    }
-    .cta-button:hover {
-      background-color: #f0f8ff;
-    }
+  /* Sections (light mode) */
+  .section{ display:none; opacity:0; transform:translateY(6px); transition: opacity .25s ease, transform .25s ease; margin:0 16px 16px; padding:16px; border:1px solid var(--line); border-radius:16px; background:#fff }
+  .section.active{display:block; opacity:1; transform:none}
 
-    nav {
-      background-color: #ffffff;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    nav a {
-      text-decoration: none;
-      color: #0056b3;
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-    }
+  /* Owner summary */
+  .about{ margin:16px; padding:16px; background:#fff; border:1px solid var(--line); border-radius:14px }
 
-    section {
-      padding: 3rem 1rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 2rem 1rem; /* side padding so text doesn’t touch edges */
-      margin-bottom: 2rem;
-      transition: transform 0.2s ease;
-    }
-    .card h2 {
-      margin-bottom: 1rem;
-      font-size: 1.75rem;
-    }
-    .card p {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #333;
-    }
-    .card:hover {
-      transform: scale(1.02);
-    }
+  /* Waste grid items (no price; + / - controls) */
+  .item{ background:#F8FAFC; border:1px solid var(--line); border-radius:14px; padding:12px; display:grid; grid-template-columns:1fr auto; gap:6px; align-items:center }
+  .title{ font-weight:700 }
+  .qty{ display:flex; gap:6px; align-items:center }
+  .step{ all:unset; width:34px; height:34px; display:grid; place-items:center; border-radius:10px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:900 }
+  .count{ min-width:30px; text-align:center; font-weight:800 }
+  textarea.note{ width:100%; min-height:72px; resize:vertical; padding:10px; border:1px solid var(--line); border-radius:10px }
 
-    /* ──────────────────────────────────────────────────────────────────────────
-       Neighborhood Grid Styles
-       ────────────────────────────────────────────────────────────────────────── */
-    .area-grid-container {
-      position: relative;
-      max-width: 800px;
-      margin: 2rem auto;
-      text-align: center;
-      padding: 0 1rem; /* ensures no clipping on narrow screens */
-    }
-    .area-grid-container h2 {
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
-    }
-    .area-grid-container p {
-      margin-bottom: 1.5rem;
-      font-size: 1rem;
-      color: #333;
-    }
-    .area-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      justify-items: center;
-    }
-    .area-btn {
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      width: 100%;
-      max-width: 160px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.95rem;
-      transition: background 0.3s;
-      text-align: center;
-    }
-    .area-btn:hover {
-      background: #0056b3;
-    }
+  /* Floating white bubbles near bottom-right (keep effect; floating dock removed) */
+  .dock-bubbles{ position:fixed; right:8px; bottom:80px; width:120px; height:260px; pointer-events:none; z-index:9 }
+  .bubble{ position:absolute; bottom:-20px; width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.9); filter:blur(.4px); animation: rise 6s linear infinite; opacity:.85 }
+  .bubble:nth-child(2){ left:20px; width:8px; height:8px; animation-duration:5.2s; animation-delay:1s }
+  .bubble:nth-child(3){ left:60px; width:12px; height:12px; animation-duration:6.8s; animation-delay:2s }
+  .bubble:nth-child(4){ left:90px; width:7px; height:7px; animation-duration:4.8s; animation-delay:1.6s }
+  .bubble:nth-child(5){ left:40px; width:9px; height:9px; animation-duration:6.2s; animation-delay:3s }
+  @keyframes rise{ to{ transform:translateY(-260px) scale(.6); opacity:0 } }
 
-    footer {
-      background-color: #0056b3;
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 2rem;
-    }
-    .footer-nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in.show {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* “Get a Free Estimate” link */
-    .fixed-estimate {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 999;
-      background: #007bff;
-      color: white;
-      padding: 1rem 1.25rem;
-      border-radius: 50px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .fixed-estimate:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  :focus-visible{outline:2px solid #93c5fd; outline-offset:2px; border-radius:10px}
+</style>
 </head>
-
 <body>
-  <!-- Skip to main content for accessibility -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Header -->
-  <header>
-    <h1>Petersen Cleaning &amp; Junk Removal</h1>
-    <p>Clean never looked this cool. See why people are obsessed with our shine.</p>
-    <button class="cta-button" onclick="window.location.href='contact.html'">
-      Get a Quote
-    </button>
-  </header>
+<!-- Floating white bubbles only -->
+<div class="dock-bubbles" aria-hidden="true">
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+</div>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="cleaning-tips.html">Cleaning Tips</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+<div class="wrap" id="app">
+  <div class="shell" role="application" aria-label="Petersen Cleaning interface">
 
-  <!-- Main Content -->
-  <main id="main-content">
-    <section>
-      <div class="card fade-in">
-        <h2>Why We’re Not Just Another Cleaning Company</h2>
-        <p>
-          At Petersen Cleaning &amp; Junk Removal, our certified, licensed, and insured team delivers
-          professional-grade results every time. We use eco-friendly, hospital-grade cleaning products
-          to ensure a safe, healthy environment for your family or employees. Our punctual staff is
-          committed to excellence, offering meticulous attention to detail and 100% satisfaction
-          guaranteed. Choose us for reliable service, transparent pricing, and the highest standards
-          in the industry.
-        </p>
+    <!-- HERO BAND (dark blue) -->
+    <div class="hero-band">
+      <div class="topbar" style="border-bottom-color:rgba(255,255,255,.15); background:transparent; color:#fff">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="brand" style="color:#fff">Petersen Cleaning</div>
+          <small class="brand" style="color:#cbd5e1">Cleaning • Waste Removal • Party Rentals</small>
+        </div>
+
+        <!-- Call/Text + Language/Voice (no ES quick button) -->
+        <div class="cta-bar">
+          <a class="btn" id="callTop" href="tel:+18083195819">📞 Call</a>
+          <button class="btn secondary" id="textTop" type="button">💬 Text</button>
+          <button class="btn secondary" id="changeLangBtn" aria-label="Change language">🌐</button>
+          <button class="btn secondary" id="muteBtn" aria-label="Toggle voice">🔊</button>
+        </div>
       </div>
-    </section>
 
-    <!-- Neighborhood Grid Section -->
-    <section class="area-grid-container">
-      <h2>We Service All Parts of Las Vegas</h2>
-      <p>Below are the neighborhoods we proudly cover. Click your area to get a quote!</p>
+      <div class="hero">
+        <!-- Agent / Avatar -->
+        <aside class="agent">
+          <div class="chip">
+            <span id="statusDot">🟢</span>
+            <span id="statusText">Online</span>
+          </div>
+          <div class="face" id="avatar" role="img" aria-label="Avatar"
+               style="background-image:url('https://github.com/Bobbylon808/PetersenCleaning/raw/new-website-design/Gemini_Generated_Image_6bdfpu6bdfpu6bdf.png');">
+          </div>
+        </aside>
 
-      <!-- Neighborhood Coverage Map -->
-      <img
-        src="MapofLV.png"
-        alt="Las Vegas neighborhood coverage map"
-        style="max-width:100%; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom:1.5rem;"
-      />
+        <!-- Conversational UI -->
+        <section class="dialog">
+          <div class="bubble-talk" id="greeting">
+            👋 <strong id="helloTxt">Welcome to Petersen Cleaning!</strong><br>
+            <span id="promptTxt">What can I help you with today?</span>
+          </div>
 
-      <!-- Grid of Neighborhood Buttons -->
-      <div class="area-grid">
-        <button class="area-btn" data-area="Centennial%20Hills">Centennial Hills</button>
-        <button class="area-btn" data-area="Downtown">Downtown</button>
-        <button class="area-btn" data-area="North%20Las%20Vegas">North Las Vegas</button>
-        <button class="area-btn" data-area="Historic%20Westside">Historic Westside</button>
-        <button class="area-btn" data-area="Henderson">Henderson</button>
-        <button class="area-btn" data-area="Paradise">Paradise</button>
-        <button class="area-btn" data-area="Peccole%20Ranch%20%2F%20The%20Lakes">Peccole Ranch / The Lakes</button>
-        <button class="area-btn" data-area="Summerlin">Summerlin</button>
-        <button class="area-btn" data-area="Spring%20Valley">Spring Valley</button>
-        <button class="area-btn" data-area="Southwest">Southwest</button>
-        <button class="area-btn" data-area="Sunrise">Sunrise</button>
-        <button class="area-btn" data-area="Whitney">Whitney</button>
+          <div class="choices" role="list" aria-label="Primary choices">
+            <button class="card" id="optCleaning" role="listitem">
+              <h3>🧽 <span data-i18n="Cleaning Services">Cleaning Services</span></h3>
+              <p data-i18n="Cleaning Desc">Residential, commercial, move-out & deep clean.</p>
+              <span class="pill">Get an instant quote →</span>
+            </button>
+
+            <button class="card" id="optWaste" role="listitem">
+              <h3>🗑️ <span data-i18n="Waste Removal">Waste Removal</span></h3>
+              <p data-i18n="Waste Desc">Tap items to add or remove. Text us your list.</p>
+              <span class="pill">Build your pickup →</span>
+            </button>
+
+            <button class="card" id="optParty" role="listitem">
+              <h3>🎉 <span data-i18n="Party Rentals">Party Rentals</span></h3>
+              <p data-i18n="Party Desc">Tables, chairs, canopies—delivered & setup.</p>
+              <span class="pill">Browse catalog →</span>
+            </button>
+          </div>
+        </section>
       </div>
-    </section>
-  </main>
-
-<!-- Reviews Preview Section -->
-<section>
-  <div class="card fade-in">
-    <h2>What Our Customers Are Saying</h2>
-    <p>“They hauled away years of clutter from my garage in less than an hour. Professional, fast, and courteous!”</p>
-    <p>“We had water damage cleanup needs during a storm and Petersen Cleaning responded the same day. Highly recommend.”</p>
-    <a href="reviews.html" style="display:inline-block;margin-top:1rem;padding:0.75rem 1.5rem;background:#007bff;color:white;border:none;border-radius:8px;text-decoration:none;">🔍 See More Reviews</a>
-  </div>
-</section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <p>
-        <strong>Petersen Cleaning &amp; Junk Removal</strong><br />
-        5940 S Rainbow Blvd<br />
-        Las Vegas, NV 89118<br />
-        <a href="tel:7021234567" style="color: white; text-decoration: none;">(702) 123-4567</a>
-      </p>
-      <nav class="footer-nav" style="margin: 1rem 0;">
-        <a href="index.html">Home</a> |
-        <a href="about.html">About</a> |
-        <a href="services.html">Services</a> |
-        <a href="gallery.html">Gallery</a> |
-        <a href="cleaning-tips.html">Cleaning Tips</a> |
-        <a href="contact.html">Contact</a>
-      </nav>
-      <p style="font-size: 0.9rem; margin-top: 0.5rem;">&copy; 2025 Petersen Cleaning &amp; Junk Removal. Designed to shine.</p>
     </div>
-  </footer>
 
-  <!-- “Get a Free Estimate” Button (Fixed) -->
-  <a href="contact.html" class="fixed-estimate">📋 Get a Free Estimate</a>
+    <!-- Owner summary -->
+    <section class="about">
+      <h2 style="margin:0 0 8px; font-size:1.25rem">About Petersen Cleaning</h2>
+      <p id="aboutText" style="margin:0; color:var(--muted)">
+        Owned by <strong>Bobby & Allison Petersen</strong>, we’ve proudly served Las Vegas for <strong>5+ years</strong>. We work <strong>24/7</strong>—day or night—to deliver <strong>excellent, friendly service</strong> for our Las Vegas family and friends. Questions or emergencies at any hour? <strong>Call</strong> <a href="tel:+18083195819">(808) 319-5819</a> or <strong>text</strong> us. Prefer email? Contact <a href="mailto:bobby@petersencleaning.com">bobby@petersencleaning.com</a>.
+      </p>
+    </section>
 
-  <!-- Fade-in Observer -->
-  <script defer>
-    document.addEventListener('DOMContentLoaded', function () {
-      const faders = document.querySelectorAll('.fade-in');
-      const options = { threshold: 0.1 };
-      const appearOnScroll = new IntersectionObserver(function (entries, observer) {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
-        });
-      }, options);
+    <!-- Cleaning -->
+    <section class="section" id="secCleaning" aria-live="polite">
+      <h2 id="cleanTitle">🧽 Cleaning — Instant Smart Quote</h2>
+      <p class="sub">Answer 4 quick questions to see a live estimate. Prefer to chat? <a class="tiny-link" href="#" id="textQuick1">Text us instead</a>.</p>
+      <form id="cleanForm">
+        <div style="display:grid; gap:12px; margin-top:10px">
+          <label id="lblPtype">Property type
+            <select name="ptype" required>
+              <option>Residential</option><option>Commercial</option><option>Move-out</option>
+            </select>
+          </label>
+          <label id="lblSqft">Square footage
+            <input name="sqft" type="number" min="200" step="50" placeholder="e.g. 1500" required />
+          </label>
+          <label id="lblRooms">Bedrooms / Offices
+            <input name="rooms" type="number" min="1" step="1" value="3" />
+          </label>
+          <label id="lblUrgency">Urgency
+            <select name="urgency">
+              <option>Flexible (3-7 days)</option><option>Rush (48h)</option><option>Same-day / Emergency</option>
+            </select>
+          </label>
+          <label id="lblAddress">Address / Cross-streets (optional)
+            <input name="addr" type="text" placeholder="e.g., Tropicana & Rainbow or full address" />
+          </label>
+          <small style="color:var(--muted)">Tip: You can also send a <a href="https://maps.google.com" target="_blank" class="tiny-link">Google Maps pin</a> in your text for faster routing.</small>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn" id="btnCalc" type="submit">Calculate</button>
+          </div>
+        </div>
+      </form>
+      <div class="bubble-talk" id="cleanQuote" style="margin-top:14px; font-weight:800"></div>
+      <div id="cleanCTA" style="margin-top:10px"></div>
+    </section>
 
-      faders.forEach(fader => appearOnScroll.observe(fader));
-    });
-  </script>
+    <!-- Waste (NO prices; add/remove; notes; bottom: Call + Text list only) -->
+    <section class="section" id="secWaste" aria-live="polite">
+      <h2 id="wasteTitle">🗑️ Waste Removal — Build Your List</h2>
+      <p class="sub">Tap + or − to change quantities. Add any extras in the notes, then text us the list.</p>
+      <div id="wasteGrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px"></div>
+      <div style="margin-top:12px">
+        <label id="lblOther">Other items / notes
+          <textarea class="note" id="wasteNotes" placeholder="e.g., piano on 2nd floor, shed panels, large aquarium..."></textarea>
+        </label>
+      </div>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="tel:+18083195819" id="btnCall">📞 Call now</a>
+        <button class="btn secondary" id="textWaste" type="button">💬 Text list</button>
+      </div>
+    </section>
 
-  <!-- Favicon -->
-  <link rel="icon" href="/assets/images/favicon-32x32.png" />
+    <!-- Party (updated) -->
+    <section class="section" id="secParty" aria-live="polite">
+      <h2 id="partyTitle">🎉 Party Rentals — Quick Browse</h2>
+      <p class="sub">Add what you need; we’ll confirm availability by text or call.</p>
+      <div id="partyList" style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px"></div>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="tel:+18083195819">📞 Call now</a>
+        <button class="btn secondary" id="textParty" type="button">💬 Text list</button>
+        <strong id="partyTotal" style="margin-left:6px"></strong>
+      </div>
+    </section>
 
-  <!-- Exit-Intent Popup (unchanged) -->
-  <script>
-    let exitPopupShown = false;
-    document.addEventListener("mouseout", function(e) {
-      if (e.clientY < 50 && !exitPopupShown) {
-        alert("💥 Wait! Get 10% off your first clean — just mention this popup when you contact us!");
-        exitPopupShown = true;
+  </div>
+</div>
+
+<!-- Language / Voice Modal (opens from the globe button) -->
+<div class="modal" id="langModal" role="dialog" aria-modal="true" aria-label="Choose language" style="position:fixed; inset:0; display:none; place-items:center; background:rgba(5,10,20,.55); z-index:20">
+  <div class="sheet" style="width:min(560px,92vw); background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:var(--shadow)">
+    <h2 style="margin:4px 0 4px">Choose your language</h2>
+    <p class="sub" style="color:var(--muted)">We’ll translate the page immediately.</p>
+    <div class="lang-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px">
+      <button class="btn" data-lang="en" id="chooseEN">English</button>
+      <button class="btn" data-lang="es" id="chooseES">Español</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ---- Cache all DOM refs safely ---- */
+  const helloTxt = document.getElementById('helloTxt');
+  const promptTxt = document.getElementById('promptTxt');
+  const statusText = document.getElementById('statusText');
+  const aboutText = document.getElementById('aboutText');
+  const cleanTitle = document.getElementById('cleanTitle');
+  const wasteTitle = document.getElementById('wasteTitle');
+  const partyTitle = document.getElementById('partyTitle');
+  const lblPtype = document.getElementById('lblPtype');
+  const lblSqft = document.getElementById('lblSqft');
+  const lblRooms = document.getElementById('lblRooms');
+  const lblUrgency = document.getElementById('lblUrgency');
+  const lblAddress = document.getElementById('lblAddress');
+  const lblOther = document.getElementById('lblOther');
+  const btnCalc = document.getElementById('btnCalc');
+  const btnCall = document.getElementById('btnCall');
+
+  const textTop = document.getElementById('textTop');
+  const changeLangBtn = document.getElementById('changeLangBtn');
+  const muteBtn = document.getElementById('muteBtn');
+
+  const secCleaning = document.getElementById('secCleaning');
+  const secWaste = document.getElementById('secWaste');
+  const secParty = document.getElementById('secParty');
+
+  const langModal = document.getElementById('langModal');
+  const chooseEN = document.getElementById('chooseEN');
+  const chooseES = document.getElementById('chooseES');
+
+  const textQuick1 = document.getElementById('textQuick1');
+  const wasteGrid = document.getElementById('wasteGrid');
+  const wasteNotes = document.getElementById('wasteNotes');
+  const textWaste = document.getElementById('textWaste');
+  const partyList = document.getElementById('partyList');
+  const partyTotal = document.getElementById('partyTotal');
+  const textParty = document.getElementById('textParty');
+
+  /* ---- Helpers ---- */
+  const PHONE_E164 = '+18083195819';
+  const DISPLAY = '808-319-5819';
+  function openSMS(message){
+    const body = encodeURIComponent(message || 'Hi, I need service. Can you help?');
+    let href = `sms:${PHONE_E164}&body=${body}`;
+    if (navigator.userAgent.toLowerCase().includes('android')) href = `sms:${PHONE_E164}?body=${body}`;
+    try { window.location.href = href; }
+    catch(e){ if (navigator.share) { navigator.share({text: decodeURIComponent(body)}); } else { alert("If your SMS app doesn't open, text us at " + DISPLAY + "."); } }
+  }
+
+  /* ---- i18n ---- */
+  const I18N = {
+    en:{ hello:"Welcome to Petersen Cleaning!", prompt:"What can I help you with today?",
+         cleaning:"Cleaning Services", cdesc:"Residential, commercial, move-out & deep clean.",
+         waste:"Waste Removal", wdesc:"Tap items to add or remove. Text us your list.",
+         party:"Party Rentals", pdesc:"Tables, chairs, canopies—delivered & setup.", online:"Online",
+         about:`Owned by <strong>Bobby & Allison Petersen</strong>, we’ve proudly served Las Vegas for <strong>5+ years</strong>. We work <strong>24/7</strong>—day or night—to deliver <strong>excellent, friendly service</strong> for our Las Vegas family and friends. Questions or emergencies at any hour? <strong>Call</strong> <a href="tel:+18083195819">(808) 319-5819</a> or <strong>text</strong> us. Prefer email? Contact <a href="mailto:bobby@petersencleaning.com">bobby@petersencleaning.com</a>.`,
+         cleanTitle:"🧽 Cleaning — Instant Smart Quote",
+         wasteTitle:"🗑️ Waste Removal — Build Your List",
+         partyTitle:"🎉 Party Rentals — Quick Browse",
+         lblPtype:"Property type", lblSqft:"Square footage", lblRooms:"Bedrooms / Offices",
+         lblUrgency:"Urgency", lblAddress:"Address / Cross-streets (optional)", lblOther:"Other items / notes",
+         btnCalc:"Calculate", btnCall:"📞 Call now", smsQuoteLead:"[Petersen Cleaning] Quote request:" },
+    es:{ hello:"¡Bienvenido a Petersen Cleaning!", prompt:"¿En qué puedo ayudarte hoy?",
+         cleaning:"Servicios de Limpieza", cdesc:"Residencial, comercial, mudanzas y limpieza profunda.",
+         waste:"Retiro de Desechos", wdesc:"Toca para agregar o quitar. Envíanos tu lista.",
+         party:"Renta de Fiestas", pdesc:"Mesas, sillas, carpas—entrega e instalación.", online:"En línea",
+         about:`Propiedad de <strong>Bobby y Allison Petersen</strong>, servimos con orgullo a Las Vegas desde hace <strong>más de 5 años</strong>. Trabajamos <strong>24/7</strong> para ofrecer un <strong>servicio excelente y amable</strong> a nuestra familia y amigos de Las Vegas. ¿Dudas o emergencias a cualquier hora? <strong>Llámanos</strong> al <a href="tel:+18083195819">(808) 319-5819</a> o mándanos <strong>texto</strong>. Si prefieres correo, escríbenos a <a href="mailto:bobby@petersencleaning.com">bobby@petersencleaning.com</a>.`,
+         cleanTitle:"🧽 Limpieza — Cotización Instantánea",
+         wasteTitle:"🗑️ Retiro de Desechos — Arma tu Lista",
+         partyTitle:"🎉 Renta de Fiestas — Vista Rápida",
+         lblPtype:"Tipo de propiedad", lblSqft:"Pies cuadrados", lblRooms:"Recámaras / Oficinas",
+         lblUrgency:"Urgencia", lblAddress:"Dirección / Cruces (opcional)", lblOther:"Otros artículos / notas",
+         btnCalc:"Calcular", btnCall:"📞 Llamar", smsQuoteLead:"[Petersen Cleaning] Solicitud de cotización:" }
+  };
+  let LANG = localStorage.getItem('lang') || 'en';
+  let VOICE = localStorage.getItem('voice') || 'off';
+
+  function applyLang(){
+    const t = I18N[LANG];
+    if (helloTxt) helloTxt.innerHTML = t.hello;
+    if (promptTxt) promptTxt.textContent = t.prompt;
+    if (statusText) statusText.textContent = t.online;
+    // hero cards
+    const c1 = document.querySelector('#optCleaning p'); if (c1) c1.textContent = t.cdesc;
+    const c2 = document.querySelector('#optWaste p'); if (c2) c2.textContent = t.wdesc;
+    const c3 = document.querySelector('#optParty p'); if (c3) c3.textContent = t.pdesc;
+    // about & titles
+    if (aboutText) aboutText.innerHTML = t.about;
+    if (cleanTitle) cleanTitle.textContent = t.cleanTitle;
+    if (wasteTitle) wasteTitle.textContent = t.wasteTitle;
+    if (partyTitle) partyTitle.textContent = t.partyTitle;
+    // labels/buttons (firstChild text nodes)
+    function setLabel(el, v){ if(!el) return; el.childNodes[0].nodeValue = v + ' '; }
+    setLabel(lblPtype, t.lblPtype); setLabel(lblSqft, t.lblSqft); setLabel(lblRooms, t.lblRooms);
+    setLabel(lblUrgency, t.lblUrgency); setLabel(lblAddress, t.lblAddress); setLabel(lblOther, t.lblOther);
+    const calcBtn = document.getElementById('btnCalc'); if (calcBtn) calcBtn.textContent = t.btnCalc;
+    const callBtn = document.getElementById('btnCall'); if (callBtn) callBtn.textContent = t.btnCall;
+  }
+
+  function showLang(){ if(langModal) langModal.style.display='grid'; }
+  function hideLang(){ if(langModal) langModal.style.display='none'; }
+
+  if (chooseEN) chooseEN.onclick = ()=>{ LANG='en'; localStorage.setItem('lang','en'); applyLang(); hideLang(); speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); };
+  if (chooseES) chooseES.onclick = ()=>{ LANG='es'; localStorage.setItem('lang','es'); applyLang(); hideLang(); speak(`${I18N[LANG].hello} ${I18N[LANG].prompt}`); };
+  if (changeLangBtn) changeLangBtn.onclick=()=> showLang();
+
+  applyLang();
+
+  /* ---- Voice (young male EN, sultry female ES) ---- */
+  let VOICES = [], voiceEN = null, voiceES = null;
+  function pickVoices(){
+    VOICES = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+    const byLang = code => VOICES.filter(v => (v.lang||'').toLowerCase().startsWith(code));
+    const en = byLang('en');
+    voiceEN = en.find(v=>/male|boy|guy|dan|ryan|george|ben/i.test(v.name)) || en.find(v=>/google uk english male/i.test(v.name)) || en[0] || null;
+    const es = byLang('es');
+    voiceES = es.find(v=>/female|woman|mujer|sofia|sara|sabina|lucia|paloma|elvira|camila/i.test(v.name)) || es[0] || null;
+  }
+  if (window.speechSynthesis){
+    window.speechSynthesis.onvoiceschanged = pickVoices;
+    pickVoices();
+  }
+  function speak(text){
+    if(VOICE!=='on' || !window.speechSynthesis) return;
+    try{
+      const u = new SpeechSynthesisUtterance(text);
+      if(LANG==='es'){ u.voice = voiceES; u.lang = (voiceES?.lang || 'es-US'); u.pitch = 0.9; u.rate  = 0.95; }
+      else{ u.voice = voiceEN; u.lang = (voiceEN?.lang || 'en-US'); u.pitch = 1.2; u.rate  = 1.05; }
+      window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  if (muteBtn){
+    muteBtn.onclick = ()=>{ VOICE = (VOICE==='on' ? 'off' : 'on'); localStorage.setItem('voice', VOICE); muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇'); };
+    muteBtn.textContent = (VOICE==='on' ? '🔊' : '🔇');
+  }
+
+  /* ---- Sections flow ---- */
+  function showSection(section){
+    [secCleaning, secWaste, secParty].forEach(s=> s && s.classList.remove('active'));
+    if (section) section.classList.add('active');
+    const band = document.querySelector('.hero-band');
+    if (band){ window.scrollTo({top: band.offsetTop + band.offsetHeight - 10, behavior:'smooth'}); }
+  }
+  const optCleaning = document.getElementById('optCleaning');
+  const optWaste = document.getElementById('optWaste');
+  const optParty = document.getElementById('optParty');
+  if (optCleaning) optCleaning.onclick = ()=>{ showSection(secCleaning); speak(LANG==='es' ? 'Perfecto. Te haré algunas preguntas rápidas para darte un presupuesto.' : 'Perfect. I’ll ask a few quick questions to give you a quote.'); };
+  if (optWaste)    optWaste.onclick    = ()=>{ showSection(secWaste); speak(LANG==='es' ? 'Agrega o quita artículos y envíanos la lista.' : 'Add or remove items, then text us your list.'); };
+  if (optParty)    optParty.onclick    = ()=>{ showSection(secParty); speak(LANG==='es' ? 'Explora el catálogo y solicita disponibilidad.' : 'Browse the catalog and request availability.'); };
+
+  if (textTop) textTop.onclick=()=> openSMS('[Petersen Cleaning] Hi Bobby, I need service. Can we text?');
+  if (textQuick1) textQuick1.onclick=(e)=>{ e.preventDefault(); openSMS('[Petersen Cleaning] Hi, I need a cleaning quote.'); };
+
+  /* ---- Cleaning estimator ---- */
+  const cleanForm = document.getElementById('cleanForm');
+  const cleanQuote = document.getElementById('cleanQuote');
+  const cleanCTA = document.getElementById('cleanCTA');
+  if (cleanForm){
+    cleanForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const fd = new FormData(cleanForm);
+      const sqft = Number(fd.get('sqft')||0);
+      const rooms = Number(fd.get('rooms')||0);
+      const ptype = fd.get('ptype');
+      const urgency = fd.get('urgency');
+      const addr = (fd.get('addr')||'').trim();
+
+      const base = (ptype==='Commercial') ? 0.22 : (ptype==='Move-out' ? 0.25 : 0.18);
+      const roomAdj = 12 * rooms;
+      let est = Math.max(95, Math.round(sqft * base + roomAdj));
+      if(urgency.includes('48')) est += 50;
+      if(urgency.toLowerCase().includes('same') || urgency.toLowerCase().includes('emergency')) est += 100;
+
+      const out = (LANG==='es')
+        ? `Estimado inicial: $${est} (pre-impuestos) • Tipo: ${ptype}, ${sqft} sqft, ${rooms} hab/esp, Urgencia: ${urgency}.`
+        : `Starter estimate: $${est} (pre-tax) • Type: ${ptype}, ${sqft} sqft, ${rooms} rooms/offices, Urgency: ${urgency}.`;
+      if (cleanQuote) cleanQuote.textContent = out;
+
+      const sms =
+`${I18N[LANG].smsQuoteLead}
+Type: ${ptype}
+Sqft: ${sqft}
+Rooms/Offices: ${rooms}
+Urgency: ${urgency}
+Shown estimate: $${est}
+Address: ${addr || '(your address)'}
+Name: (your name)
+Preferred date/time: (add here)`;
+
+      if (cleanCTA){
+        cleanCTA.innerHTML = `
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="tel:${PHONE_E164}">📞 Call now</a>
+            <button class="btn secondary" id="cleanSMSBtn" type="button">💬 Text this quote</button>
+          </div>`;
+        const cleanSMSBtn = document.getElementById('cleanSMSBtn');
+        if (cleanSMSBtn) cleanSMSBtn.onclick = ()=> openSMS(sms);
       }
     });
-  </script>
+  }
 
-  <!-- Neighborhood Redirect Logic -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const areaButtons = document.querySelectorAll(".area-btn");
-      areaButtons.forEach(button => {
-        button.addEventListener("click", function() {
-          const area = this.getAttribute("data-area");
-          // Redirect to contact.html with the area query parameter
-          window.location.href = `contact.html?area=${area}`;
-        });
-      });
+  /* ---- Waste list (+/−, notes, SMS) ---- */
+  const WASTE_ITEMS = ['Sofa','Mattress','Fridge','TV','Desk','Washer','Dryer','Tires (pair)','Boxes (10)','Yard bags (5)'];
+  const wasteSel = new Map();
+  if (wasteGrid){
+    WASTE_ITEMS.forEach((name)=>{
+      const wrap = document.createElement('div'); wrap.className='item'; wrap.setAttribute('aria-label',name);
+      const title = document.createElement('div'); title.className='title'; title.textContent = name;
+      const qty = document.createElement('div'); qty.className='qty';
+      const minus = document.createElement('button'); minus.className='step'; minus.textContent = '−';
+      const count = document.createElement('div'); count.className='count'; count.textContent = '0';
+      const plus  = document.createElement('button'); plus.className='step'; plus.textContent = '+';
+      qty.append(minus, count, plus);
+      wrap.append(title, qty);
+
+      function update(n){
+        const cur = wasteSel.get(name)||0; const next = Math.max(0, cur + n);
+        wasteSel.set(name, next); count.textContent = String(next);
+      }
+      plus.onclick = ()=> update(1); minus.onclick = ()=> update(-1);
+      wasteGrid.appendChild(wrap);
     });
-  </script>
+  }
+  if (textWaste){
+    textWaste.onclick=()=>{
+      const lines=[]; for(const [k,v] of wasteSel){ if(v>0) lines.push(`${k} ×${v}`); }
+      const notes = (wasteNotes?.value || '').trim();
+      const sms = `[Petersen Cleaning] Junk pickup:
+${lines.join('\n') || '(No items yet)'}
+Notes: ${notes || '(none)'}
+Address: (your address)
+Preferred date/time:`;
+      openSMS(sms);
+    };
+  }
+
+  /* ---- Party (items, running total, SMS) ---- */
+  const PARTY = [
+    {name:'Table (6ft)', price:10}, {name:'Folding Chair', price:2.5}, {name:'Canopy (10x10)', price:45},
+    {name:'Cooler', price:8}, {name:'String Lights', price:12}, {name:'Bluetooth Speaker', price:16},
+    {name:'Folding Picnic Table ★', price:20}
+  ];
+  const partySel = new Map();
+  function updatePartyTotal(){
+    if (!partyTotal) return;
+    let t=0; for(const [k,v] of partySel){ const item = PARTY.find(x=>x.name===k); if(item) t += item.price*v; }
+    partyTotal.textContent = (localStorage.getItem('lang')==='es') ? `Total: $${t.toFixed(2)}` : `Total: $${t.toFixed(2)}`;
+  }
+  if (partyList){
+    PARTY.forEach(it=>{
+      const b = document.createElement('button'); b.className='card'; b.type='button';
+      b.innerHTML = `<h3>${it.name}</h3><p>$${it.price}</p><span class="pill">Add</span>`;
+      b.onclick = ()=>{
+        const cur = partySel.get(it.name)||0;
+        partySel.set(it.name, cur+1);
+        const pill = b.querySelector('.pill'); if (pill) pill.textContent = `Added ×${cur+1}`;
+        updatePartyTotal();
+      };
+      partyList.appendChild(b);
+    });
+  }
+  if (textParty){
+    textParty.onclick=()=>{
+      const lines=[...partySel.entries()].map(([k,v])=>`${k} ×${v}`);
+      const sms = `[Petersen Cleaning] Party rentals:
+${lines.join('\n') || '(No items yet)'}
+Delivery address:
+Event date/time:`;
+      openSMS(sms);
+    };
+  }
+}); // DOMContentLoaded
+</script>
 </body>
 </html>
